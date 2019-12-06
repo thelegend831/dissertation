@@ -177,6 +177,13 @@ References
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \start_of_appendix
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
