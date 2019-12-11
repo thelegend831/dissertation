@@ -4,10 +4,10 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass paper
+\textclass article
 \begin_preamble
-\rfoot{Andy Pack}
-\lfoot{6420013}
+\rfoot{Andy Pack / 6420013}
+\lfoot{January 2020}
 \end_preamble
 \use_default_options true
 \begin_modules
@@ -109,12 +109,8 @@ todonotes
 Multi-Source Holoportation
 \end_layout
 
-\begin_layout SubTitle
-Mid-term report
-\end_layout
-
 \begin_layout Author
-Andy Pack (6420013)
+Andy Pack / 6420013
 \end_layout
 
 \begin_layout Standard
@@ -152,16 +148,244 @@ LatexCommand tableofcontents
 Introduction
 \end_layout
 
+\begin_layout Standard
+The aim of this project is to develop a piece of software capable of supporting
+ multi-source holoportation (hologram teleportation) using the 
+\emph on
+\noun on
+LiveScan3D
+\emph default
+\noun default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "livescan3d"
+literal "false"
+
+\end_inset
+
+ suite of software as a base.
+\end_layout
+
+\begin_layout Standard
+As the spaces of augmented and virtual reality become commonplace and mature,
+ the ability to capture and stream 3D renderings of objects and people over
+ the internet using consumer-grade hardware has many possible applications.
+\end_layout
+
+\begin_layout Standard
+The 
+\noun on
+LiveScan3D
+\noun default
+ suite uses 
+\noun on
+Xbox Kinect
+\noun default
+ cameras to capture and stream 3D renders of objects from one or many angles
+ simultaneously however the destination server is only able to process and
+ reconstruct one object or surroundings at a time.
+\end_layout
+
+\begin_layout Standard
+The capability to concurrently receive and reconstruct streams of different
+ objects further broadens the landscape of possible applications, analogous
+ to the movement from 1-to-1 phone calls to conference calling.
+\end_layout
+
 \begin_layout Section
 Literature Review
+\end_layout
+
+\begin_layout Subsection
+Holoportation
+\end_layout
+
+\begin_layout Subsection
+Augmented and Virtual Reality
+\end_layout
+
+\begin_layout Subsection
+Kinect
 \end_layout
 
 \begin_layout Section
 LiveScan3D
 \end_layout
 
+\begin_layout Standard
+
+\noun on
+LiveScan3D
+\noun default
+ is a suite of software developed by Marek Kowalski, Jacek Naruniec and
+ Michal Daniluk of the Warsaw University of Technology in 2015
+\begin_inset CommandInset citation
+LatexCommand cite
+key "livescan3d"
+literal "false"
+
+\end_inset
+
+.
+ The suite utilises the 
+\noun on
+Xbox Kinect
+\noun default
+ camera to record and transmit 3D renders over an IP network.
+ A server which can manage multiple clients processes, reconstructs and
+ displays the renderings in real-time.
+\end_layout
+
+\begin_layout Subsection
+LiveScan Client
+\end_layout
+
+\begin_layout Subsection
+LiveScan Server
+\end_layout
+
+\begin_layout Standard
+The server component of the 
+\noun on
+LiveScan
+\noun default
+ suite is responsible for managing and receiving 3D renders from connected
+ clients.
+\end_layout
+
+\begin_layout Subsection
+Multi-View Configurations
+\end_layout
+
 \begin_layout Section
 Current Work
+\end_layout
+
+\begin_layout Standard
+As of January 2020 the method for displaying renderings, the server's 
+\noun on
+OpenGL
+\noun default
+ window, has been modified such that it can construct and render point clouds
+ from multiple sources.
+ In doing so a sub-system of geometric transformations has been included
+ such that the renders of individual sources are arranged coherently within
+ the space when reconstructed.
+ Work has begun on separating much of the network functionality from the
+ 
+\noun on
+KinectServer
+\noun default
+ class such as frame retrieval in order to allow this to be done on a source-by-
+source basis.
+\end_layout
+
+\begin_layout Subsection
+Geometric Transformations
+\end_layout
+
+\begin_layout Standard
+Within the 
+\noun on
+LiveScan3D
+\noun default
+ server source code are utility structures and classes which made developing
+ a wider geometric manipulation system easier.
+ Structures defining points in both 3D and 2D space called 
+\noun on
+Point3f
+\noun default
+ and 
+\noun on
+Point2f
+\noun default
+ respectively are used in drawing skeletons.
+ There is also a class defining an affine transformation.
+\end_layout
+
+\begin_layout Standard
+An affine transformation is a family of geometric transformations that preserve
+ parallel lines within geometric spaces.
+ Some examples of affine transformations include scaling, reflection, rotation,
+ translation and shearing.
+\end_layout
+
+\begin_layout Standard
+The class definition is made up of a three-by-three transformation matrix
+ and single 3D vector for translation.
+ 
+\end_layout
+
+\begin_layout Standard
+The class is used for both camera poses and world transformations.
+ A camera pose is the affine transformation defining the position and orientatio
+n of the 
+\noun on
+Kinect
+\noun default
+ camera when drawn in the 
+\noun on
+OpenGL
+\noun default
+ space.
+ The world transformations are used when using multiple sensors simultaneously.
+ When completing the calibration process, the origin of the 
+\noun on
+OpenGL
+\noun default
+ space shifts from being the position of the single 
+\noun on
+Kinect
+\noun default
+ sensor to being the calibration markers that each camera now orbits.
+ The server, however, still receives renders from each sensor defined by
+ their own Euclidean space and as such the server must transform each view
+ into a composite one.
+ The world transforms define the transformations for each sensor that correctly
+ construct a calibrated 3D render.
+\end_layout
+
+\begin_layout Standard
+When considering how each source's render would be arranged in the space
+ the use of this class definition of affine transformations was extended.
+ As the use of the class is fairly limited within the base source code,
+ some utility classes and functions were required in order to fully maximise
+ their effectiveness.
+\end_layout
+
+\begin_layout Standard
+The 
+\noun on
+Transformer
+\noun default
+ class has static methods to apply 
+\noun on
+AffineTransform
+\noun default
+s to both 
+\noun on
+Point3f
+\noun default
+ structures and raw vertices when received from 
+\noun on
+LiveScan
+\noun default
+ clients.
+\end_layout
+
+\begin_layout Standard
+It also has static methods to generate affine transformations for rotations
+ in each axis given an arbitrary angle.
+ This provided a foundation on which to define how the 
+\noun on
+OpenGL
+\noun default
+ space would arrange separate sources within it's combined co-ordinate space.
+\end_layout
+
+\begin_layout Subsection
+Separation of Network and Display
 \end_layout
 
 \begin_layout Section
