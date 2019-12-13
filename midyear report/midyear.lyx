@@ -5,10 +5,6 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
-\begin_preamble
-\rfoot{Andy Pack / 6420013}
-\lfoot{January 2020}
-\end_preamble
 \use_default_options true
 \begin_modules
 customHeadersFooters
@@ -144,6 +140,14 @@ LatexCommand tableofcontents
 
 \end_layout
 
+\begin_layout Right Footer
+Andy Pack / 6420013
+\end_layout
+
+\begin_layout Left Footer
+January 2020
+\end_layout
+
 \begin_layout Section
 Introduction
 \end_layout
@@ -252,6 +256,86 @@ LiveScan
 \noun default
  suite is responsible for managing and receiving 3D renders from connected
  clients.
+ These renderings are reconstructed in an 
+\noun on
+OpenGL 
+\noun default
+window, the structure of the LiveScan server can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:server-structure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../initial-state.png
+	lyxscale 30
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Initial structure of the 
+\noun on
+LiveScan3D
+\noun default
+ server
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:server-structure"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\noun on
+KinectServer
+\noun default
+ is responsible for the network layer of the program, managing client connection
+s via 
+\noun on
+KinectSocket
+\noun default
+s and frame reception.
+ Received frames in the form of lists of vertices, RGB values, camera poses
+ and bodies override shared variables between the main window and the 
+\noun on
+OpenGL
+\noun default
+ window.
 \end_layout
 
 \begin_layout Subsection
@@ -272,13 +356,12 @@ OpenGL
  In doing so a sub-system of geometric transformations has been included
  such that the renders of individual sources are arranged coherently within
  the space when reconstructed.
- Work has begun on separating much of the network functionality from the
- 
+ These default arrangements can be overridden using keyboard controls to
+ allow arbitrary placement and rotation of separate sources within the 
 \noun on
-KinectServer
+OpenGL
 \noun default
- class such as frame retrieval in order to allow this to be done on a source-by-
-source basis.
+ window's co-ordinate space.
 \end_layout
 
 \begin_layout Subsection
@@ -290,8 +373,8 @@ Within the
 \noun on
 LiveScan3D
 \noun default
- server source code are utility structures and classes which made developing
- a wider geometric manipulation system easier.
+ server source code are utility structures and classes which were extended
+ in order to develop a wider geometric manipulation system.
  Structures defining points in both 3D and 2D space called 
 \noun on
 Point3f
