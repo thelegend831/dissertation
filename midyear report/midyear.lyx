@@ -110,6 +110,11 @@ Andy Pack / 6420013
 \end_layout
 
 \begin_layout Standard
+\align center
+Mid-Term Report
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
 
@@ -202,11 +207,11 @@ Literature Review
 \end_layout
 
 \begin_layout Subsection
-Holoportation
+Augmented and Virtual Reality
 \end_layout
 
 \begin_layout Subsection
-Augmented and Virtual Reality
+Holoportation
 \end_layout
 
 \begin_layout Subsection
@@ -282,7 +287,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../initial-state.png
+	filename ../media/initial-state.png
 	lyxscale 30
 	width 50col%
 
@@ -356,8 +361,8 @@ OpenGL
  In doing so a sub-system of geometric transformations has been included
  such that the renders of individual sources are arranged coherently within
  the space when reconstructed.
- These default arrangements can be overridden using keyboard controls to
- allow arbitrary placement and rotation of separate sources within the 
+ These default arrangements can be overridden with keyboard controls allowing
+ arbitrary placement and rotation of separate sources within the 
 \noun on
 OpenGL
 \noun default
@@ -396,12 +401,8 @@ An affine transformation is a family of geometric transformations that preserve
 
 \begin_layout Standard
 The class definition is made up of a three-by-three transformation matrix
- and single 3D vector for translation.
- 
-\end_layout
-
-\begin_layout Standard
-The class is used for both camera poses and world transformations.
+ and single 3D vector for translation and is used for both camera poses
+ and world transformations.
  A camera pose is the affine transformation defining the position and orientatio
 n of the 
 \noun on
@@ -468,7 +469,347 @@ OpenGL
 \end_layout
 
 \begin_layout Subsection
-Separation of Network and Display
+Separation of Network and Presentation Layer
+\end_layout
+
+\begin_layout Standard
+During initial testing frames received from a live sensor were intercepted
+ and serialized to XML files in local storage.
+ These frames were loaded back as the server started and the values were
+ merged with those received live before display.
+\end_layout
+
+\begin_layout Standard
+The composite frame can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Initial-composite-frame"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../media/pretransform.jpg
+	lyxscale 10
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Initial composite testing frame
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Initial-composite-frame"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The objects can be seen to be occupying the same space due to their similar
+ positions in the frame.
+ This is not a sufficient solution for displaying separate sources and so
+ geometric transformations like those mentioned above were employed.
+ This can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Initial-testing-layout"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ A rotation of 180° in the 
+\begin_inset Formula $y$
+\end_inset
+
+ axis pivoted the frames such that they faced those being received live,
+ the results can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:180-degree-rotation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../media/local-testing.png
+	lyxscale 30
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Initial testing process transforming frames loaded from local storage
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Initial-testing-layout"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../media/180flip.jpg
+	lyxscale 10
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Composite frame following 180° rotation of recorded frame in 
+\begin_inset Formula $y$
+\end_inset
+
+ axis
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:180-degree-rotation"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At this point it was noted that transforming and arranging figures within
+ the main window before passing the 
+\noun on
+OpenGL
+\noun default
+ window a complete point cloud spreads responsibility for the display process
+ logic to the main window.
+\end_layout
+
+\begin_layout Standard
+
+\noun on
+LiveScan3D
+\noun default
+ is capable of supporting more display methods than just the native 
+\noun on
+OpenGL
+\noun default
+ implementation with versions available for both 
+\noun on
+Microsoft Hololens
+\noun default
+ and Mobile AR applications.
+ Therefore when designing the multi-source capabilities the separation of
+ logic between the network and presentation layer will be important.
+ The way in which the 
+\noun on
+OpenGL
+\noun default
+ window arranges the figures within should be defined by the 
+\noun on
+OpenGL
+\noun default
+ window.
+ The network layer should be display agnostic and not make assumptions about
+ how the display will process figures.
+\end_layout
+
+\begin_layout Standard
+In order to follow this design the transformations were moved to instead
+ occur within the 
+\noun on
+OpenGL
+\noun default
+ window class.
+ To allow this the shared variables between the 
+\noun on
+MainWindow
+\noun default
+ and 
+\noun on
+OpenGL
+\noun default
+ were changed.
+ The Frame structure was defined to wrap an individual point cloud with
+ a client ID to allow differentiation.
+ The structure holds fields for each of the lists previously shared between
+ the two objects including a list of vertices or co-ordinates and the RGB
+ values for each as well as the camera poses and bodies.
+\end_layout
+
+\begin_layout Standard
+The original 
+\noun on
+LiveScan3D
+\noun default
+ cleared each of these variables for each newly retrieved frame, when moving
+ to a multi-source architecture the ability to individually update source
+ point clouds was required.
+\end_layout
+
+\begin_layout Standard
+To accomplish this a dictionary was used as the shared variable with each
+ clients frame being keyed by it's client ID.
+ In doing so only one frame per client is kept and each new frame overrides
+ the last.
+ During rendering the dictionary is iterated through and each point cloud
+ combined.
+ Before combination a client specific transformation is retrieved from an
+ instance of the 
+\noun on
+DisplayFrameTransformer
+\noun default
+ class.
+ This object is a member of the 
+\noun on
+OpenGL
+\noun default
+ window and is responsible for defining the orientation and position of
+ each point cloud.
+\end_layout
+
+\begin_layout Subsection
+DisplayFrameTransformer
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../media/december-state.png
+	lyxscale 30
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Current state of LiveScan server structure with 
+\noun on
+OpenGL
+\noun default
+ window-based transformer
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:current-state-diagram"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
