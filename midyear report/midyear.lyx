@@ -177,9 +177,9 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-As the spaces of augmented and virtual reality become commonplace and mature,
- the ability to capture and stream 3D renderings of objects and people over
- the internet using consumer-grade hardware has many possible applications.
+As the spaces of augmented and virtual reality mature and become more commonplac
+e, the ability to capture and stream 3D renderings of objects and people
+ over the internet using consumer-grade hardware has many possible applications.
 \end_layout
 
 \begin_layout Standard
@@ -212,6 +212,10 @@ Augmented and Virtual Reality
 
 \begin_layout Subsection
 Holoportation
+\end_layout
+
+\begin_layout Subsection
+Traditional Optical 3D Reconstruction
 \end_layout
 
 \begin_layout Subsection
@@ -344,7 +348,7 @@ OpenGL
 \end_layout
 
 \begin_layout Subsection
-Multi-View Configurations
+Frame Geometry & Multi-View Configurations
 \end_layout
 
 \begin_layout Section
@@ -763,6 +767,75 @@ DisplayFrameTransformer
 \end_layout
 
 \begin_layout Standard
+The 
+\noun on
+DisplayFrameTransformer
+\noun default
+ is responsible for generating transformations for the sources displayed
+ within the 
+\noun on
+OpenGL
+\noun default
+ window.
+\end_layout
+
+\begin_layout Standard
+Each client is assigned a default transformation which can be overridden
+ using keyboard controls.
+\end_layout
+
+\begin_layout Standard
+Clients are initially arranged in a circle in around the origin in the center
+ of the space.
+ This is done by retrieving a transformation for a rotation in the 
+\begin_inset Formula $y$
+\end_inset
+
+ axis for each client number, 
+\begin_inset Formula $n$
+\end_inset
+
+, using the below, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\alpha\left(n\right)=\frac{n}{client\:total}\cdotp360\textdegree
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similar to the shared variables between the 
+\noun on
+MainWindow
+\noun default
+ and 
+\noun on
+OpenGL
+\noun default
+ window, client transformations are stored within a dictionary indexed by
+ client ID.
+\end_layout
+
+\begin_layout Standard
+The 
+\noun on
+DisplayFrameTransformer
+\noun default
+ also has methods to override these initial transforms with the RotateClient()
+ and TranslateClient() methods.
+ When these methods are called for the first time for a client an object
+ defining the position and rotation is pulled from the default rotation.
+ From here the presence of a client override leads returned transforms to
+ be defined by these values instead.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -784,7 +857,11 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Current state of LiveScan server structure with 
+Current state of 
+\noun on
+LiveScan
+\noun default
+ server structure with 
 \noun on
 OpenGL
 \noun default
