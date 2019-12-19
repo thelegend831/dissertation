@@ -245,17 +245,47 @@ literal "false"
 \noun on
 Xbox Kinect
 \noun default
- camera to record and transmit 3D renders over an IP network.
+ v2 camera to record and transmit 3D renders over an IP network.
  A server which can manage multiple clients processes, reconstructs and
  displays the renderings in real-time.
 \end_layout
 
 \begin_layout Subsection
-LiveScan Client
+
+\noun on
+LiveScan
+\noun default
+ Client
+\end_layout
+
+\begin_layout Standard
+The 
+\noun on
+LiveScan
+\noun default
+ Client is responsible for interfacing with the 
+\noun on
+Kinect
+\noun default
+ sensor via the 
+\noun on
+Kinect
+\noun default
+ v2 SDK and transmitting frames to the 
+\noun on
+LiveScan
+\noun default
+ Server.
+ Body detection takes place client side, as does calibration when using
+ multiple sensors.
 \end_layout
 
 \begin_layout Subsection
-LiveScan Server
+
+\noun on
+LiveScan
+\noun default
+ Server
 \end_layout
 
 \begin_layout Standard
@@ -269,7 +299,11 @@ LiveScan
 \noun on
 OpenGL 
 \noun default
-window, the structure of the LiveScan server can be seen in figure 
+window, the structure of the 
+\noun on
+LiveScan
+\noun default
+ server can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:server-structure"
@@ -349,6 +383,22 @@ OpenGL
 
 \begin_layout Subsection
 Frame Geometry & Multi-View Configurations
+\end_layout
+
+\begin_layout Standard
+When using a single client setup frames are transmitted in their own co-ordinate
+ space, the sensor is made the origin with the scene being rendered in front
+ of it.
+\end_layout
+
+\begin_layout Standard
+When using multiple sensors, the server would be unable to combine these
+ unique Euclidean spaces without knowledge of the sensors relative positions.
+\end_layout
+
+\begin_layout Standard
+In order to make a composite frame a calibration process is completed client
+ side following instruction by the server.
 \end_layout
 
 \begin_layout Section
