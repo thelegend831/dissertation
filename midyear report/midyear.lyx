@@ -16,7 +16,7 @@ todonotes
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
+\font_roman "utopia" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -167,12 +167,45 @@ University of Surrey
 \end_layout
 
 \begin_layout Abstract
-abstract
+The scope and current state of the multi-source holoportation project is
+ examined.
+ The aim is to take a suite of 3D video capture software and extend it from
+ the current capabilities of multiple sensors but a single client to handle
+ multiple groups of sensors called sources during frame collection and display.
+ Currently the display methods have been extended in line with the specification
+ in order to allow simultaneous display and arbitrary real-time placement
+ within the display space.
+ 
+\end_layout
+
+\begin_layout Abstract
+The future work for the project is described including the current designs
+ for said endeavours.
+ The bulk of this remaining work involves developing the network capabilities
+ of the software to accommodation multiple sources.
 \end_layout
 
 \begin_layout Standard
 \begin_inset CommandInset toc
 LatexCommand tableofcontents
+
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList figure
+
+\end_inset
+
+
+\begin_inset CommandInset toc
+LatexCommand lstlistoflistings
 
 \end_inset
 
@@ -477,7 +510,7 @@ Worlds in Miniature
 \end_layout
 
 \begin_layout Standard
-The Worlds in Miniature is described in the paper 
+The Worlds in Miniature is described in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "wim"
@@ -488,9 +521,8 @@ literal "false"
  as a set of interfaces between the user and the virtual space they experience
  using tactile and visual tools.
  The interface involves providing the user with a miniature render of the
- world they are inhabiting.
- This model can interacted with in order to affect the full scale environment
- around them.
+ world they are inhabiting that can interacted with in order to affect the
+ full scale environment around them.
 \end_layout
 
 \begin_layout Standard
@@ -715,7 +747,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Initial structure of the 
+Initial architecture of the 
 \noun on
 LiveScan3D
 \noun default
@@ -787,11 +819,19 @@ The required development to take the existing
 \noun on
 LiveScan
 \noun default
- codebase to the desired multi-source result can be split into two parts.
+ codebase to the desired multi-source result can be split into two areas
+ of concern.
 \end_layout
 
-\begin_layout Standard
-The network layer of the 
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+\emph on
+Network
+\series default
+\emph default
+ The network layer of the 
 \noun on
 LiveScan
 \noun default
@@ -807,8 +847,15 @@ sources
  for which separate frames are collected for display.
 \end_layout
 
-\begin_layout Standard
-Finally the display element of the server should be extended to allow the
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\series bold
+\emph on
+Display
+\series default
+\emph default
+ Finally the display element of the server should be extended to allow the
  simultaneous presentation of multiple point clouds.
  These objects should be individually arrangeable in the display space allowing
  both movement and rotation.
@@ -821,9 +868,8 @@ OpenGL
 \noun default
  window, has been modified such that it can construct and render point clouds
  from multiple sources.
- To do so a dynamic sub-system of geometric transformations has been included
- such that the renders of individual sources are arranged coherently within
- the space when reconstructed.
+ To do so a dynamic sub-system of geometric transformations has been written
+ in order to coherently arrange sources within the space when reconstructed.
  The default arrangements can be overridden with keyboard controls facilitating
  arbitrary placement and rotation of separate sources within the 
 \noun on
@@ -853,7 +899,18 @@ Point3f
 Point2f
 \noun default
  respectively are used in drawing skeletons.
- There is also a class defining an affine transformation.
+ There is also a class defining an affine transformation, the definitions
+ for all three can be seen in appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Existing-Data-Structures"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -942,9 +999,9 @@ Separation of Network and Presentation Layer
 
 \begin_layout Standard
 During initial testing frames received from a live sensor were intercepted
- and serialized to XML files in local storage.
- These frames were loaded back as the server started and the values were
- merged with those received live before display.
+ and serialized to XML in local storage.
+ These frames were loaded into memory as the server was started and merged
+ with those received live before display.
 \end_layout
 
 \begin_layout Standard
@@ -983,7 +1040,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Initial composite testing frame
+Initial multi-source composite testing frame
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Initial-composite-frame"
@@ -1005,10 +1062,11 @@ name "fig:Initial-composite-frame"
 
 \begin_layout Standard
 The objects can be seen to be occupying the same space due to their similar
- positions in the frame.
+ positions in the frame during capture.
  This is not a sufficient solution for displaying separate sources and so
- geometric transformations like those mentioned above were employed.
- This can be seen in figure 
+ geometric transformations like those mentioned above were employed to separate
+ the two.
+ The change in software structure at this stage can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Initial-testing-layout"
@@ -1105,7 +1163,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Composite frame following 180° rotation of recorded frame in 
+Composite testing frame following 180° rotation of recorded source in 
 \begin_inset Formula $y$
 \end_inset
 
@@ -1157,17 +1215,18 @@ OpenGL
 Microsoft Hololens
 \noun default
  and Mobile AR applications.
- Therefore when designing the multi-source capabilities the separation of
- logic between the network and presentation layer will be important.
+ Therefore when designing the multi-source capabilities, the separation
+ of logic between the network and presentation layer is important.
  The way in which the 
 \noun on
 OpenGL
 \noun default
- window arranges the figures within should be defined by the 
+ window arranges the figures in it's display space should be defined by
+ the 
 \noun on
 OpenGL
 \noun default
- window.
+ window itself.
  The network layer should be display agnostic and not make assumptions about
  how the display will process figures.
 \end_layout
@@ -1188,8 +1247,19 @@ MainWindow
 OpenGL
 \noun default
  were changed.
- The Frame structure was defined to wrap an individual point cloud with
- a client ID to allow differentiation.
+ A Frame structure was defined to wrap an individual point cloud with a
+ client ID to allow differentiation, the definition can be seen in appendix
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Frame"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
  The structure holds fields for each of the lists previously shared between
  the two objects including a list of vertices or co-ordinates and the RGB
  values for each as well as the camera poses and bodies.
@@ -1200,9 +1270,12 @@ The original
 \noun on
 LiveScan3D
 \noun default
- cleared each of these variables for each newly retrieved frame, when moving
+ cleared each of these variables before retrieving a new frame, when moving
  to a multi-source architecture the ability to individually update source
- point clouds was required.
+ point clouds was noted as being important.
+ This would remove blocking the entire display when unable to receive frames
+ from a specific client, other clients would still be able to have frames
+ updated promptly.
 \end_layout
 
 \begin_layout Standard
@@ -1240,7 +1313,67 @@ DisplayFrameTransformer
 \noun on
 OpenGL
 \noun default
- window.
+ window, a UML diagram for the class can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:UML-displayframetransformer"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../media/DisplayFrameTransformer.png
+	lyxscale 30
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+UML diagram for 
+\noun on
+DisplayFrameTransformer
+\noun default
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:UML-displayframetransformer"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1249,7 +1382,7 @@ Each client is assigned a default transformation which can be overridden
 \end_layout
 
 \begin_layout Standard
-Clients are initially arranged in a circle in around the origin in the center
+Clients are initially arranged in a circle around the origin in the center
  of the space.
  This is done by retrieving a transformation for a rotation in the 
 \begin_inset Formula $y$
@@ -1294,9 +1427,24 @@ DisplayFrameTransformer
  also has methods to override these initial transforms with the RotateClient()
  and TranslateClient() methods.
  When these methods are called for the first time for a client an object
- defining the position and rotation is pulled from the default rotation.
- From here the presence of a client override leads returned transforms to
- be defined by these values instead.
+ defining the position and rotation is populated using the default rotation.
+ From here the presence of a client override results in applied transforms
+ being defined by these values as opposed to the default orientation.
+\end_layout
+
+\begin_layout Standard
+This leaves the current architecture of the server application as described
+ in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:current-state-diagram"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1353,6 +1501,112 @@ name "fig:current-state-diagram"
 
 \end_layout
 
+\begin_layout Subsection
+Control Scheme
+\end_layout
+
+\begin_layout Standard
+The movement of objects within the 
+\noun on
+OpenGL
+\noun default
+ space is conducted through keyboard controls.
+ While mouse control would fine-grained and intuitive, the axes of motion
+ and rotation available to objects makes defining specific keys for each
+ more flexible.
+ This additionally removes the need to redefine or overload the camera controls.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Quotes eld
+\end_inset
+
+I
+\begin_inset Quotes erd
+\end_inset
+
+ key is used to cycle through displayed sources, the currently selected
+ source is the subject of each of the movement actions.
+ Sources are moved across the horizontal plane (
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $x$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $z$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ axis) of the display space using a WASD-esque layout of the UHJK keys.
+ Objects can be rotated about the vertical (
+\begin_inset Formula $y$
+\end_inset
+
+) axis using the B and N keys.
+ Finally the placement of an object can be reset to default using the R
+ key, the addition of the shift modifier resets all clients.
+\end_layout
+
+\begin_layout Standard
+Worth noting is that this represents arbitrary placement of sources in two
+ axes of position and one of rotation.
+ This is a result of these being the most common and intuitive axes with
+ which sources will need to be manipulated.
+ The ability to allow movement in all degrees would require only binding
+ these actions to keys.
+\end_layout
+
 \begin_layout Section
 Future Work
 \end_layout
@@ -1366,7 +1620,250 @@ OpenGL
 \noun on
 KinectServer
 \noun default
- can now be developed and tested using a fully functional display method.
+ can now be developed with the advantage of a fully functional display method
+ for debugging.
+\end_layout
+
+\begin_layout Standard
+The aim of this aspect of the project will be to alter the the 
+\noun on
+KinectServer
+\noun default
+ in order to allow the logical grouping of connected clients into sources
+ for separate display.
+\end_layout
+
+\begin_layout Standard
+When integrated together the server as a whole will then be able to collect
+ discrete point clouds from different sources and coherently display them
+ separately in the space, in doing so achieving the objectives for this
+ project3.
+\end_layout
+
+\begin_layout Subsection
+Network Layer Design Considerations
+\end_layout
+
+\begin_layout Standard
+Some thought as to the design for the network layer has been undertaken.
+ Although this has not yielded a final design for implementation, it has
+ made apparent some of the conditions and constraints which must be considered.
+\end_layout
+
+\begin_layout Standard
+When considering the initial steps for the project, it was thought that
+ the network layer should be developed first.
+ The design would involve separating much of the logic contained within
+ the 
+\noun on
+KinectServer
+\noun default
+ object into a new 
+\noun on
+KinectSource
+\noun default
+ object which would represent a group of clients acting as a single source.
+ It would function as a group of 
+\noun on
+KinectSocket
+\noun default
+s that could be individually polled for new frames using the same interface
+ currently being used by the 
+\noun on
+KinectServer
+\noun default
+.
+ The 
+\noun on
+KinectServer
+\noun default
+ object itself would be reduced to simply managing these 
+\noun on
+KinectSource
+\noun default
+s.
+\end_layout
+
+\begin_layout Standard
+An advantage would be that additional objects which should exist per source
+ such as the calibration information and settings could then be contained
+ within.
+\end_layout
+
+\begin_layout Standard
+This would, however, have represented a significant architecture change
+ in the entire server application and without a functioning display method
+ would have been challenging to debug.
+ As a result, it was instead decided to work on the display method first.
+\end_layout
+
+\begin_layout Standard
+Coming back to the network design following this work, a different method
+ has been considered.
+ A separate piece of work currently being undertaken is investigating the
+ network behaviour of the suite with focus on unblocking the sockets to
+ aid in the parallel operation of the server.
+\end_layout
+
+\begin_layout Standard
+Considerations from this work in combination with an emphasis on minimalism
+ and simplicity has suggested a new approach.
+\end_layout
+
+\begin_layout Subsubsection
+Socket Handshake
+\end_layout
+
+\begin_layout Standard
+A handshake process has been suggested for when new clients connect to the
+ 
+\noun on
+KinectServer
+\noun default
+.
+ The aim is to implement the method by which clients are grouped into sources
+ but also to solve how clients identify themselves consistently when communicati
+ng over multiple sockets.
+ Multiple sockets can be used by clients in order to make simultaneous connectio
+ns to the server and increase bandwidth.
+ However when doing so it is important to be able to identify which sockets
+ represent which client.
+\end_layout
+
+\begin_layout Standard
+The proposed handshake would be initiated by the client when connecting
+ to the server, at this point they include which source they should be grouped
+ with using an integer ID.
+ The server groups the socket as such and, if one has not been received,
+ responds with a random identifier string that should be used across all
+ sockets to identify the client.
+ Should the newly connected socket be for a client that is already connected
+ then the client will respond with it's existing identifier to inform the
+ server that this ID has been ignored.
+ In doing so the client now has a method of identifying itself agnostic
+ of socket, and the server has a way of identifying the source which is
+ frame is representing.
+\end_layout
+
+\begin_layout Subsection
+Deliverables and Additional Goals
+\end_layout
+
+\begin_layout Standard
+At this point in the project it is worth considering the viability of the
+ final deliverables with relation to the time remaining.
+ Based on the work completed so far the original objectives of multi-source
+ holoportation remain viable with a round of complete testing defined and
+ employed.
+\end_layout
+
+\begin_layout Standard
+This testing suite is yet to be defined but will comprise performance evaluation
+ for both the network and display aspects of the software.
+\end_layout
+
+\begin_layout Standard
+Should the original specification be delivered and evaluated with time remaining
+, additional goals and investigations should be examined.
+ Considering the design principle of network and presentation separation
+ in combination with the relevance of the technology to the spaces of AR
+ and VR, an interesting analysis could be the applicability of the multi-source
+ network developments to additional display methods.
+ Mobile AR and 
+\noun on
+Hololens
+\noun default
+ display for 
+\noun on
+LiveScan
+\noun default
+ have both been demonstrated and either could prove interesting when considered
+ in a multi-source context.
+\end_layout
+
+\begin_layout Subsection
+Final Report Structure
+\end_layout
+
+\begin_layout Standard
+The final report for the project will to an extent be based off of this
+ piece in terms of structure and content.
+ The literature review will be expanded to include an investigation of simultane
+ous video streaming in order to contextualise the coming work on the network
+ layer of the application suite.
+\end_layout
+
+\begin_layout Standard
+A results section will describe the quantitative and qualitative results
+ of the final product, these will then be evaluated and discussed in the
+ discussion section.
+ At this point a discussion can also be had about further developments that
+ can be made, both to the 
+\noun on
+LiveScan
+\noun default
+ codebase but also to the final developed version of this project.
+ The structure will be as follows,
+\end_layout
+
+\begin_layout Itemize
+Title Page
+\end_layout
+
+\begin_layout Itemize
+Abstract
+\end_layout
+
+\begin_layout Itemize
+Table of Contents
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Including lists of figures, code listings
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Acknowledgements
+\end_layout
+
+\begin_layout Itemize
+Introduction
+\end_layout
+
+\begin_layout Itemize
+Literature Review
+\end_layout
+
+\begin_layout Itemize
+Methodology and Developments
+\end_layout
+
+\begin_layout Itemize
+Results
+\end_layout
+
+\begin_layout Itemize
+Discussion
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+A description of further 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Conclusion
+\end_layout
+
+\begin_layout Itemize
+References
+\end_layout
+
+\begin_layout Itemize
+Appendices
 \end_layout
 
 \begin_layout Section
@@ -1375,6 +1872,26 @@ Summary
 
 \begin_layout Section
 Conclusions
+\end_layout
+
+\begin_layout Standard
+Roughly halfway through the time span of the project, one of two aspects
+ of the development has been completed.
+ The native display methods have been extended to meet the deliverable specifica
+tion allowing the display of multiple sources while also allowing arbitrary
+ placement and orientation within the display space.
+\end_layout
+
+\begin_layout Standard
+From this point the network layer of the suite will be developed to also
+ match the specification, allowing clients to be grouped into sources for
+ polling and processing.
+\end_layout
+
+\begin_layout Standard
+Following the development of the two, testing methodologies will be defined
+ and carried out to gather quantitative results for the final product.
+ A final report on the results will be available in May 2020.
 \end_layout
 
 \begin_layout Standard
@@ -1396,9 +1913,71 @@ options "bibtotoc"
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Section
 \start_of_appendix
-\begin_inset FloatList figure
+Existing Data Structures
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Existing-Data-Structures"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand lstinputlisting
+filename "../snippets/point2f.cs"
+lstparams "language={[Sharp]C},keywordstyle={\\color{blue}},commentstyle={\\color{magenta}\\itshape},emphstyle={\\color{red}},basicstyle={\\ttfamily},stringstyle={\\color{green}},identifierstyle={\\color{cyan}},caption={Cartesian coordinate in 2 dimensions}"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand lstinputlisting
+filename "../snippets/point3f.cs"
+lstparams "language={[Sharp]C},keywordstyle={\\color{blue}},commentstyle={\\color{magenta}\\itshape},emphstyle={\\color{red}},basicstyle={\\ttfamily},stringstyle={\\color{green}},identifierstyle={\\color{cyan}},caption={Cartesian coordinate in 3 dimensions}"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand lstinputlisting
+filename "/home/andy/uni/dissertation/snippets/affinetransform.cs"
+lstparams "language={[Sharp]C},keywordstyle={\\color{blue}},commentstyle={\\color{magenta}\\itshape},emphstyle={\\color{red}},basicstyle={\\ttfamily},stringstyle={\\color{green}},identifierstyle={\\color{cyan}},caption={Affine transformation matrix with translation}"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+New Data Structures
+\end_layout
+
+\begin_layout Subsection
+Frame
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Frame"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand lstinputlisting
+filename "../snippets/frame.cs"
+lstparams "language={[Sharp]C},keywordstyle={\\color{blue}},commentstyle={\\color{magenta}\\itshape},emphstyle={\\color{red}},basicstyle={\\ttfamily},stringstyle={\\color{green}},identifierstyle={\\color{cyan}},caption={Point cloud with Client ID}"
 
 \end_inset
 
