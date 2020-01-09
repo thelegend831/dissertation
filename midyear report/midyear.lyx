@@ -34,7 +34,7 @@ todonotes
 \bibtex_command biber
 \index_command default
 \paperfontsize default
-\spacing single
+\spacing onehalf
 \use_hyperref false
 \pdf_title "Holoportation"
 \pdf_author "Andy Pack"
@@ -180,9 +180,9 @@ The scope and current state of the multi-source holoportation project is
 
 \begin_layout Abstract
 The future work for the project is described including the current designs
- for said endeavours.
+ these endeavours.
  The bulk of this remaining work involves developing the network capabilities
- of the software to accommodation multiple sources.
+ of the software to accommodate multiple sources.
 \end_layout
 
 \begin_layout Standard
@@ -255,9 +255,10 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-As the spaces of augmented and virtual reality mature and become more commonplac
-e, the ability to capture and stream 3D renderings of objects and people
- over the internet using consumer-grade hardware has many possible applications.
+As the spaces of augmented and virtual reality become more commonplace and
+ mature, the ability to capture and stream 3D renderings of objects and
+ people over the internet using consumer-grade hardware has many possible
+ applications.
 \end_layout
 
 \begin_layout Standard
@@ -266,17 +267,36 @@ This represents one of the most direct evolutions of traditional video streaming
 \end_layout
 
 \begin_layout Standard
-The 
-\noun on
-LiveScan3D
-\noun default
- suite uses 
+LiveScan3D is a suite of 3D video software capable of recording and transmitting
+ video from client to server for rendering.
+ The suite is fast and uses consumer grade hardware for capture in the form
+ of 
 \noun on
 Xbox Kinect
 \noun default
- cameras to capture and stream 3D renders of objects from one or many angles
- simultaneously however the destination server is only able to process and
- reconstruct one object or surroundings at a time.
+ cameras, it is used in projects at various levels throughout the 
+\noun on
+University of Surrey
+\noun default
+ and has multiple setups in dedicated laboratory space.
+\end_layout
+
+\begin_layout Standard
+
+\noun on
+LiveScan3D's
+\noun default
+ use
+\noun on
+ 
+\noun default
+of 
+\noun on
+Xbox Kinect
+\noun default
+ cameras allows the capture and stream of 3D renders in single or multi-view
+ configurations using multiple cameras however the server is only able to
+ process and reconstruct one environment at a time.
 \end_layout
 
 \begin_layout Standard
@@ -1607,6 +1627,20 @@ Worth noting is that this represents arbitrary placement of sources in two
  these actions to keys.
 \end_layout
 
+\begin_layout Standard
+There is room to improve these controls, however, as the directions of movement
+ for selected objects are in relation to the fixed axes of the display space
+ as opposed to the view of the viewpoint camera.
+ In practice this means that when moving objects in the display space the
+ orientation of the space must be considered in order to identify which
+ direction the object should be moved.
+ This is less intuitive than could be expected in other areas where such
+ a control scheme is used such as video games or modelling software.
+ In such implementations when moving objects the directions are typically
+ taken from the camera's frame of reference and as the feasibility of employing
+ a similar control philosophy should be considered.
+\end_layout
+
 \begin_layout Section
 Future Work
 \end_layout
@@ -1685,15 +1719,15 @@ s.
 \end_layout
 
 \begin_layout Standard
-An advantage would be that additional objects which should exist per source
- such as the calibration information and settings could then be contained
- within.
+An advantage of this approach would be that it could also contain the additional
+ information which should exist per source such as the calibration data
+ and settings.
 \end_layout
 
 \begin_layout Standard
-This would, however, have represented a significant architecture change
+However it would have also represented a significant architecture change
  in the entire server application and without a functioning display method
- would have been challenging to debug.
+ it would have been challenging to debug.
  As a result, it was instead decided to work on the display method first.
 \end_layout
 
@@ -1701,13 +1735,13 @@ This would, however, have represented a significant architecture change
 Coming back to the network design following this work, a different method
  has been considered.
  A separate piece of work currently being undertaken is investigating the
- network behaviour of the suite with focus on unblocking the sockets to
+ network behaviour of the suite with focus on unblocking the sockets and
  aid in the parallel operation of the server.
 \end_layout
 
 \begin_layout Standard
-Considerations from this work in combination with an emphasis on minimalism
- and simplicity has suggested a new approach.
+Considerations from this work in combination with an emphasis on simplicity
+ has suggested a new approach.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1765,10 +1799,16 @@ This testing suite is yet to be defined but will comprise performance evaluation
 \begin_layout Standard
 Should the original specification be delivered and evaluated with time remaining
 , additional goals and investigations should be examined.
- Considering the design principle of network and presentation separation
- in combination with the relevance of the technology to the spaces of AR
- and VR, an interesting analysis could be the applicability of the multi-source
- network developments to additional display methods.
+ Initially, aspects already completed should be investigated for further
+ refinement, namely the control scheme as mentioned above.
+ 
+\end_layout
+
+\begin_layout Standard
+Additionally, when considering the design principle of network and presentation
+ separation in combination with the relevance of the technology to the spaces
+ of AR and VR, an interesting analysis could be made into the applicability
+ of multi-source network developments to additional display methods.
  Mobile AR and 
 \noun on
 Hololens
@@ -1786,7 +1826,7 @@ Final Report Structure
 \end_layout
 
 \begin_layout Standard
-The final report for the project will to an extent be based off of this
+The final report for the project will, to an extent, be based off of this
  piece in terms of structure and content.
  The literature review will be expanded to include an investigation of simultane
 ous video streaming in order to contextualise the coming work on the network
@@ -1802,7 +1842,7 @@ A results section will describe the quantitative and qualitative results
 \noun on
 LiveScan
 \noun default
- codebase but also to the final developed version of this project.
+ codebase but also to the multi-source version presented by this project.
  The structure will be as follows,
 \end_layout
 
@@ -1850,7 +1890,7 @@ Discussion
 
 \begin_deeper
 \begin_layout Itemize
-A description of further 
+A description of possible further developments
 \end_layout
 
 \end_deeper
@@ -1870,22 +1910,64 @@ Appendices
 Summary
 \end_layout
 
+\begin_layout Standard
+Within this piece the process of extending the 
+\noun on
+LiveScan3D
+\noun default
+ software to include multi-source holoportation has been introduced.
+ The use of such a system has many applications from uses inherited from
+ it's 2D video basis such as conference calls to new utilisations that are
+ wholly unique to the environment.
+\end_layout
+
+\begin_layout Standard
+The literature review contextualises the 
+\noun on
+LiveScan
+\noun default
+ suite and the wider spaces of AR, VR, 3D video and multi-source holoportation
+ itself.
+ Previous examples of holoportation are described and their aims of achieving
+ telepresence are discussed.
+\end_layout
+
+\begin_layout Standard
+The current state of the project is laid out showing good progress through
+ the required areas of development.
+ Of the display and network layers requiring development to fulfil the project,
+ the display element has been extended in order to allow the rendering of
+ multiple environments simultaneously with a dynamic sub-system of geometric
+ transformations.
+ The transforms are responsive to user input allowing arbitrary placement
+ and orientation of individual sources within the display space.
+ While this control interface allows free movement in the most naturally
+ traversed axes it could use some additional tuning to make it feel more
+ intuitive.
+\end_layout
+
+\begin_layout Standard
+The next steps for the project leading up to its completion are presented,
+ the initial and current plans for the remaining work is described and additiona
+l stretch goals are defined for any additional time.
+ How the work will be presented in a final report is also described.
+\end_layout
+
 \begin_layout Section
 Conclusions
 \end_layout
 
 \begin_layout Standard
-Roughly halfway through the time span of the project, one of two aspects
- of the development has been completed.
- The native display methods have been extended to meet the deliverable specifica
-tion allowing the display of multiple sources while also allowing arbitrary
- placement and orientation within the display space.
+At roughly halfway through the time allowed for the project the native display
+ methods have successfully been extended to meet the deliverable specification.
+ This involves allowing the display of multiple sources while also allowing
+ arbitrary placement and orientation within the display space.
 \end_layout
 
 \begin_layout Standard
 From this point the network layer of the suite will be developed to also
- match the specification, allowing clients to be grouped into sources for
- polling and processing.
+ match the specification, allowing connected clients to be grouped into
+ sources for polling and processing.
 \end_layout
 
 \begin_layout Standard
