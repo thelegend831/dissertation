@@ -228,6 +228,11 @@ e, the ability to capture and stream 3D renderings of objects and people
 \end_layout
 
 \begin_layout Standard
+This represents one of the most direct evolutions of traditional video streaming
+ when applied to this new technological space.
+\end_layout
+
+\begin_layout Standard
 The 
 \noun on
 LiveScan3D
@@ -586,8 +591,40 @@ literal "false"
 Xbox Kinect
 \noun default
  v2 camera to record and transmit 3D renders over an IP network.
- A server which can manage multiple clients processes, reconstructs and
- displays the renderings in real-time.
+ A server can manage multiple clients simultaneously and is responsible
+ for processing, reconstructing and displaying the renderings in real-time.
+\end_layout
+
+\begin_layout Standard
+These renderings take the form of a point cloud, a collection of 3D co-ordinates
+ indicating the position of each voxel (3D pixel) and it's associated RGB
+ colour value.
+ As a result of it's analogous nature to a traditional frame of 2D video,
+ the terms 
+\begin_inset Quotes eld
+\end_inset
+
+render
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+point cloud
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+frame
+\begin_inset Quotes erd
+\end_inset
+
+ are used interchangeably from here.
 \end_layout
 
 \begin_layout Subsection
