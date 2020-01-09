@@ -102,16 +102,61 @@ todonotes
 \begin_body
 
 \begin_layout Title
+
+\size giant
 Multi-Source Holoportation
 \end_layout
 
 \begin_layout Author
-Andy Pack / 6420013
+Andy Pack
 \end_layout
 
 \begin_layout Standard
 \align center
+
+\size largest
 Mid-Term Report
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename ../surreylogo.png
+	lyxscale 30
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size large
+Department of Electrical and Electronic Engineering
+\begin_inset Newline newline
+\end_inset
+
+Faculty of Engineering and Physical Sciences
+\begin_inset Newline newline
+\end_inset
+
+University of Surrey
 \end_layout
 
 \begin_layout Standard
@@ -206,12 +251,24 @@ The capability to concurrently receive and reconstruct streams of different
 Literature Review
 \end_layout
 
-\begin_layout Subsection
-Augmented and Virtual Reality
+\begin_layout Standard
+The significance of the 3D video captured and relayed with the 
+\noun on
+LiveScan
+\noun default
+ suite is closely related to the development of new technologies able to
+ immersively display such video content.
+ Therefore before discussing the specific extension that this project will
+ make to the 
+\noun on
+LiveScan
+\noun default
+ software it is important to contextualise it within the space of 3D video
+ capture while also considering it's implications for AR and VR applications.
 \end_layout
 
 \begin_layout Subsection
-Holoportation
+Augmented and Virtual Reality
 \end_layout
 
 \begin_layout Subsection
@@ -219,7 +276,290 @@ Traditional Optical 3D Reconstruction
 \end_layout
 
 \begin_layout Subsection
+Kinect and RGB-D Cameras
+\end_layout
+
+\begin_layout Subsection
+Holoportation and Telepresence
+\end_layout
+
+\begin_layout Standard
+The term Holoportation is defined and exemplified in the 
+\noun on
+Microsoft Research
+\noun default
+ paper 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "holoportation"
+literal "false"
+
+\end_inset
+
+, where an end-to-end pipeline is laid out for the acquisition, transmission
+ and display of 3D video facilitating real-time AR and VR experiences.
+ The 
+\noun on
+Microsoft Research
+\noun default
+ paper builds on works such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Immersive-telepresence"
+literal "false"
+
+\end_inset
+
+ 2 years earlier which describes attempts at achieving 
+\begin_inset Quotes eld
+\end_inset
+
+telepresence
+\begin_inset Quotes erd
+\end_inset
+
+, a term coined by Marvin Minksy to describe the transparent and intuitive
+ remote control of robot arms as if they were the controllers own
+\begin_inset CommandInset citation
+LatexCommand cite
+key "marvin-minksy"
+literal "false"
+
+\end_inset
+
+.
+ The term was broadened by Bill Buxton
+\begin_inset CommandInset citation
+LatexCommand cite
+key "buxton-telepresence"
+literal "false"
+
+\end_inset
+
+ to include the space of telecommunications to describe technology being
+ used to make someone feel present in a different environment.
+ In the context of holoportation this is through the use of 3D video reconstruct
+ion.
+ The aforementioned 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Immersive-telepresence"
+literal "false"
+
+\end_inset
+
+ used 10 
+\noun on
+Microsoft Kinect
+\noun default
+ cameras to capture a room before virtually reconstructing the models.
+ 
+\end_layout
+
+\begin_layout Standard
+In service of demonstrating it's applicability to achieving telepresence,
+ a figure was isolated from the surroundings and stereoscopically rear-projected
+ onto a screen for a single participant, a result of this can be seen in
+ figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:stereoscopic"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../media/telepresence-stereoscopic.png
+	lyxscale 30
+	width 40col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+An example of stereoscopic projection of depth aware footage captured during
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Immersive-telepresence"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:stereoscopic"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\noun on
+Microsoft Research
+\noun default
+ paper demonstrates a system using 8 cameras surrounding a space.
+ Each camera captured both Near Infra-Red and colour images to construct
+ a colour-depth video stream, .
+\end_layout
+
+\begin_layout Subsection
+Multi-Source Holoportation
+\end_layout
+
+\begin_layout Standard
+The space of work implementing multi-source holoportation has been explored
+ in works such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "group-to-group-telepresence"
+literal "false"
+
+\end_inset
+
+ in the context of shared architectural design spaces in virtual reality
+ similar to a conference call.
+ Two groups of people were captured in 3D using clusters of 
+\noun on
 Kinect
+\noun default
+ cameras before having these renders transmitted to the other group.
+ Each group reconstructs the other's render for display in virtual reality
+ in conjunction with their own.
+ In doing so a shared virtual space for the two groups has been created
+ and it can be seen to implement the process of holoportation.
+ The shared architectural design experience is emergent of the semantics
+ of the virtual space where a World in Miniature (WIM) metaphor is used.
+\end_layout
+
+\begin_layout Subsubsection
+Worlds in Miniature
+\end_layout
+
+\begin_layout Standard
+The Worlds in Miniature is described in the paper 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wim"
+literal "false"
+
+\end_inset
+
+ as a set of interfaces between the user and the virtual space they experience
+ using tactile and visual tools.
+ The interface involves providing the user with a miniature render of the
+ world they are inhabiting.
+ This model can interacted with in order to affect the full scale environment
+ around them.
+\end_layout
+
+\begin_layout Standard
+This navigation tool maps well to the architecture groupware structure of
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "group-to-group-telepresence"
+literal "false"
+
+\end_inset
+
+, an image captured during the work can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:World-in-Miniature-group-by-group"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../media/group-by-group.png
+	lyxscale 30
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+World in Miniature render demonstrated in a multi-source holoporation context
+ during 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "group-to-group-telepresence"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:World-in-Miniature-group-by-group"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -406,16 +746,48 @@ Current Work
 \end_layout
 
 \begin_layout Standard
+The required development to take the existing 
+\noun on
+LiveScan
+\noun default
+ codebase to the desired multi-source result can be split into two parts.
+\end_layout
+
+\begin_layout Standard
+The network layer of the 
+\noun on
+LiveScan
+\noun default
+ server must be updated in order to accommodate multiple clients logically
+ grouped into 
+\begin_inset Quotes eld
+\end_inset
+
+sources
+\begin_inset Quotes erd
+\end_inset
+
+ for which separate frames are collected for display.
+\end_layout
+
+\begin_layout Standard
+Finally the display element of the server should be extended to allow the
+ simultaneous presentation of multiple point clouds.
+ These objects should be individually arrangeable in the display space allowing
+ both movement and rotation.
+\end_layout
+
+\begin_layout Standard
 As of January 2020 the method for displaying renderings, the server's 
 \noun on
 OpenGL
 \noun default
  window, has been modified such that it can construct and render point clouds
  from multiple sources.
- In doing so a sub-system of geometric transformations has been included
+ To do so a dynamic sub-system of geometric transformations has been included
  such that the renders of individual sources are arranged coherently within
  the space when reconstructed.
- These default arrangements can be overridden with keyboard controls allowing
+ The default arrangements can be overridden with keyboard controls facilitating
  arbitrary placement and rotation of separate sources within the 
 \noun on
 OpenGL
@@ -434,7 +806,8 @@ LiveScan3D
 \noun default
  server source code are utility structures and classes which were extended
  in order to develop a wider geometric manipulation system.
- Structures defining points in both 3D and 2D space called 
+ Structures defining Cartesian coordinates in both 3D and 2D spaces called
+ 
 \noun on
 Point3f
 \noun default
@@ -447,7 +820,7 @@ Point2f
 \end_layout
 
 \begin_layout Standard
-An affine transformation is a family of geometric transformations that preserve
+Affine transformations are a family of geometric transformations that preserve
  parallel lines within geometric spaces.
  Some examples of affine transformations include scaling, reflection, rotation,
  translation and shearing.
@@ -455,10 +828,14 @@ An affine transformation is a family of geometric transformations that preserve
 
 \begin_layout Standard
 The class definition is made up of a three-by-three transformation matrix
- and single 3D vector for translation and is used for both camera poses
- and world transformations.
- A camera pose is the affine transformation defining the position and orientatio
-n of the 
+ and single 3D vector for translation, within the initial code it is used
+ for both camera poses and world transformations.
+ 
+\end_layout
+
+\begin_layout Standard
+A camera pose is the affine transformation defining the position and orientation
+ of the 
 \noun on
 Kinect
 \noun default
@@ -466,7 +843,7 @@ Kinect
 \noun on
 OpenGL
 \noun default
- space.
+ space as a green cross.
  The world transformations are used when using multiple sensors simultaneously.
  When completing the calibration process, the origin of the 
 \noun on
@@ -943,6 +1320,18 @@ name "fig:current-state-diagram"
 Future Work
 \end_layout
 
+\begin_layout Standard
+Following the extension of the 
+\noun on
+OpenGL
+\noun default
+ window, the network layer of the 
+\noun on
+KinectServer
+\noun default
+ can now be developed and tested using a fully functional display method.
+\end_layout
+
 \begin_layout Section
 Summary
 \end_layout
@@ -959,12 +1348,20 @@ Conclusions
 \end_layout
 
 \begin_layout Standard
-\start_of_appendix
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 btprint "btPrintCited"
 bibfiles "references"
 options "bibtotoc"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\start_of_appendix
+\begin_inset FloatList figure
 
 \end_inset
 
