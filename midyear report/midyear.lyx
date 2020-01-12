@@ -34,7 +34,7 @@ todonotes
 \bibtex_command biber
 \index_command default
 \paperfontsize default
-\spacing onehalf
+\spacing other 1.2
 \use_hyperref false
 \pdf_title "Holoportation"
 \pdf_author "Andy Pack"
@@ -76,9 +76,9 @@ todonotes
 \shortcut idx
 \color #008000
 \end_index
-\leftmargin 2cm
+\leftmargin 1.2cm
 \topmargin 2cm
-\rightmargin 2cm
+\rightmargin 1.5cm
 \bottommargin 2cm
 \secnumdepth 3
 \tocdepth 3
@@ -89,7 +89,7 @@ todonotes
 \quotes_style english
 \dynamic_quotes 0
 \papercolumns 1
-\papersides 1
+\papersides 2
 \paperpagestyle fancy
 \bullet 1 0 9 -1
 \tracking_changes false
@@ -170,8 +170,8 @@ University of Surrey
 The scope and current state of the multi-source holoportation project is
  examined.
  The aim is to take a suite of 3D video capture software and extend it from
- the current capabilities of multiple sensors but a single client to handle
- multiple groups of sensors called sources during frame collection and display.
+ the current capabilities of multiple sensors but a single captured environment
+ to handle multiple surroundings during frame collection and display.
  Currently the display methods have been extended in line with the specification
  in order to allow simultaneous display and arbitrary real-time placement
  within the display space.
@@ -182,7 +182,8 @@ The scope and current state of the multi-source holoportation project is
 The future work for the project is described including the current designs
  these endeavours.
  The bulk of this remaining work involves developing the network capabilities
- of the software to accommodate multiple sources.
+ of the software to accommodate multiple sources, this is on track to be
+ completed by May 2020.
 \end_layout
 
 \begin_layout Standard
@@ -192,7 +193,10 @@ LatexCommand tableofcontents
 \end_inset
 
 
-\begin_inset Newpage newpage
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
 \end_inset
 
 
@@ -303,6 +307,16 @@ Xbox Kinect
 The capability to concurrently receive and reconstruct streams of different
  objects further broadens the landscape of possible applications, analogous
  to the movement from 1-to-1 phone calls to conference calling.
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+describe scenario
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -326,27 +340,221 @@ LiveScan
 \end_layout
 
 \begin_layout Subsection
-Augmented and Virtual Reality
+Augmented, Virtual and Mixed Reality
 \end_layout
 
-\begin_layout Subsection
-Traditional Optical 3D Reconstruction
+\begin_layout Standard
+The burgeoning space of consumer augmented and virtual reality experiences
+ through headsets such as the 
+\noun on
+Microsoft Hololens
+\noun default
+ and 
+\noun on
+Oculus Rift
+\noun default
+ represents a new space for the consumption of interactive media experiences.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "remixed-reality"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "remixed-reality"
+literal "false"
+
+\end_inset
+
+ demonstrate an example of mixed reality through the use of 
+\noun on
+Kinect
+\noun default
+ cameras and a virtual reality headset.
+ Users are placed in a virtual space constructed from 3D renders of the
+ physical environment around the user.
+ Virtual manipulation of the space can then be achieved with visual, spatial
+ and temporal changes supported.
+ Objects can be scaled and sculpted in realtime while the environment can
+ be paused and rewinded.
+ The strength of mixed reality comes with the immersion of being virtually
+ placed in a version of the physical surroundings, tactile feedback from
+ the environment compounds this.
 \end_layout
 
 \begin_layout Subsection
 Kinect and RGB-D Cameras
 \end_layout
 
-\begin_layout Subsection
-Holoportation and Telepresence
+\begin_layout Standard
+Initially designed as a motion control accessory for the 
+\noun on
+Xbox
+\noun default
+, the 
+\noun on
+Kinect
+\noun default
+ is a series of depth aware cameras produced my 
+\noun on
+Microsoft
+\noun default
+.
+ The device uses additional infrared lights and sensors alongside an RGB
+ camera in a configuration referred to as a time of flight camera to generate
+ 3D renders of a surroundings.
+ The device also includes motion tracking and skeleton isolation for figures
+ in view.
 \end_layout
 
 \begin_layout Standard
-The term Holoportation is defined and exemplified in the 
+Following the release of an SDK for Windows in 2012, 
 \noun on
 Microsoft Research
 \noun default
- paper 
+ reflects on the original camera's capabilities and the applications to
+ computer vision research by 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "original-kinect-microsoft"
+literal "false"
+
+\end_inset
+
+ in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "original-kinect-microsoft"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Here 3D conference calling of the type described in the introduction without
+ AR or VR applications is presented, instead users watch a composite conference
+ space on a screen with all participants rendered within.
+ Work was undertaken to achieve mutual gaze between participants, a marked
+ advantage over traditional conference calls where the lack of such aspects
+ of group interaction make the experience more impersonal.
+ Methods of achieving more natural virtual interactions or 
+\emph on
+telepresence
+\emph default
+ are covered in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Holoportation-and-Telepresence"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A second version of the camera, v2, was released alongside the 
+\noun on
+Xbox One
+\noun default
+ in 2013 and presented many improvements over the original.
+ A higher quality RGB camera captures 1080p video at up to 30 frames per
+ second with a wider field of view than the original.
+ The physical capabilities of the camera are discussed by 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "new-kinect"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "new-kinect"
+literal "false"
+
+\end_inset
+
+.
+ The second version of the camera was found to gather more accurate depth
+ data than the original and was less sensitive to daylight.
+ 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "kinectv1/v2-accuracy-precision"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kinectv1/v2-accuracy-precision"
+literal "false"
+
+\end_inset
+
+ found similar results with the v2 achieving higher accuracy results over
+ the original.
+ The second version did, however, achieve lower precision results than the
+ v1 with recommendations included for levels of pre-processing to be applied
+ to acquired depth images to control for random noise, 
+\emph on
+flying pixels
+\emph default
+ and 
+\emph on
+multipath interference
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+This second iteration on the 
+\noun on
+Kinect
+\noun default
+ is frequently used in computer vision experiments with many of the works
+ cited here using it for acquisition.
+\end_layout
+
+\begin_layout Subsection
+Holoportation and Telepresence
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Holoportation-and-Telepresence"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The term Holoportation is defined and exemplified in a 
+\noun on
+Microsoft Research
+\noun default
+ paper by 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "holoportation"
+literal "false"
+
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "holoportation"
@@ -354,13 +562,21 @@ literal "false"
 
 \end_inset
 
-, where an end-to-end pipeline is laid out for the acquisition, transmission
+ where an end-to-end pipeline is laid out for the acquisition, transmission
  and display of 3D video facilitating real-time AR and VR experiences.
  The 
 \noun on
 Microsoft Research
 \noun default
- paper builds on works such as 
+ paper builds on works such as by 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "Immersive-telepresence"
+literal "false"
+
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Immersive-telepresence"
@@ -398,7 +614,15 @@ literal "false"
  used to make someone feel present in a different environment.
  In the context of holoportation this is through the use of 3D video reconstruct
 ion.
- The aforementioned 
+ The aforementioned work by 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "Immersive-telepresence"
+literal "false"
+
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Immersive-telepresence"
@@ -493,7 +717,32 @@ Microsoft Research
 \noun default
  paper demonstrates a system using 8 cameras surrounding a space.
  Each camera captured both Near Infra-Red and colour images to construct
- a colour-depth video stream, .
+ a colour-depth video stream, a more complex camera configuration than those
+ in the others cited.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "velt"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "velt"
+literal "false"
+
+\end_inset
+
+ demonstrates a similar holoportation experience to 
+\noun on
+LiveScan3D
+\noun default
+ capable of supporting multi-view configurations, it also supports both
+ point clouds and meshes.
 \end_layout
 
 \begin_layout Subsection
@@ -502,7 +751,15 @@ Multi-Source Holoportation
 
 \begin_layout Standard
 The space of work implementing multi-source holoportation has been explored
- in works such as 
+ in works such as by 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "group-to-group-telepresence"
+literal "false"
+
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "group-to-group-telepresence"
@@ -530,7 +787,15 @@ Worlds in Miniature
 \end_layout
 
 \begin_layout Standard
-The Worlds in Miniature is described in 
+The Worlds in Miniature is described by 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "wim"
+literal "false"
+
+\end_inset
+
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "wim"
@@ -546,8 +811,15 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-This navigation tool maps well to the architecture groupware structure of
- 
+This navigation tool maps well to 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "group-to-group-telepresence"
+literal "false"
+
+\end_inset
+
+'s
 \begin_inset CommandInset citation
 LatexCommand cite
 key "group-to-group-telepresence"
@@ -555,7 +827,8 @@ literal "false"
 
 \end_inset
 
-, an image captured during the work can be seen in figure 
+ architecture groupware design, an image captured during the work can be
+ seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:World-in-Miniature-group-by-group"
@@ -590,10 +863,10 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-World in Miniature render demonstrated in a multi-source holoporation context
- during 
+World in Miniature render demonstrated in a multi-source holoportation context
+ by 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citeauthor
 key "group-to-group-telepresence"
 literal "false"
 
@@ -679,6 +952,12 @@ frame
  are used interchangeably from here.
 \end_layout
 
+\begin_layout Standard
+The majority of the development being conducted in this project is regarding
+ the server component of the software and as such this is covered in more
+ detail.
+\end_layout
+
 \begin_layout Subsection
 
 \noun on
@@ -724,15 +1003,48 @@ LiveScan
 \noun default
  suite is responsible for managing and receiving 3D renders from connected
  clients.
- These renderings are reconstructed in an 
+ These renders are reconstructed in an interactive 
 \noun on
 OpenGL 
 \noun default
-window, the structure of the 
+window.
+ When considering the code architecture of this application there are three
+ main components.
+ 
+\end_layout
+
+\begin_layout Description
+OpenGLWindow Presentation layer of the application.
+ Separate window spawned by the 
 \noun on
-LiveScan
+LiveScanServer
 \noun default
- server can be seen in figure 
+ responsible for drawing point clouds and responding to user control.
+ 
+\end_layout
+
+\begin_layout Description
+KinectServer Network layer of the application.
+ The main window make requests of this component to receive transmitted
+ point clouds.
+\end_layout
+
+\begin_layout Description
+KinectSocket
+\noun on
+ 
+\noun default
+Child objects contained within the 
+\noun on
+KinectServer
+\noun default
+.
+ A traditional network socket object representing a single TCP connection
+ between the server and a client.
+\end_layout
+
+\begin_layout Standard
+This structure can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:server-structure"
@@ -792,18 +1104,8 @@ name "fig:server-structure"
 \end_layout
 
 \begin_layout Standard
-The 
-\noun on
-KinectServer
-\noun default
- is responsible for the network layer of the program, managing client connection
-s via 
-\noun on
-KinectSocket
-\noun default
-s and frame reception.
- Received frames in the form of lists of vertices, RGB values, camera poses
- and bodies override shared variables between the main window and the 
+Received frames in the form of lists of vertices, RGB values, camera poses
+ and bodies overwrite shared variables between the main window and the 
 \noun on
 OpenGL
 \noun default
@@ -815,7 +1117,7 @@ Frame Geometry & Multi-View Configurations
 \end_layout
 
 \begin_layout Standard
-When using a single client setup frames are transmitted in their own co-ordinate
+When using a single client, setup frames are transmitted in their own coordinate
  space, the sensor is made the origin with the scene being rendered in front
  of it.
 \end_layout
@@ -828,6 +1130,51 @@ When using multiple sensors, the server would be unable to combine these
 \begin_layout Standard
 In order to make a composite frame a calibration process is completed client
  side following instruction by the server.
+\end_layout
+
+\begin_layout Subsection
+Design Considerations
+\end_layout
+
+\begin_layout Standard
+When assessing 
+\noun on
+LiveScan
+\noun default
+'s suitability for extension to a multi-source context, the original network
+ design should be investigated.
+\end_layout
+
+\begin_layout Standard
+The original applications were best suited to a local environment as a result
+ of many of the network functions being blocking.
+ Should any delays or interruptions have occurred during a network operation,
+ then the application would need to stop and wait for remediation before
+ continuing.
+\end_layout
+
+\begin_layout Standard
+From a network perspective the need to make these actions non-blocking would
+ present benefits for both multi-source and multi-view configurations.
+\end_layout
+
+\begin_layout Standard
+Additionally, the network polling rates are much higher than the frame rate
+ of the produced video and when the server requests a frame before a new
+ one has been captured by the client, the client sends the same frame.
+ This presents unnecessary bandwidth usage.
+\end_layout
+
+\begin_layout Standard
+Moving to a multi-source context implies transmitting over the internet
+ as opposed to local operation, this will make blocking actions and bloated
+ bandwidth more dangerous to user experience.
+\end_layout
+
+\begin_layout Standard
+Work has been undertaken that allows multiple TCP connections to be used
+ by each client to increase bandwidth.
+ Further work is being undertaken to un-block network actions.
 \end_layout
 
 \begin_layout Section
@@ -909,16 +1256,20 @@ LiveScan3D
 \noun default
  server source code are utility structures and classes which were extended
  in order to develop a wider geometric manipulation system.
- Structures defining Cartesian coordinates in both 3D and 2D spaces called
+ Structures defining Cartesian coordinates in both 2D and 3D spaces called
  
-\noun on
-Point3f
-\noun default
- and 
 \noun on
 Point2f
 \noun default
- respectively are used in drawing skeletons.
+ and 
+\noun on
+Point3f
+\noun default
+ respectively are used in drawing skeletons as captured by the 
+\noun on
+Kinect
+\noun default
+ camera.
  There is also a class defining an affine transformation, the definitions
  for all three can be seen in appendix 
 \begin_inset CommandInset ref
@@ -942,8 +1293,8 @@ Affine transformations are a family of geometric transformations that preserve
 
 \begin_layout Standard
 The class definition is made up of a three-by-three transformation matrix
- and single 3D vector for translation, within the initial code it is used
- for both camera poses and world transformations.
+ and single 3D vector for translation, within the native codebase it is
+ used for both camera poses and world transformations.
  
 \end_layout
 
@@ -958,7 +1309,7 @@ Kinect
 OpenGL
 \noun default
  space as a green cross.
- The world transformations are used when using multiple sensors simultaneously.
+ The world transformations are used when using multi-view configurations.
  When completing the calibration process, the origin of the 
 \noun on
 OpenGL
@@ -968,9 +1319,22 @@ OpenGL
 Kinect
 \noun default
  sensor to being the calibration markers that each camera now orbits.
- The server, however, still receives renders from each sensor defined by
- their own Euclidean space and as such the server must transform each view
- into a composite one.
+ 
+\end_layout
+
+\begin_layout Standard
+The server still receives renders from each sensor defined by their own
+ Euclidean space
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+check where world mapping occurs
+\end_layout
+
+\end_inset
+
+ and as such the server must transform each view into a composite one.
  The world transforms define the transformations for each sensor that correctly
  construct a calibrated 3D render.
 \end_layout
@@ -981,6 +1345,27 @@ When considering how each source's render would be arranged in the space
  As the use of the class is fairly limited within the base source code,
  some utility classes and functions were required in order to fully maximise
  their effectiveness.
+\end_layout
+
+\begin_layout Subsubsection
+Transformer
+\end_layout
+
+\begin_layout Standard
+The motivation in writing the 
+\noun on
+Transformer
+\noun default
+ was to create a generic framework of geometric transformations that could
+ be utilised by the 
+\noun on
+OpenGL
+\noun default
+ display to arrange separate point clouds.
+ At a high level this is done by implementing matrix arithmetic functions
+ in the context of their use for applying linear transformations to Cartesian
+ coordinates.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -996,7 +1381,7 @@ s to both
 \noun on
 Point3f
 \noun default
- structures and raw vertices when received from 
+ structures and lists of raw vertices as received from 
 \noun on
 LiveScan
 \noun default
@@ -1004,8 +1389,34 @@ LiveScan
 \end_layout
 
 \begin_layout Standard
-It also has static methods to generate affine transformations for rotations
- in each axis given an arbitrary angle.
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+compound matrices?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Additionally there are utility functions to bidirectionally cast between
+ 
+\noun on
+Point3f
+\noun default
+ data structures and the lists of vertices received from 
+\noun on
+LiveScan
+\noun default
+ clients.
+\end_layout
+
+\begin_layout Standard
+Finally static methods generate common rotation transformations about each
+ axis given an arbitrary angle.
  This provided a foundation on which to define how the 
 \noun on
 OpenGL
@@ -1084,7 +1495,7 @@ name "fig:Initial-composite-frame"
 The objects can be seen to be occupying the same space due to their similar
  positions in the frame during capture.
  This is not a sufficient solution for displaying separate sources and so
- geometric transformations like those mentioned above were employed to separate
+ geometric transformations like those described above were employed to separate
  the two.
  The change in software structure at this stage can be seen in figure 
 \begin_inset CommandInset ref
@@ -1097,11 +1508,11 @@ noprefix "false"
 \end_inset
 
 .
- A rotation of 180° in the 
+ A rotation of 180° in the vertical (
 \begin_inset Formula $y$
 \end_inset
 
- axis pivoted the frames such that they faced those being received live,
+) axis pivoted the frames such that they faced those being received live,
  the results can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1292,20 +1703,20 @@ LiveScan3D
 \noun default
  cleared each of these variables before retrieving a new frame, when moving
  to a multi-source architecture the ability to individually update source
- point clouds was noted as being important.
- This would remove blocking the entire display when unable to receive frames
+ point clouds was prioritised.
+ This would avoid blocking the entire display when unable to receive frames
  from a specific client, other clients would still be able to have frames
  updated promptly.
 \end_layout
 
 \begin_layout Standard
 To accomplish this a dictionary was used as the shared variable with each
- clients frame being keyed by it's client ID.
+ clients frame referenced by it's client ID.
  In doing so only one frame per client is kept and each new frame overrides
  the last.
  During rendering the dictionary is iterated through and each point cloud
  combined.
- Before combination a client specific transformation is retrieved from an
+ During combination a client specific transformation is retrieved from an
  instance of the 
 \noun on
 DisplayFrameTransformer
@@ -1356,7 +1767,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename ../media/DisplayFrameTransformer.png
-	lyxscale 30
+	lyxscale 50
 	width 50col%
 
 \end_inset
@@ -1404,7 +1815,11 @@ Each client is assigned a default transformation which can be overridden
 \begin_layout Standard
 Clients are initially arranged in a circle around the origin in the center
  of the space.
- This is done by retrieving a transformation for a rotation in the 
+ This is done by retrieving a transformation from the 
+\noun on
+Transformer
+\noun default
+ for a rotation in the 
 \begin_inset Formula $y$
 \end_inset
 
@@ -1412,7 +1827,12 @@ Clients are initially arranged in a circle around the origin in the center
 \begin_inset Formula $n$
 \end_inset
 
-, using the below, 
+.
+ Each angle of rotation, 
+\begin_inset Formula $\alpha$
+\end_inset
+
+, is calculated using the below, 
 \end_layout
 
 \begin_layout Standard
@@ -1446,7 +1866,7 @@ DisplayFrameTransformer
 \noun default
  also has methods to override these initial transforms with the RotateClient()
  and TranslateClient() methods.
- When these methods are called for the first time for a client an object
+ When these methods are called for the first time on a point cloud, an object
  defining the position and rotation is populated using the default rotation.
  From here the presence of a client override results in applied transforms
  being defined by these values as opposed to the default orientation.
@@ -1530,10 +1950,10 @@ The movement of objects within the
 \noun on
 OpenGL
 \noun default
- space is conducted through keyboard controls.
- While mouse control would fine-grained and intuitive, the axes of motion
- and rotation available to objects makes defining specific keys for each
- more flexible.
+ space is implemented through keyboard controls.
+ While using the mouse would allow fine-grained and intuitive control, the
+ number of axes for motion and rotation available to objects makes defining
+ specific keys for each more flexible.
  This additionally removes the need to redefine or overload the camera controls.
 \end_layout
 
@@ -1578,7 +1998,7 @@ I
 \uwave default
 \noun default
 \color inherit
- and 
+, 
 \family roman
 \series medium
 \shape up
@@ -1608,7 +2028,7 @@ I
 \uwave default
 \noun default
 \color inherit
- axis) of the display space using a WASD-esque layout of the UHJK keys.
+) of the display space using a WASD-esque layout of the UHJK keys.
  Objects can be rotated about the vertical (
 \begin_inset Formula $y$
 \end_inset
@@ -1621,24 +2041,41 @@ I
 \begin_layout Standard
 Worth noting is that this represents arbitrary placement of sources in two
  axes of position and one of rotation.
- This is a result of these being the most common and intuitive axes with
- which sources will need to be manipulated.
+ This is a result of being the most common and intuitive axes with which
+ sources will need to be manipulated.
  The ability to allow movement in all degrees would require only binding
  these actions to keys.
 \end_layout
 
 \begin_layout Standard
-There is room to improve these controls, however, as the directions of movement
- for selected objects are in relation to the fixed axes of the display space
- as opposed to the view of the viewpoint camera.
+There is room to improve these controls as the directions of movement are
+ in relation to the fixed axes of the display space as opposed to the view
+ of the viewpoint camera.
  In practice this means that when moving objects in the display space the
  orientation of the space must be considered in order to identify which
  direction the object should be moved.
  This is less intuitive than could be expected in other areas where such
  a control scheme is used such as video games or modelling software.
  In such implementations when moving objects the directions are typically
- taken from the camera's frame of reference and as the feasibility of employing
- a similar control philosophy should be considered.
+ taken from the camera's frame of reference.
+ The feasibility of employing a similar control philosophy should be considered.
+\end_layout
+
+\begin_layout Subsection
+Challenges
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+populate
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1670,8 +2107,7 @@ KinectServer
 \begin_layout Standard
 When integrated together the server as a whole will then be able to collect
  discrete point clouds from different sources and coherently display them
- separately in the space, in doing so achieving the objectives for this
- project3.
+ separately in the space, achieving the objectives for this project.
 \end_layout
 
 \begin_layout Subsection
@@ -1719,29 +2155,29 @@ s.
 \end_layout
 
 \begin_layout Standard
-An advantage of this approach would be that it could also contain the additional
- information which should exist per source such as the calibration data
- and settings.
+An advantage of this approach would be that it provide a suitable location
+ to store additional information which should exist per source such as the
+ calibration data and settings.
 \end_layout
 
 \begin_layout Standard
 However it would have also represented a significant architecture change
  in the entire server application and without a functioning display method
  it would have been challenging to debug.
- As a result, it was instead decided to work on the display method first.
+ This was the motivation for initially working on the display method.
 \end_layout
 
 \begin_layout Standard
 Coming back to the network design following this work, a different method
  has been considered.
- A separate piece of work currently being undertaken is investigating the
- network behaviour of the suite with focus on unblocking the sockets and
- aid in the parallel operation of the server.
+ A separate body of work currently being undertaken is investigating the
+ network behaviour of the suite with a focus on unblocking the network sockets
+ to aid in parallel operation.
 \end_layout
 
 \begin_layout Standard
-Considerations from this work in combination with an emphasis on simplicity
- has suggested a new approach.
+In order to ease integration with developments in this work a less disruptive
+ design was proposed.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1749,15 +2185,9 @@ Socket Handshake
 \end_layout
 
 \begin_layout Standard
-A handshake process has been suggested for when new clients connect to the
- 
-\noun on
-KinectServer
-\noun default
-.
- The aim is to implement the method by which clients are grouped into sources
- but also to solve how clients identify themselves consistently when communicati
-ng over multiple sockets.
+The aim is to implement a method by which clients are grouped into sources
+ that also allows them to identify themselves consistently when communicating
+ over multiple sockets.
  Multiple sockets can be used by clients in order to make simultaneous connectio
 ns to the server and increase bandwidth.
  However when doing so it is important to be able to identify which sockets
@@ -1765,7 +2195,13 @@ ns to the server and increase bandwidth.
 \end_layout
 
 \begin_layout Standard
-The proposed handshake would be initiated by the client when connecting
+A method for doing so would involve a handshake process when new clients
+ connect to the 
+\noun on
+KinectServer
+\noun default
+.
+ The proposed handshake would be initiated by the client when connecting
  to the server, at this point they include which source they should be grouped
  with using an integer ID.
  The server groups the socket as such and, if one has not been received,
@@ -1775,7 +2211,7 @@ The proposed handshake would be initiated by the client when connecting
  then the client will respond with it's existing identifier to inform the
  server that this ID has been ignored.
  In doing so the client now has a method of identifying itself agnostic
- of socket, and the server has a way of identifying the source which is
+ of socket, and the server has a way of identifying the source which each
  frame is representing.
 \end_layout
 
@@ -1787,8 +2223,7 @@ Deliverables and Additional Goals
 At this point in the project it is worth considering the viability of the
  final deliverables with relation to the time remaining.
  Based on the work completed so far the original objectives of multi-source
- holoportation remain viable with a round of complete testing defined and
- employed.
+ holoportation remain viable with a round of complete testing undertaken.
 \end_layout
 
 \begin_layout Standard
@@ -1842,7 +2277,7 @@ A results section will describe the quantitative and qualitative results
 \noun on
 LiveScan
 \noun default
- codebase but also to the multi-source version presented by this project.
+ codebase and the multi-source version presented by this project.
  The structure will be as follows,
 \end_layout
 
@@ -1977,7 +2412,7 @@ Following the development of the two, testing methodologies will be defined
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage pagebreak
+\begin_inset Newpage newpage
 \end_inset
 
 
