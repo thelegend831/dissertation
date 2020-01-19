@@ -112,13 +112,6 @@ Andy Pack
 \end_layout
 
 \begin_layout Standard
-\align center
-
-\size largest
-Mid-Term Report
-\end_layout
-
-\begin_layout Standard
 \begin_inset VSpace bigskip
 \end_inset
 
@@ -138,6 +131,23 @@ Mid-Term Report
 \end_layout
 
 \begin_layout Standard
+\begin_inset VSpace 10pheight%
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+
+\size large
+A dissertation submitted to the Department of Electronic Engineering in
+ partial fulfilment of the Degree of Bachelor of Engineering in Electronic
+ Engineering.
+\end_layout
+
+\begin_layout Standard
 \begin_inset VSpace vfill
 \end_inset
 
@@ -145,9 +155,14 @@ Mid-Term Report
 \end_layout
 
 \begin_layout Standard
+\noindent
 \align center
-
+May 2020
 \size large
+
+\begin_inset Newline newline
+\end_inset
+
 Department of Electrical and Electronic Engineering
 \begin_inset Newline newline
 \end_inset
@@ -167,28 +182,7 @@ University of Surrey
 \end_layout
 
 \begin_layout Abstract
-The scope and current state of the multi-source holoportation project is
- examined.
- The aim is to extend a suite of 3D video capture software from it's current
- capabilities supporting multiple sensors but a single captured environment
- to handling multiple surroundings concurrently during frame collection
- and display.
- 
-\end_layout
-
-\begin_layout Abstract
-Currently the display methods have been developed in line with the specification
- in order to allow simultaneous display and arbitrary real-time placement
- within the display space.
- 
-\end_layout
-
-\begin_layout Abstract
-The future work for the project is described including the current designs
- these endeavours.
- The bulk of this remaining work involves developing the network capabilities
- of the software to accommodate multiple sources, this is on track to be
- completed by May 2020.
+abstract
 \end_layout
 
 \begin_layout Standard
@@ -219,6 +213,23 @@ LatexCommand lstlistoflistings
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Acknowledgements
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+acknowledgements
 \end_layout
 
 \begin_layout Standard
@@ -1579,7 +1590,7 @@ Work has been undertaken that allows multiple concurrent TCP connections
 \end_layout
 
 \begin_layout Section
-Current Work
+Methodology and Developments
 \end_layout
 
 \begin_layout Standard
@@ -2482,7 +2493,7 @@ OpenGL
  window.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Future Work
 \end_layout
 
@@ -2660,89 +2671,8 @@ LiveScan
  in a multi-source context.
 \end_layout
 
-\begin_layout Subsection
-Final Report Structure
-\end_layout
-
-\begin_layout Standard
-The final report for the project will, to an extent, be based off of this
- piece in terms of structure and content.
- The literature review will be expanded to include an investigation of simultane
-ous video streaming in order to contextualise the coming work on the network
- layer of the application suite.
-\end_layout
-
-\begin_layout Standard
-A results section will describe the quantitative and qualitative results
- of the final product, these will then be evaluated and discussed in the
- discussion section.
- At this point a discussion can also be had about further developments that
- can be made, both to the 
-\noun on
-LiveScan
-\noun default
- codebase and the multi-source version presented by this project.
- The structure will be as follows,
-\end_layout
-
-\begin_layout Itemize
-Title Page
-\end_layout
-
-\begin_layout Itemize
-Abstract
-\end_layout
-
-\begin_layout Itemize
-Table of Contents
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Including lists of figures, code listings
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Acknowledgements
-\end_layout
-
-\begin_layout Itemize
-Introduction
-\end_layout
-
-\begin_layout Itemize
-Literature Review
-\end_layout
-
-\begin_layout Itemize
-Methodology and Developments
-\end_layout
-
-\begin_layout Itemize
+\begin_layout Section
 Results
-\end_layout
-
-\begin_layout Itemize
-Discussion
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-A description of possible further developments
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Conclusion
-\end_layout
-
-\begin_layout Itemize
-References
-\end_layout
-
-\begin_layout Itemize
-Appendices
 \end_layout
 
 \begin_layout Section
