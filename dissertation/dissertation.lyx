@@ -16,7 +16,7 @@ todonotes
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "utopia" "default"
+\font_roman "times" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -34,7 +34,7 @@ todonotes
 \bibtex_command biber
 \index_command default
 \paperfontsize default
-\spacing single
+\spacing onehalf
 \use_hyperref false
 \pdf_title "Holoportation"
 \pdf_author "Andy Pack"
@@ -77,9 +77,9 @@ todonotes
 \color #008000
 \end_index
 \leftmargin 2cm
-\topmargin 2cm
+\topmargin 2.2cm
 \rightmargin 2cm
-\bottommargin 2cm
+\bottommargin 2.2cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation skip
@@ -89,7 +89,7 @@ todonotes
 \quotes_style english
 \dynamic_quotes 0
 \papercolumns 1
-\papersides 2
+\papersides 1
 \paperpagestyle fancy
 \bullet 1 0 9 -1
 \tracking_changes false
@@ -131,7 +131,7 @@ Andy Pack
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace 10pheight%
+\begin_inset VSpace 4pheight%
 \end_inset
 
 
@@ -144,7 +144,7 @@ Andy Pack
 \size large
 A dissertation submitted to the Department of Electronic Engineering in
  partial fulfilment of the Degree of Bachelor of Engineering in Electronic
- Engineering.
+ Engineering
 \end_layout
 
 \begin_layout Standard
@@ -244,11 +244,24 @@ Andy Pack / 6420013
 \end_layout
 
 \begin_layout Left Footer
-January 2020
+May 2020
 \end_layout
 
 \begin_layout Section
 Introduction
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+add proper intro about XR and new media
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -602,7 +615,7 @@ Xbox
 \noun on
 Kinect
 \noun default
- is a series of depth aware cameras produced my 
+ is a series of depth aware cameras produced by 
 \noun on
 Microsoft
 \noun default
