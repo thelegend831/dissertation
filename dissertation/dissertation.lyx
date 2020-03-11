@@ -432,6 +432,19 @@ Cross Reality (XR)
 \end_layout
 
 \begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Should this just be on AR?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Cross reality is a broad term describing the combination of technology with
  a user's experience of their surroundings in order to alter the experience
  of reality.
@@ -600,6 +613,23 @@ Kinect
  The strength of mixed reality comes with the immersion of being virtually
  placed in a version of the physical surroundings, tactile feedback from
  the environment compounds this.
+\end_layout
+
+\begin_layout Subsubsection
+Augmented Reality
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Referencing the android UE
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1045,6 +1075,19 @@ Multi-Source Holoportation
 \end_layout
 
 \begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+More?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The space of multi-source holoportation has been explored by 
 \begin_inset CommandInset citation
 LatexCommand citeauthor
@@ -1189,6 +1232,10 @@ name "fig:World-in-Miniature-group-by-group"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+High Bandwidth Media Streaming
 \end_layout
 
 \begin_layout Section
@@ -1350,6 +1397,27 @@ KinectServer
 .
  A traditional network socket object representing a single TCP connection
  between the server and a client.
+\end_layout
+
+\begin_layout Description
+TransferServer
+\end_layout
+
+\begin_layout Description
+TransferSocket
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Populate
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1556,6 +1624,14 @@ OpenGL
 \end_layout
 
 \begin_layout Subsection
+
+\noun on
+LiveScan
+\noun default
+ Android
+\end_layout
+
+\begin_layout Subsection
 Design Considerations
 \end_layout
 
@@ -1603,7 +1679,7 @@ Work has been undertaken that allows multiple concurrent TCP connections
 \end_layout
 
 \begin_layout Section
-Methodology and Developments
+Server Developments
 \end_layout
 
 \begin_layout Standard
@@ -2685,6 +2761,14 @@ LiveScan
 \end_layout
 
 \begin_layout Section
+Mobile Developments
+\end_layout
+
+\begin_layout Section
+Testing Methodology
+\end_layout
+
+\begin_layout Section
 Results
 \end_layout
 
@@ -2745,7 +2829,7 @@ Holoportation and multi-source configurations thereof are important technologies
 \noun on
 Kinect
 \noun default
-, have accelerated the space.
+, has accelerated the space.
 \end_layout
 
 \begin_layout Standard

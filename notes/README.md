@@ -27,6 +27,17 @@
     - Could change behaviour with poor network conditions
 * Identification of clients and sources (handshake)
 
+## Testing Methodology
+
+* Bandwidth measures
+    - Base codebase vs my version
+* FPS
+* CPU measurements?
+* Different source configurations
+* Qualitative Measures?
+    - User experience
+        - Particular points of immersion/discomfort
+
 ##  Mid-Year Feedback
 
 * Link citations better
