@@ -32,6 +32,8 @@
 * Shift in experience paradigm
     - Not one connection to one source but a session to view multiple streams
     - Could change behaviour with poor network conditions
+    - Football red zone analogy
+        - When a game stops or loses signal, this stream should be culled
 * Identification of clients and sources (handshake)
 
 ## Testing Methodology
