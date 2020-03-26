@@ -12,6 +12,12 @@
 
 ## Significance
 
+* Generic implementation
+    - Flexible uses
+    - Different to architecture example as users are not necessarily included in experience
+        - Separation of viewer and session
+        - Can just consume and not interact
+
 ## Challenges
 
 * Synchronising clients
@@ -22,6 +28,7 @@
     - Compression?
     - Stream only bodies?
     - Multiple TCP connections
+    - Selective frame dropping? for research paper
 * Shift in experience paradigm
     - Not one connection to one source but a session to view multiple streams
     - Could change behaviour with poor network conditions
