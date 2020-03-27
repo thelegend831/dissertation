@@ -47,6 +47,13 @@
     - User experience
         - Particular points of immersion/discomfort
 
+## Questions
+
+* How do I reference Ioannis' work?
+* How do I describe the manor with which I "chose" LiveScan?
+* How do I conduct testing?
+    * FPS/Delay research?
+
 ##  Mid-Year Feedback
 
 * Link citations better
