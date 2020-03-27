@@ -5,6 +5,10 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+\end_preamble
 \use_default_options true
 \begin_modules
 customHeadersFooters
@@ -63,6 +67,7 @@ todonotes
 \cite_engine biblatex
 \cite_engine_type authoryear
 \biblio_style plain
+\biblio_options urldate=long
 \biblatex_bibstyle ieee
 \biblatex_citestyle ieee
 \use_bibtopic false
@@ -80,8 +85,8 @@ todonotes
 \topmargin 2.2cm
 \rightmargin 2cm
 \bottommargin 2.2cm
-\secnumdepth 3
-\tocdepth 3
+\secnumdepth 4
+\tocdepth 4
 \paragraph_separation skip
 \defskip medskip
 \is_math_indent 0
@@ -92,6 +97,7 @@ todonotes
 \papersides 1
 \paperpagestyle fancy
 \bullet 1 0 9 -1
+\bullet 2 0 24 -1
 \tracking_changes false
 \output_changes false
 \html_math_output 0
@@ -138,6 +144,22 @@ Andy Pack
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{changemargin}{3cm}{3cm}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \noindent
 \align center
 
@@ -145,6 +167,22 @@ Andy Pack
 A dissertation submitted to the Department of Electronic Engineering in
  partial fulfilment of the Degree of Bachelor of Engineering in Electronic
  Engineering
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{changemargin}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -428,212 +466,15 @@ LiveScan
 \end_layout
 
 \begin_layout Subsection
-Cross Reality (XR)
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Should this just be on AR?
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Cross reality is a broad term describing the combination of technology with
- a user's experience of their surroundings in order to alter the experience
- of reality.
- It is used as an umbrella term for virtual, mixed and augmented reality
- experiences and technology.
- Before continuing, the differences between these technologies is considered.
-\end_layout
-
-\begin_layout Description
-Virtual The replacement of a user's experience of their surroundings, rendering
- a new space that the user appears to inhabit.
- Typically achieved through face mounted headsets (
-\emph on
-Facebook Oculus, HTC Vive, Playstation VR, Valve Index
-\emph default
-).
-\end_layout
-
-\begin_layout Description
-Augmented The augmentation of a users surroundings by overlaying the environment
- with digital alterations.
- Can be achieved with translucent/transparent headsets 
-\emph on
-(Microsoft Hololens, Google Glass)
-\emph default
- or through mobile experiences 
-\emph on
-(Android ARCore, Apple ARKit)
-\emph default
- both when head mounted 
-\emph on
-(Google Cardboard, Google Daydream, Samsung Gear VR)
-\emph default
- and handheld 
-\emph on
-(Pokemon GO)
-\emph default
-.
-\end_layout
-
-\begin_layout Description
-Mixed A combination of virtual and augmented elements in order to allow
- interaction with an augmented reality.
- Can be achieved in different ways typically starting with either a typical
- AR or VR experience and including aspects of the other.
- At a higher level, mixed reality can be described as a continuous scale
- between the entirely real and entirely virtual with augmented reality occurring
- in between.
-\end_layout
-
-\begin_layout Standard
-The burgeoning of these three forms of XR via consumer hardware such as
- the 
-\noun on
-Microsoft Hololens
-\noun default
- and 
-\noun on
-Oculus Rift
-\noun default
- represents a new space for the consumption of interactive media experiences.
-\end_layout
-
-\begin_layout Standard
-Although VR and AR headsets have accelerated the development of XR technology,
- they are not the only way to construct XR experiences.
- 
-\begin_inset CommandInset citation
-LatexCommand citeauthor
-key "roomalive"
-literal "false"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "roomalive"
-literal "false"
-
-\end_inset
-
- demonstrate 
-\emph on
-RoomAlive
-\emph default
-, an AR experience using depth cameras and projectors (refereed to as 
-\emph on
-procams
-\emph default
-) to construct experiences in any room.
- This is presented through games and visual alterations to the users surrounding
-s.
- A strength of the system is it's self contained nature, able to automatically
- calibrate the camera arrangements using correspondences found between each
- view.
- Experience level heuristics are also discussed regarding capturing and
- maintaining user attention in an environment where the experience can be
- occurring anywhere, including behind the user .
- 
-\end_layout
-
-\begin_layout Standard
-A point is also made about how the nature of this room based experience
- breaks much of the typical game-user interaction established by virtual
- reality and video games.
- In contrast to traditional and virtual reality game experiences where the
- game is ultimately in control of the user or user avatar, AR experiences
- of this type have no physical control over the user and extra considerations
- must be made when designing such systems.
-\end_layout
-
-\begin_layout Standard
-Traditional media consumption is not the only area of interest for developing
- interactive experiences, an investigation into the value of AR and VR for
- improving construction safety is presented by 
-\begin_inset CommandInset citation
-LatexCommand citeauthor
-key "ar/vr-construction"
-literal "false"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ar/vr-construction"
-literal "false"
-
-\end_inset
-
-.
- A broad look at the applicability is taken with assessments including VR
- experiences for developing worker balance to aid in working at elevation
- and AR experiences incorporated into the workplace for aiding in task sequencin
-g to reduce the effect of memory on safety.
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset citation
-LatexCommand citeauthor
-key "remixed-reality"
-literal "false"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "remixed-reality"
-literal "false"
-
-\end_inset
-
- demonstrate an example of mixed reality through the use of 
-\noun on
-Kinect
-\noun default
- cameras and a virtual reality headset.
- Users are placed in a virtual space constructed from 3D renders of the
- physical environment around the user.
- Virtual manipulation of the space can then be achieved with visual, spatial
- and temporal changes supported.
- Objects can be scaled and sculpted in realtime while the environment can
- be paused and rewinded.
- The strength of mixed reality comes with the immersion of being virtually
- placed in a version of the physical surroundings, tactile feedback from
- the environment compounds this.
+3D Capture & Reconstruction
 \end_layout
 
 \begin_layout Subsubsection
-Augmented Reality
+Visual Hull Reconstruction
 \end_layout
 
-\begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Referencing the android UE
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Kinect and RGB-D Cameras
+\begin_layout Subsubsection
+RGB-D Cameras
 \end_layout
 
 \begin_layout Standard
@@ -808,6 +649,224 @@ Kinect
 \noun default
  is frequently used in computer vision experiments with many of the works
  cited here using it for acquisition.
+\end_layout
+
+\begin_layout Subsection
+Extended Reality (XR)
+\end_layout
+
+\begin_layout Standard
+Cross reality is a broad term describing the combination of technology with
+ a user's experience of their surroundings in order to alter the experience
+ of reality.
+ It is used as an umbrella term for virtual, mixed and augmented reality
+ experiences and technology.
+ Before continuing, the differences between these technologies is considered.
+\end_layout
+
+\begin_layout Description
+Virtual The replacement of a user's experience of their surroundings, rendering
+ a new space that the user appears to inhabit.
+ Typically achieved through face mounted headsets (
+\emph on
+Facebook Oculus, HTC Vive, Playstation VR, Valve Index
+\emph default
+).
+\end_layout
+
+\begin_layout Description
+Augmented The augmentation of a users surroundings by overlaying the environment
+ with digital alterations.
+ Can be achieved with translucent/transparent headsets 
+\emph on
+(Microsoft Hololens, Google Glass)
+\emph default
+ or through mobile experiences 
+\emph on
+(Android ARCore, Apple ARKit)
+\emph default
+ both when head mounted 
+\emph on
+(Google Cardboard, Google Daydream, Samsung Gear VR)
+\emph default
+ and handheld 
+\emph on
+(Pokemon GO)
+\emph default
+.
+\end_layout
+
+\begin_layout Description
+Mixed A combination of virtual and augmented elements in order to allow
+ interaction with an augmented reality.
+ Can be achieved in different ways typically starting with either a typical
+ AR or VR experience and including aspects of the other.
+ At a higher level, mixed reality can be described as a continuous scale
+ between the entirely real and entirely virtual with augmented reality occurring
+ in between.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Reality Virtuality Continuum
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The burgeoning of these three forms of XR via consumer hardware such as
+ the 
+\noun on
+Microsoft Hololens
+\noun default
+ and 
+\noun on
+Oculus Rift
+\noun default
+ represents a new space for the consumption of interactive media experiences.
+\end_layout
+
+\begin_layout Standard
+Although VR and AR headsets have accelerated the development of XR technology,
+ they are not the only way to construct XR experiences.
+ 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "roomalive"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "roomalive"
+literal "false"
+
+\end_inset
+
+ demonstrate 
+\emph on
+RoomAlive
+\emph default
+, an AR experience using depth cameras and projectors (refereed to as 
+\emph on
+procams
+\emph default
+) to construct experiences in any room.
+ This is presented through games and visual alterations to the users surrounding
+s.
+ A strength of the system is it's self contained nature, able to automatically
+ calibrate the camera arrangements using correspondences found between each
+ view.
+ Experience level heuristics are also discussed regarding capturing and
+ maintaining user attention in an environment where the experience can be
+ occurring anywhere, including behind the user .
+ 
+\end_layout
+
+\begin_layout Standard
+A point is also made about how the nature of this room based experience
+ breaks much of the typical game-user interaction established by virtual
+ reality and video games.
+ In contrast to traditional and virtual reality game experiences where the
+ game is ultimately in control of the user or user avatar, AR experiences
+ of this type have no physical control over the user and extra considerations
+ must be made when designing such systems.
+\end_layout
+
+\begin_layout Standard
+Traditional media consumption is not the only area of interest for developing
+ interactive experiences, an investigation into the value of AR and VR for
+ improving construction safety is presented by 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "ar/vr-construction"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ar/vr-construction"
+literal "false"
+
+\end_inset
+
+.
+ A broad look at the applicability is taken with assessments including VR
+ experiences for developing worker balance to aid in working at elevation
+ and AR experiences incorporated into the workplace for aiding in task sequencin
+g to reduce the effect of memory on safety.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "remixed-reality"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "remixed-reality"
+literal "false"
+
+\end_inset
+
+ demonstrate an example of mixed reality through the use of 
+\noun on
+Kinect
+\noun default
+ cameras and a virtual reality headset.
+ Users are placed in a virtual space constructed from 3D renders of the
+ physical environment around the user.
+ Virtual manipulation of the space can then be achieved with visual, spatial
+ and temporal changes supported.
+ Objects can be scaled and sculpted in realtime while the environment can
+ be paused and rewinded.
+ The strength of mixed reality comes with the immersion of being virtually
+ placed in a version of the physical surroundings, tactile feedback from
+ the environment compounds this.
+\end_layout
+
+\begin_layout Subsubsection
+Augmented Reality
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Handheld and Hololens
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Mobile AR SDKs and Unity ARFoundation
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1238,6 +1297,10 @@ name "fig:World-in-Miniature-group-by-group"
 High Bandwidth Media Streaming
 \end_layout
 
+\begin_layout Subsection
+Summary
+\end_layout
+
 \begin_layout Section
 LiveScan3D
 \end_layout
@@ -1367,6 +1430,20 @@ window.
  When considering the code architecture of this application there are three
  main components.
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Less depth? Move below to appendix? include high level diagram of servers
+ and parts
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Description
