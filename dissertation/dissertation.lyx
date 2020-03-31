@@ -20,7 +20,7 @@ todonotes
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "times" "default"
+\font_roman "default" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
@@ -445,8 +445,32 @@ The capability to concurrently receive and reconstruct streams of different
  to the movement from traditional phone calls to conference calling.
 \end_layout
 
+\begin_layout Subsection
+COVID-19
+\end_layout
+
 \begin_layout Section
 Literature Review
+\end_layout
+
+\begin_layout Standard
+
+\noun on
+LiveScan3D
+\noun default
+ utilises the 
+\noun on
+Microsoft Kinect
+\noun default
+ sensor in order to capture RGB video with depth information.
+ While Kinect sensors have proved extremely popular in the computer vision
+ sector, it does not represent the only method for such 3D reconstruction,
+ traditional visual hull reconstruction is investigated before identifying
+ the 
+\noun on
+Kinect
+\noun default
+'s role in this space.
 \end_layout
 
 \begin_layout Standard
@@ -456,13 +480,66 @@ LiveScan
 \noun default
  suite is related to the development of new technologies able to immersively
  display such video content.
- Therefore before discussing the specific extension that this project will
- make to the 
+ 
+\end_layout
+
+\begin_layout Standard
+While this has been exemplified mostly through AR with 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "livescan3d-hololens"
+literal "false"
+
+\end_inset
+
+'s 
 \noun on
 LiveScan
 \noun default
- software it is important to contextualise it within the space of 3D video
- capture while also considering it's implications for AR and VR applications.
+ client for 
+\noun on
+Microsoft Hololens
+\begin_inset CommandInset citation
+LatexCommand cite
+key "livescan3d-hololens"
+literal "false"
+
+\end_inset
+
+
+\noun default
+ and 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "livescan3d-android"
+literal "false"
+
+\end_inset
+
+'s extension of this for 
+\noun on
+Android
+\noun default
+ phones
+\begin_inset CommandInset citation
+LatexCommand cite
+key "livescan3d-android"
+literal "false"
+
+\end_inset
+
+, the collection and transmission of 3D holograms have applicability to
+ all forms of XR and as such the state of this space as a whole is investigated.
+\end_layout
+
+\begin_layout Standard
+As the foundation of this project, the 
+\noun on
+LiveScan3D 
+\noun default
+suite itself is presented in more depth following this review in order to
+ contextualise it both within these investigations and the extension work
+ presented herein.
 \end_layout
 
 \begin_layout Subsection
@@ -473,8 +550,34 @@ LiveScan
 Visual Hull Reconstruction
 \end_layout
 
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+CVSSP case study from CV?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 RGB-D Cameras
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Structure Sensor
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -492,7 +595,7 @@ Microsoft
 \noun default
 .
  The device uses additional infrared lights and sensors alongside an RGB
- camera in a configuration referred to as a time of flight camera to generate
+ camera in a configuration referred to as a Time-of-Flight camera to generate
  3D renders of a surroundings.
  The device also includes motion tracking and skeleton isolation for figures
  in view.
@@ -656,17 +759,27 @@ Extended Reality (XR)
 \end_layout
 
 \begin_layout Standard
-Cross reality is a broad term describing the combination of technology with
- a user's experience of their surroundings in order to alter the experience
- of reality.
- It is used as an umbrella term for virtual, mixed and augmented reality
- experiences and technology.
- Before continuing, the differences between these technologies is considered.
+Immersive media experiences enhanced through the use of technology are typically
+ defined by the level to which they affect the perception of the user.
+ This distinction typically organises technologies into one of three established
+ terms, 
+\emph on
+Virtual Reality
+\emph default
+, 
+\emph on
+Augmented Reality
+\emph default
+ and 
+\emph on
+Mixed Reality
+\emph default
+.
 \end_layout
 
 \begin_layout Description
-Virtual The replacement of a user's experience of their surroundings, rendering
- a new space that the user appears to inhabit.
+Virtual The replacement of a user's experience of unmediated reality, rendering
+ a new computer-generated space that the user appears to immersively inhabit.
  Typically achieved through face mounted headsets (
 \emph on
 Facebook Oculus, HTC Vive, Playstation VR, Valve Index
@@ -675,43 +788,113 @@ Facebook Oculus, HTC Vive, Playstation VR, Valve Index
 \end_layout
 
 \begin_layout Description
-Augmented The augmentation of a users surroundings by overlaying the environment
- with digital alterations.
- Can be achieved with translucent/transparent headsets 
+Augmented The enhancement of a user's reality through the overlay of digital
+ graphics.
+ Typically facilitated with translucent/transparent headsets 
 \emph on
 (Microsoft Hololens, Google Glass)
 \emph default
- or through mobile experiences 
+ or increasingly with 
+\begin_inset Quotes eld
+\end_inset
+
+Window on the World
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "reality-virtuality-continuum"
+literal "false"
+
+\end_inset
+
+ mobile technologies 
 \emph on
-(Android ARCore, Apple ARKit)
+(Android ARCore
 \emph default
- both when head mounted 
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ARCore"
+literal "false"
+
+\end_inset
+
+, 
 \emph on
-(Google Cardboard, Google Daydream, Samsung Gear VR)
+Apple ARKit
 \emph default
- and handheld 
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "arkit"
+literal "false"
+
+\end_inset
+
+
 \emph on
-(Pokemon GO)
+)
 \emph default
+ such as 
+\emph on
+Pokemon GO
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "pokemonGO"
+literal "false"
+
+\end_inset
+
 .
 \end_layout
 
 \begin_layout Description
-Mixed A combination of virtual and augmented elements in order to allow
- interaction with an augmented reality.
- Can be achieved in different ways typically starting with either a typical
- AR or VR experience and including aspects of the other.
- At a higher level, mixed reality can be described as a continuous scale
- between the entirely real and entirely virtual with augmented reality occurring
- in between.
+Mixed A combination of virtual elements with the real world in order to
+ facilitate interaction with an augmented reality.
+ A somewhat broad term owing to it's description of a point between augmented
+ and virtual reality.
+ An emphasis is typically placed on virtual elements existing coherently
+ within the real world and interacting in real-time.
 \end_layout
 
 \begin_layout Standard
+The term 
+\emph on
+Extended Reality 
+\emph default
+or XR functions as an umbrella term for all such experiences and is used
+ throughout this paper, note that the terms 
+\emph on
+mediated reality
+\emph default
+ and *R
+\begin_inset CommandInset citation
+LatexCommand cite
+key "all-reality"
+literal "false"
+
+\end_inset
+
+ are also sometimes used where the asterisk refers to 
+\begin_inset Quotes eld
+\end_inset
+
+all
+\begin_inset Quotes erd
+\end_inset
+
+ realities.
+ 
 \begin_inset Flex TODO Note (inline)
 status open
 
 \begin_layout Plain Layout
-Reality Virtuality Continuum
+Cross reality? Reference?
 \end_layout
 
 \end_inset
@@ -720,16 +903,80 @@ Reality Virtuality Continuum
 \end_layout
 
 \begin_layout Standard
-The burgeoning of these three forms of XR via consumer hardware such as
- the 
-\noun on
-Microsoft Hololens
-\noun default
- and 
-\noun on
-Oculus Rift
-\noun default
- represents a new space for the consumption of interactive media experiences.
+While individual classes of XR provide ostensibly different experiences,
+ it can be seen that there is overlap between them, notably that at a high
+ level all aim to extend a user's experience of reality.
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Reword
+\end_layout
+
+\end_inset
+
+ All can be seen to employ 
+\emph on
+Spatial Computing
+\emph default
+ as defined by 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "spatial-computing"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "spatial-computing"
+literal "false"
+
+\end_inset
+
+ to refer to 
+\end_layout
+
+\begin_layout Quote
+
+\emph on
+Human interaction with a machine in which the machine retains and manipulates
+ referents to real objects and spaces.
+\end_layout
+
+\begin_layout Standard
+Identifying the common dimensions across XR has led to the proposal of various
+ taxonomies providing insights in to how each implementation relate to others
+\begin_inset CommandInset citation
+LatexCommand cite
+key "reality-virtuality-continuum,mr-taxonomy,all-reality"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+The Reality Virtuality Continuum
+\end_layout
+
+\begin_layout Subsubsection
+XR Implementations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Mobile AR examples
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -755,7 +1002,7 @@ literal "false"
 \emph on
 RoomAlive
 \emph default
-, an AR experience using depth cameras and projectors (refereed to as 
+, an AR experience using depth cameras and projectors (referred to as 
 \emph on
 procams
 \emph default
@@ -767,8 +1014,18 @@ s.
  view.
  Experience level heuristics are also discussed regarding capturing and
  maintaining user attention in an environment where the experience can be
- occurring anywhere, including behind the user .
+ occurring anywhere, including behind the user.
  
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+Link with work
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -805,6 +1062,16 @@ literal "false"
  experiences for developing worker balance to aid in working at elevation
  and AR experiences incorporated into the workplace for aiding in task sequencin
 g to reduce the effect of memory on safety.
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+Link with work
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -837,10 +1104,50 @@ Kinect
  The strength of mixed reality comes with the immersion of being virtually
  placed in a version of the physical surroundings, tactile feedback from
  the environment compounds this.
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+Link with work
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
 Augmented Reality
+\end_layout
+
+\begin_layout Standard
+The advancement of mobile AR experiences spurred
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+?
+\end_layout
+
+\end_inset
+
+ by the introduction of OS level SDK's in Google's ARCore
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ARCore"
+literal "false"
+
+\end_inset
+
+ and Apple's ARKit
+\begin_inset CommandInset citation
+LatexCommand cite
+key "arkit"
+literal "false"
+
+\end_inset
+
+ has led this to be
 \end_layout
 
 \begin_layout Standard
@@ -955,8 +1262,19 @@ literal "false"
 
  to include the space of telecommunications to describe technology being
  used to make someone feel present in a different environment.
- In the context of holoportation this is through the use of 3D video reconstruct
-ion.
+ 
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Is telepresence relevant here? reverse telepresence for something else being
+ telepresent in your space?
+\end_layout
+
+\end_inset
+
+In the context of holoportation this is through the use of 3D video reconstructi
+on.
  The aforementioned work by 
 \begin_inset CommandInset citation
 LatexCommand citeauthor
@@ -1129,6 +1447,19 @@ OpenCV
  in calibration.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Link to livescan?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Multi-Source Holoportation
 \end_layout
@@ -1297,12 +1628,71 @@ name "fig:World-in-Miniature-group-by-group"
 High Bandwidth Media Streaming
 \end_layout
 
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+RTP
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+UDP
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+4K media streaming?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Compression? ZSTD
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Summary
 \end_layout
 
 \begin_layout Section
 LiveScan3D
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:LiveScan3D"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1325,15 +1715,48 @@ literal "false"
 Xbox Kinect
 \noun default
  v2 camera to record and transmit 3D renders over an IP network.
- A server can manage multiple clients simultaneously and is responsible
- for processing, reconstructing and displaying the renderings in real-time.
+ A server can manage multiple clients simultaneously in order to facilitate
+ multi-view configurations, it is then responsible for displaying the renderings
+ in real-time and/or transmitting composite renders to a user experience
+ or UE.
+ This architecture can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LiveScanArchitecture"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 These renderings take the form of a point cloud, a collection of 3D co-ordinates
- indicating the position of each voxel (3D pixel) and it's associated RGB
- colour value.
- As a result of it's analogous nature to a traditional frame of 2D video,
+ each with an associated RGB colour value.
+ There are many methods by which point clouds can be used to construct surfaces
+ suited for traditional computer graphics applications
+\begin_inset CommandInset citation
+LatexCommand cite
+key "point-cloud-surface"
+literal "false"
+
+\end_inset
+
+ however for the purposes of an interactive or real-time application the
+ plotting of each point of the cloud in a 3D space using a suitable point
+ size can create a coloured mesh visually representing the captured object
+ while keeping the processing pipeline streamlined.
+ This is the approach taken in 
+\noun on
+LiveScan
+\noun default
+.
+\end_layout
+
+\begin_layout Standard
+As a result of it's analogous nature to a traditional frame of 2D video,
  the terms 
 \begin_inset Quotes eld
 \end_inset
@@ -1362,9 +1785,50 @@ frame
 \end_layout
 
 \begin_layout Standard
-The majority of the development being conducted in this project is regarding
- the server component of the software and as such this is covered in more
- detail.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/LiveScanArchitecture.png
+	lyxscale 50
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The architecture of the 
+\noun on
+LiveScan3D
+\noun default
+ suite
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:LiveScanArchitecture"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1407,6 +1871,19 @@ Kinect
  configurations over the internet.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Extend
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 
 \noun on
@@ -1422,11 +1899,22 @@ LiveScan
 \noun default
  suite is responsible for managing and receiving 3D renders from connected
  clients.
- These renders are reconstructed in an interactive 
+ These holograms are reconstructed in an interactive 
 \noun on
 OpenGL 
 \noun default
-window.
+window functioning in a similar fashion to that of a traditional camera
+ allowing.
+ Holograms can then be transmitted to the user experience or UE, constituting
+ an XR client such as the 
+\noun on
+Hololens
+\noun default
+ or 
+\noun on
+Android
+\noun default
+ app.
  When considering the code architecture of this application there are three
  main components.
  
@@ -1437,8 +1925,7 @@ window.
 status open
 
 \begin_layout Plain Layout
-Less depth? Move below to appendix? include high level diagram of servers
- and parts
+Less depth? Move below to appendix?
 \end_layout
 
 \end_inset
@@ -1701,6 +2188,18 @@ OpenGL
 \end_layout
 
 \begin_layout Subsection
+Buffers and a non-blocking Network
+\end_layout
+
+\begin_layout Subsection
+
+\noun on
+LiveScan
+\noun default
+ Hololens
+\end_layout
+
+\begin_layout Subsection
 
 \noun on
 LiveScan
@@ -1756,7 +2255,11 @@ Work has been undertaken that allows multiple concurrent TCP connections
 \end_layout
 
 \begin_layout Section
-Server Developments
+Developments
+\end_layout
+
+\begin_layout Subsection
+Server
 \end_layout
 
 \begin_layout Standard
@@ -1821,7 +2324,7 @@ OpenGL
  co-ordinate space.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Geometric Transformations
 \end_layout
 
@@ -1898,7 +2401,7 @@ When considering how each source's render would be arranged in the space,
  were required in order to fully maximise their effectiveness.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Paragraph
 Transformer
 \end_layout
 
@@ -1970,7 +2473,7 @@ Currently missing is the ability to combine transformations into compound
 d as described here.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Separation of Network and Presentation Layer
 \end_layout
 
@@ -2280,7 +2783,7 @@ OpenGL
  each point cloud.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 DisplayFrameTransformer
 \end_layout
 
@@ -2491,7 +2994,7 @@ name "fig:current-state-diagram"
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Control Scheme
 \end_layout
 
@@ -2615,7 +3118,7 @@ This is less intuitive than could be expected in other areas where such
  The feasibility of employing a similar control philosophy should be considered.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Challenges
 \end_layout
 
@@ -2659,7 +3162,7 @@ OpenGL
  window.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Future Work
 \end_layout
 
@@ -2691,7 +3194,7 @@ When integrated together the server as a whole will then be able to collect
  separately in the space, achieving the objectives for this project.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Network Layer Design Considerations
 \end_layout
 
@@ -2761,7 +3264,7 @@ In order to ease integration with developments in this work a less disruptive
  design was proposed.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Paragraph
 Socket Handshake
 \end_layout
 
@@ -2797,48 +3300,11 @@ KinectServer
 \end_layout
 
 \begin_layout Subsection
-Deliverables and Additional Goals
+Network
 \end_layout
 
-\begin_layout Standard
-At this point in the project it is worth considering the viability of the
- final deliverables with relation to the time remaining.
- Based on the work completed so far the original objectives of multi-source
- holoportation remain viable with a round of complete testing undertaken.
-\end_layout
-
-\begin_layout Standard
-This testing suite is yet to be defined but will comprise performance evaluation
- for both the network and display aspects of the software.
-\end_layout
-
-\begin_layout Standard
-Should the original specification be delivered and evaluated with time remaining
-, additional goals and investigations should be examined.
- Initially, aspects already completed should be investigated for further
- refinement, namely the control scheme as mentioned above.
- 
-\end_layout
-
-\begin_layout Standard
-When considering the design principle of network and presentation separation
- in combination with the relevance of the technology to the spaces of AR
- and VR, an interesting analysis could be made into the applicability of
- multi-source network developments to additional display methods.
- Mobile AR and 
-\noun on
-Hololens
-\noun default
- display for 
-\noun on
-LiveScan
-\noun default
- have both been demonstrated and either could prove interesting when considered
- in a multi-source context.
-\end_layout
-
-\begin_layout Section
-Mobile Developments
+\begin_layout Subsection
+Mobile AR
 \end_layout
 
 \begin_layout Section
@@ -2951,8 +3417,22 @@ options "bibtotoc"
 
 \end_layout
 
-\begin_layout Section
+\begin_layout Standard
 \start_of_appendix
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+I reckon this is all unnecessary, if any code goes in, it's not struct definitio
+ns
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Existing Data Structures
 \begin_inset CommandInset label
 LatexCommand label
