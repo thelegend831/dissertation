@@ -1121,17 +1121,10 @@ Augmented Reality
 \end_layout
 
 \begin_layout Standard
-The advancement of mobile AR experiences spurred
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-?
-\end_layout
-
-\end_inset
-
- by the introduction of OS level SDK's in Google's ARCore
+The advancement of mobile AR aided by it's accessibility without expensive
+ ancillary hardware has led this to be a rapidly growing and popular form
+ of XR.
+ The introduction of OS level SDK's in Google's ARCore
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ARCore"
@@ -1147,7 +1140,7 @@ literal "false"
 
 \end_inset
 
- has led this to be
+ make it easier to create AR experiences.
 \end_layout
 
 \begin_layout Standard
@@ -1807,7 +1800,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-The architecture of the 
+Architecture of the 
 \noun on
 LiveScan3D
 \noun default
@@ -1904,7 +1897,7 @@ LiveScan
 OpenGL 
 \noun default
 window functioning in a similar fashion to that of a traditional camera
- allowing.
+ viewfinder allowing live previews of received data.
  Holograms can then be transmitted to the user experience or UE, constituting
  an XR client such as the 
 \noun on
@@ -1915,73 +1908,44 @@ Hololens
 Android
 \noun default
  app.
- When considering the code architecture of this application there are three
- main components.
  
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Less depth? Move below to appendix?
+A hologram frame as defined at the server is made up of the following,
 \end_layout
 
-\end_inset
-
-
+\begin_layout Itemize
+A list of 3D vertices
 \end_layout
 
-\begin_layout Description
-OpenGLWindow Presentation layer of the application.
- Separate window spawned by the 
+\begin_layout Itemize
+A list of associated RGB values for each vertex
+\end_layout
+
+\begin_layout Itemize
+A list of camera poses defining each 
 \noun on
-LiveScanServer
+Kinect
 \noun default
- responsible for drawing point clouds and responding to user control.
- 
+ sensors position and orientation
 \end_layout
 
-\begin_layout Description
-KinectServer Network layer of the application.
- The main window make requests of this component to receive transmitted
- point clouds.
-\end_layout
-
-\begin_layout Description
-KinectSocket
+\begin_layout Itemize
+A list of bodies, skeletons as identified by the 
 \noun on
- 
+Kinect
 \noun default
-Child objects contained within the 
-\noun on
-KinectServer
-\noun default
-.
- A traditional network socket object representing a single TCP connection
- between the server and a client.
-\end_layout
-
-\begin_layout Description
-TransferServer
-\end_layout
-
-\begin_layout Description
-TransferSocket
+ sensor
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Populate
-\end_layout
-
-\end_inset
-
-
+The existing codebase shared variables for each between the main window
+ and the 
+\noun on
+OpenGL
+\noun default
+ window, clearing and updating each with received live frames.
 \end_layout
 
 \begin_layout Standard
@@ -2044,17 +2008,31 @@ name "fig:server-structure"
 
 \end_layout
 
-\begin_layout Standard
-Received frames in the form of lists of vertices, RGB values, camera poses
- and bodies overwrite shared variables between the main window and the 
-\noun on
-OpenGL
-\noun default
- window.
-\end_layout
-
 \begin_layout Subsection
 Calibration & Multi-View Configurations
+\end_layout
+
+\begin_layout Standard
+Single view configurations provide one viewing angle of a captured scene,
+ this results in 
+\emph on
+shadows
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+
+\emph off
+Reword? include example?
+\end_layout
+
+\end_inset
+
+
+\emph default
+ being visible in the hologram.
+ Capturing multiple angles of the same scene allows a more complete composite
+ hologram to be constructed and presented.
 \end_layout
 
 \begin_layout Standard
@@ -2069,7 +2047,11 @@ Kinect
 \begin_layout Standard
 When using multiple sensors, the server would be unable to combine these
  unique Euclidean spaces without knowledge of the sensors positions relative
- to each other, the extrinsics of the system.
+ to each other, the 
+\emph on
+extrinsics
+\emph default
+ of the system.
 \end_layout
 
 \begin_layout Standard
@@ -2208,19 +2190,104 @@ LiveScan
 \end_layout
 
 \begin_layout Subsection
-Design Considerations
+Evaluation
 \end_layout
 
 \begin_layout Standard
-When assessing 
+Here an evaluation of the 
 \noun on
 LiveScan
 \noun default
-'s suitability for extension to a multi-source context, the original network
- design should be investigated.
+ suite is presented.
+ It's strengths within the space of 3D capture and transmission are identified
+ while it's limitations are also highlighted.
 \end_layout
 
 \begin_layout Standard
+The main strength of the 
+\noun on
+LiveScan
+\noun default
+ suite lies in it's display agnostic architecture.
+ While some of the methods previously reviewed present domain specific implement
+ations of holoportation, such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "group-to-group-telepresence"
+literal "false"
+
+\end_inset
+
+, 
+\noun on
+LiveScan
+\noun default
+ presents a generic way to capture and transmit 3D renders over an IP network
+ in real-time.
+ The transfer server then provides an interface for different display methods,
+ theoretically most forms of XR, to connect and receive these holograms.
+\end_layout
+
+\begin_layout Standard
+In concept, this design pattern makes it a good candidate for use in a hologram
+ streaming service whether for personal communications similar to
+\noun on
+ Skype
+\noun default
+ or public broadcast akin to 
+\noun on
+Twitch
+\noun default
+.
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+reference?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A limitation of the suite could be identified in it's network protocol use,
+ TCP connections are used throughout the communication pipeline from 
+\noun on
+Kinect
+\noun default
+ sensor to UE.
+ While this connection-oriented protocol provides advantages through flow
+ control, packet ordering and error handling, these also include overhead
+ which limits the speed of transmission.
+ For these reasons UDP is typically better suited for media streaming, especiall
+y when in real-time.
+ Investigations could be made into the suitability for it's use in the 
+\noun on
+LiveScan3D
+\noun default
+ suite.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+Explain UDP/TCP? covered in high bandwidth media streaming?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
 The original applications were best suited to a local environment as a result
  of many of the network functions being blocking.
  Should any delays or interruptions have occurred during a network operation,
@@ -2230,258 +2297,193 @@ The original applications were best suited to a local environment as a result
  to communicating over the open internet.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 From a network perspective the need to make these actions non-blocking would
  present benefits for both multi-source and multi-view configurations.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Additionally, the network polling rates are higher than the frame rate of
  the produced video, when the server requests a frame before a new one has
  been captured by the client, the same previous frame is resent.
  This presents unnecessary bandwidth usage.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Moving to a multi-source context implies transmitting over the internet
  as opposed to local operation, this will make blocking actions and bloated
  bandwidth more dangerous to user experience.
 \end_layout
 
-\begin_layout Standard
-Work has been undertaken that allows multiple concurrent TCP connections
- to be used by each client to increase bandwidth.
- Further work is being undertaken to un-block network actions.
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
 Developments
 \end_layout
 
+\begin_layout Standard
+The developments made throughout this project in order to facilitate multi-sourc
+e experiences were focused on four aspects of the suite,
+\end_layout
+
+\begin_layout Itemize
+The native display element of the server was updated in order to allow the
+ concurrent display of multiple sources.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+This included a system of geometric transformations to facilitate the coherent
+ arrangement of holograms in the 3D rendered space and a control scheme
+ with which to manipulate them.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+The network communications throughout the suite were extended to include
+ source IDs.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Using this ID, both the server and display elements are able to differentiate
+ frames for different sources during processing and presentation.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+The mobile AR application was extended in order to display multiple holograms
+ simultaneously.
+\end_layout
+
+\begin_layout Itemize
+Additional features facilitating the paradigm shift away from a single stream
+ to a multi-stream scenario.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+This is done through identifying and removing 
+\emph on
+stale sources
+\emph default
+ at the server.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Additionally, three other developments were made to the application suite,
+\end_layout
+
+\begin_layout Itemize
+A dynamic system of frame rate throttling was implemented.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+This was in order to facilitate investigations into the effect on user experienc
+e of balancing FPS and delay.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+The server was refactored in order to facilitate cross-platform applications.
+\end_layout
+
+\begin_layout Itemize
+The mobile UE application was refactored in order to allow cross-platform
+ deployment.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Extend, include section references?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
-Server
+Server Display
 \end_layout
 
 \begin_layout Standard
-The required development to take the existing 
-\noun on
-LiveScan
-\noun default
- codebase to the desired multi-source result can be split into two areas
- of concern.
-\end_layout
-
-\begin_layout Labeling
-\labelwidthstring 00.00.0000
-
-\series bold
-\emph on
-Network
-\series default
-\emph default
- The network layer of the 
-\noun on
-LiveScan
-\noun default
- server must be updated in order to accommodate multiple clients logically
- grouped into 
-\begin_inset Quotes eld
-\end_inset
-
-sources
-\begin_inset Quotes erd
-\end_inset
-
- for which separate frames are collected for display.
-\end_layout
-
-\begin_layout Labeling
-\labelwidthstring 00.00.0000
-
-\series bold
-\emph on
-Display
-\series default
-\emph default
- Finally the display element of the server should be extended to allow the
- simultaneous presentation of multiple point clouds.
- These objects should be individually arrangeable in the display space allowing
- both movement and rotation.
-\end_layout
-
-\begin_layout Standard
-As of January 2020 the native method for displaying renderings, the server's
+This section presents the extensions made to the presentation layer of the
+ server application.
  
-\noun on
-OpenGL
-\noun default
- window, has been modified such that it can construct and render point clouds
- from multiple sources.
- To do so a dynamic sub-system of geometric transformations has been written
- in order to coherently arrange sources within the space when reconstructed.
- The default arrangements can be overridden with keyboard controls facilitating
- arbitrary placement and rotation of separate sources within the window's
- co-ordinate space.
-\end_layout
-
-\begin_layout Subsubsection
-Geometric Transformations
 \end_layout
 
 \begin_layout Standard
-Within the 
+The semantics for the implemented geometric transformations are explored
+ through the use of the 
 \noun on
-LiveScan3D
-\noun default
- server source code are utility structures and classes which were extended
- in order to develop a wider geometric manipulation system.
- Structures defining Cartesian coordinates in both 2D and 3D spaces called
- 
-\noun on
-Point2f
+Transformer
 \noun default
  and 
 \noun on
-Point3f
+DisplayFrameTransformer
 \noun default
- respectively are used in drawing skeletons as captured by the 
-\noun on
-Kinect
-\noun default
- camera.
- There is also a class defining an affine transformation, the definitions
- for all three can be seen in appendix 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Existing-Data-Structures"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Affine transformations are a family of geometric transformations that preserve
- parallel lines within geometric spaces.
- Some examples of affine transformations include scaling, reflection, rotation,
- translation and shearing.
-\end_layout
-
-\begin_layout Standard
-The class definition is made up of a three-by-three transformation matrix
- and single 3D vector for translation, within the native codebase it is
- used for both camera poses and world transformations.
- 
-\end_layout
-
-\begin_layout Standard
-A camera pose is the affine transformation defining the position and orientation
- of the 
-\noun on
-Kinect
-\noun default
- camera when drawn in the 
-\noun on
-OpenGL
-\noun default
- space as a green cross.
- The world transformations are used as part of the calibration process when
- using multi-view configurations.
- 
-\end_layout
-
-\begin_layout Standard
-When considering how each source's render would be arranged in the space,
- the use of this class definition was extended.
- As the use of affine transformations is mostly limited to use as a data
- structure within the base source code, some utility classes and functions
- were required in order to fully maximise their effectiveness.
-\end_layout
-
-\begin_layout Paragraph
-Transformer
-\end_layout
-
-\begin_layout Standard
-The motivation in writing the 
-\noun on
-Transformer
-\noun default
- was to create a generic framework of geometric transformations that could
- be utilised by the 
-\noun on
-OpenGL
-\noun default
- display to arrange separate point clouds.
- At a high level this is done by implementing matrix arithmetic functions
- in the context of their use for applying linear transformations to Cartesian
- coordinates.
- 
-\end_layout
-
-\begin_layout Standard
-The 
-\noun on
-Transformer
-\noun default
- class has static methods to apply 
-\noun on
-AffineTransform
-\noun default
-s to both 
-\noun on
-Point3f
-\noun default
- structures and lists of raw vertices as received from 
-\noun on
-LiveScan
-\noun default
- clients.
-\end_layout
-
-\begin_layout Standard
-Additionally there are utility functions to bidirectionally cast between
- 
-\noun on
-Point3f
-\noun default
- data structures and the lists of received vertices.
-\end_layout
-
-\begin_layout Standard
-Finally static methods generate common rotation transformations about each
- axis given an arbitrary angle.
- This provided a foundation on which to define how the 
-\noun on
-OpenGL
-\noun default
- space would arrange separate sources within it's combined co-ordinate space.
-\end_layout
-
-\begin_layout Standard
-Currently missing is the ability to combine transformations into compound
- matrices.
- Applying multiple transformations to large numbers of coordinates would
- be more computationally expensive than applying one compound matrix and
- when running in realtime this should be considered.
- This is not yet included due to the current lack of need to apply multiple
- successive transformations.
- If the need were to arise following further refinements, it would be implemente
-d as described here.
+ objects.
+ The final implementation of this geometry within the code is presented.
+ The new control scheme is presented, it's weaknesses are considered.
 \end_layout
 
 \begin_layout Subsubsection
-Separation of Network and Presentation Layer
+Design Considerations
+\end_layout
+
+\begin_layout Standard
+In designing the extension to the server's OpenGL display window, geometric
+ transformations were used in order to arrange holograms in the virtual
+ space through rotation and translation.
+ This defines each hologram's position within the viewfinder's coordinate
+ space, by default arranging them in a circle around the origin.
+\end_layout
+
+\begin_layout Standard
+In order to maintain a strength of the suite in it's agnostic behaviour
+ to different display methods, it was made critical to the design of the
+ OpenGL extension that spatial processing would be specific to this display
+ only.
+ Mobile AR applications will arrange and interact with holograms in a different
+ way, as will head-mounted AR or VR applications.
+ In maintaining this separation of network and presentation layer each display
+ can operate independently and no assumptions are made as to how a display
+ method should handle each hologram.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+This also helps when no opengl, containers?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Implementation
 \end_layout
 
 \begin_layout Standard
 During initial testing frames received from a live sensor were intercepted
  and serialized to XML in local storage.
- These frames were loaded into memory as the server was started and merged
- with those received live before display.
+ These frames were then loaded into memory as the server was started and
+ merged with those received live before display.
 \end_layout
 
 \begin_layout Standard
@@ -2672,50 +2674,6 @@ name "fig:180-degree-rotation"
 \end_layout
 
 \begin_layout Standard
-At this point it was noted that transforming and arranging figures within
- the main window before passing the 
-\noun on
-OpenGL
-\noun default
- window a complete point cloud spreads responsibility for the display logic
- to the main window.
-\end_layout
-
-\begin_layout Standard
-
-\noun on
-LiveScan3D
-\noun default
- is capable of supporting more display methods than just the native 
-\noun on
-OpenGL
-\noun default
- implementation with versions available for both 
-\noun on
-Microsoft Hololens
-\noun default
- and Mobile AR applications.
- Therefore when designing the multi-source capabilities, the separation
- of logic between the network and presentation layer is important.
- 
-\end_layout
-
-\begin_layout Standard
-The way in which the 
-\noun on
-OpenGL
-\noun default
- window arranges the figures in it's display space should be defined by
- the 
-\noun on
-OpenGL
-\noun default
- window itself.
- The network layer should be display agnostic and not make assumptions about
- how the display will process figures.
-\end_layout
-
-\begin_layout Standard
 In order to follow this design the transformations were moved to instead
  occur within the 
 \noun on
@@ -2732,7 +2690,7 @@ OpenGL
 \noun default
  were changed.
  A Frame structure was defined to wrap an individual point cloud with a
- client ID to allow differentiation, the definition can be seen in appendix
+ source ID to allow differentiation, the definition can be seen in appendix
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2764,7 +2722,7 @@ LiveScan3D
 
 \begin_layout Standard
 To accomplish this a dictionary was used as the shared variable with each
- client's frame referenced by it's client ID.
+ client's frame referenced by it's source ID.
  In doing so only one frame per client is kept and each new frame overrides
  the last.
  During rendering the dictionary is iterated through and each point cloud
@@ -2784,6 +2742,146 @@ OpenGL
 \end_layout
 
 \begin_layout Subsubsection
+Geometric Transformations
+\end_layout
+
+\begin_layout Standard
+Within the 
+\noun on
+LiveScan3D
+\noun default
+ server source code are utility structures and classes which were extended
+ in order to develop a wider geometric manipulation system.
+ Structures defining Cartesian coordinates in both 2D and 3D spaces called
+ 
+\noun on
+Point2f
+\noun default
+ and 
+\noun on
+Point3f
+\noun default
+ respectively are used in drawing skeletons as captured by the 
+\noun on
+Kinect
+\noun default
+ camera.
+ There is also a class defining an affine transformation, the definitions
+ for all three can be seen in appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Existing-Data-Structures"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Affine transformations are a family of geometric transformations that preserve
+ parallel lines within geometric spaces.
+ Some examples of affine transformations include scaling, reflection, rotation,
+ translation and shearing.
+\end_layout
+
+\begin_layout Standard
+The class definition is made up of a three-by-three transformation matrix
+ and a single 3D vector for translation, within the original codebase it
+ is used for both camera poses and world transformations.
+ 
+\end_layout
+
+\begin_layout Standard
+A camera pose is the affine transformation defining the position and orientation
+ of the 
+\noun on
+Kinect
+\noun default
+ camera when drawn in the 
+\noun on
+OpenGL
+\noun default
+ space as a green cross.
+ The world transformations are used as part of the calibration process when
+ using multi-view configurations.
+\end_layout
+
+\begin_layout Standard
+When considering how each source's render would be arranged in the space,
+ the use of this class definition was extended.
+ As the use of affine transformations is mostly limited to use as a data
+ structure within the base source code, some utility classes and functions
+ were required in order to fully maximise their effectiveness.
+\end_layout
+
+\begin_layout Paragraph
+
+\noun on
+Transformer
+\end_layout
+
+\begin_layout Standard
+The motivation in writing the 
+\noun on
+Transformer
+\noun default
+ was to create a generic framework of geometric transformations that could
+ be utilised by the 
+\noun on
+OpenGL
+\noun default
+ display to arrange separate point clouds.
+ At a high level this is done by implementing matrix arithmetic functions
+ in the context of their use for applying linear transformations to Cartesian
+ coordinates.
+ 
+\end_layout
+
+\begin_layout Standard
+The 
+\noun on
+Transformer
+\noun default
+ class has static methods to apply 
+\noun on
+AffineTransform
+\noun default
+s to both 
+\noun on
+Point3f
+\noun default
+ structures and lists of raw vertices as received from 
+\noun on
+LiveScan
+\noun default
+ clients.
+\end_layout
+
+\begin_layout Standard
+Additionally there are utility functions to bidirectionally cast between
+ 
+\noun on
+Point3f
+\noun default
+ data structures and the lists of received vertices.
+\end_layout
+
+\begin_layout Standard
+Finally static methods generate common rotation transformations about each
+ axis given an arbitrary angle.
+ This provided a foundation on which to define how the 
+\noun on
+OpenGL
+\noun default
+ space would arrange separate sources within it's combined co-ordinate space.
+\end_layout
+
+\begin_layout Subsubsection
+
+\noun on
 DisplayFrameTransformer
 \end_layout
 
@@ -2792,12 +2890,13 @@ The
 \noun on
 DisplayFrameTransformer
 \noun default
- is responsible for generating transformations for the sources displayed
- within the 
+ is responsible for maintaining the geometric state of each source, generating
+ transformations for each displayed within the 
 \noun on
 OpenGL
 \noun default
- window, a UML diagram for the class can be seen in figure 
+ window at each frame update.
+ A UML diagram for the class can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:UML-displayframetransformer"
@@ -2820,8 +2919,8 @@ status open
 \align center
 \begin_inset Graphics
 	filename ../media/DisplayFrameTransformer.png
-	lyxscale 50
-	width 60col%
+	lyxscale 20
+	width 75col%
 
 \end_inset
 
@@ -2861,12 +2960,12 @@ name "fig:UML-displayframetransformer"
 \end_layout
 
 \begin_layout Standard
-Each client is assigned a default transformation which can be overridden
+Each source is assigned a default transformation which can be overridden
  using keyboard controls.
 \end_layout
 
 \begin_layout Standard
-Clients are initially arranged in a circle around the origin in the center
+Sources are initially arranged in a circle around the origin in the center
  of the space.
  This is done by retrieving a transformation from the 
 \noun on
@@ -2876,7 +2975,7 @@ Transformer
 \begin_inset Formula $y$
 \end_inset
 
- axis for each client, 
+ axis for each source, 
 \begin_inset Formula $n$
 \end_inset
 
@@ -2891,7 +2990,7 @@ Transformer
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\alpha\left(n\right)=\frac{n}{\sum clients}\cdotp360\textdegree
+\alpha\left(n\right)=\frac{n}{\sum sources}\cdotp360\textdegree
 \]
 
 \end_inset
@@ -2908,8 +3007,18 @@ MainWindow
 \noun on
 OpenGL
 \noun default
- window, client transformations are stored within a dictionary indexed by
- client ID.
+ window, source transformations are stored within a dictionary indexed by
+ source ID.
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Not necessary
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2917,11 +3026,11 @@ The
 \noun on
 DisplayFrameTransformer
 \noun default
- also has methods to override these initial transforms with the RotateClient()
- and TranslateClient() methods.
- When these methods are called for the first time on a point cloud, an object
+ also has methods to override these initial transforms with the RotateSource()
+ and TranslateSource() methods.
+ When these methods are called for the first time on a source, an object
  defining the position and rotation is populated using the default rotation.
- From here the presence of a client override results in applied transforms
+ From here the presence of a source override results in applied transforms
  being defined by these values as opposed to the default orientation.
 \end_layout
 
@@ -3118,157 +3227,168 @@ This is less intuitive than could be expected in other areas where such
  The feasibility of employing a similar control philosophy should be considered.
 \end_layout
 
-\begin_layout Subsubsection
-Challenges
+\begin_layout Subsection
+Network Source IDs
 \end_layout
 
 \begin_layout Standard
-The main challenge encountered throughout the project so far was initially
- intercepting the live frames and serializing these as XML files in local
- storage.
- With no previous experience developing in C#, the opening steps of the
- project involved both getting to grips with the language based on previous
- work in C-like languages (Java, C) and understanding the layout of the
- codebase.
-\end_layout
-
-\begin_layout Standard
-Initial attempts to serialize the frame structures resulted in no output
- to the file system and the multi-threaded nature of the graphical application
- led to no feedback for debugging.
- This was fixed by removing the affine transformations representing camera
- poses from the frame structure for the testing process.
- 
-\end_layout
-
-\begin_layout Standard
-This would imply that something about the nature of the 
-\noun on
-AffineTransform
-\noun default
- class type is causing errors when serializing.
- Java requires classes implement a 
-\emph on
-serializable
-\emph default
- interface in order to successfully save to file and further work will be
- required in order to determine whether the same concept is to blame in
- this situation.
- However for now the camera poses of local frames are not displayed in the
- 
-\noun on
-OpenGL
-\noun default
- window.
-\end_layout
-
-\begin_layout Subsubsection
-Future Work
-\end_layout
-
-\begin_layout Standard
-Following the extension of the 
-\noun on
-OpenGL
-\noun default
- window, the network layer of the 
-\noun on
-KinectServer
-\noun default
- can now be developed with the advantage of a fully functional display method
- for debugging.
-\end_layout
-
-\begin_layout Standard
-The aim of this aspect of the project will be to alter the the 
-\noun on
-KinectServer
-\noun default
- in order to allow the logical grouping of connected clients into sources
- for separate display.
-\end_layout
-
-\begin_layout Standard
-When integrated together the server as a whole will then be able to collect
- discrete point clouds from different sources and coherently display them
- separately in the space, achieving the objectives for this project.
-\end_layout
-
-\begin_layout Subsubsection
-Network Layer Design Considerations
-\end_layout
-
-\begin_layout Standard
-Some thought as to the design for the network layer has been undertaken.
- Although this has not yielded a final design for implementation, it has
- made apparent some of the conditions and constraints which must be considered.
-\end_layout
-
-\begin_layout Standard
-When considering the initial steps for the project, it was thought that
- the network layer should be developed first.
- The design would involve separating much of the logic contained within
+The following section explores how the network communications throughout
  the 
 \noun on
-KinectServer
+LiveScan
 \noun default
- object into a new 
+ suite were extended in order to identify the source each frame corresponds
+ to.
+\end_layout
+
+\begin_layout Standard
+The original and updated packet structures are explored.
+\end_layout
+
+\begin_layout Subsubsection
+Design Considerations
+\end_layout
+
+\begin_layout Standard
+Within the 
 \noun on
-KinectSource
+LiveScan
 \noun default
- object which would represent a group of clients acting as a single source.
- It would function as a group of 
-\noun on
-KinectSocket
-\noun default
-s that could be individually polled for new frames using the same interface
- currently being used by the 
-\noun on
-KinectServer
-\noun default
+ suite two network communications required updating, those between the client
+ and server and those between the server and user experiences.
+\end_layout
+
+\begin_layout Standard
+In the native codebase the headers for all packets were the same, the structure
+ can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Existing-packet-header"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
 .
- The 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/HeaderSTD.png
+	lyxscale 50
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Existing packet header structure for all 
 \noun on
-KinectServer
+LiveScan
 \noun default
- object itself would be reduced to simply managing these 
-\noun on
-KinectSource
-\noun default
-s.
+ TCP packets
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Existing-packet-header"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-An advantage of this approach would be that it provide a suitable location
- to store additional information which should exist per source such as the
- calibration data and settings.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/HeaderUE.png
+	lyxscale 50
+	width 70col%
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Standard
-However it would also have represented a significant architecture change
- in the entire server application and without a functioning display method
- it would have been challenging to debug.
- This was the motivation for initially working on the display method.
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Extended packet header structure for server to UE communications
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:new-packet-header"
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Standard
-Coming back to the network design following this work, a different design
- has been considered.
- A separate body of work currently being undertaken is investigating the
- network behaviour of the suite with a focus on unblocking the network sockets
- to aid in parallel operation.
+\end_inset
+
+
 \end_layout
 
-\begin_layout Standard
-In order to ease integration with developments in this work a less disruptive
- design was proposed.
+\end_inset
+
+
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Socket Handshake
 \end_layout
 
 \begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Doubt necessary
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
 The aim is to implement a method by which clients are grouped into sources
  that also allows them to identify themselves consistently when communicating
  over multiple sockets.
@@ -3278,7 +3398,7 @@ ns to the server and increase bandwidth.
  represent which client when some may be at the IP address.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 A method for doing so would involve a handshake process when new clients
  connect to the 
 \noun on
@@ -3299,11 +3419,213 @@ KinectServer
  socket is representing.
 \end_layout
 
-\begin_layout Subsection
-Network
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
+Mobile AR
+\end_layout
+
+\begin_layout Subsection
+Stale Source Culling
+\end_layout
+
+\begin_layout Standard
+Transitioning the 
+\noun on
+LiveScan
+\noun default
+ suite to a multi-source architecture implies a significant difference in
+ certain behaviours of the server.
+ For example, when encountering adverse network conditions in a single source
+ scenario, the desired action could be to wait until transmissions from
+ the client(s) can resume.
+ With only a single stream, the alternative would be to quit the experience.
+\end_layout
+
+\begin_layout Standard
+However in a multi-source scenario, a decision could be made to instead
+ remove sources that cannot maintain a reasonable transmission rate so as
+ not to infringe on the experience of other sources, no longer do the conditions
+ of any single stream define the conditions of the whole.
+\end_layout
+
+\begin_layout Standard
+A similarity could be drawn between watching a traditional broadcast sports
+ game compared to 
+\emph on
+simulcast
+\emph default
+ broadcasts such as those seen on the 
+\noun on
+NFL's RedZone
+\noun default
+ where multiple games can be watched simultaneously dividing the screen.
+ Were one of the games to experience transmission issues, it could be considered
+ beneficial to the experience to remove the game from display and wait for
+ the conditions to improve, especially in a commercial context.
+\end_layout
+
+\begin_layout Subsubsection
+Design Considerations
+\end_layout
+
+\begin_layout Standard
+A source could be considered 
+\emph on
+stale
+\emph default
+ when a frame has not been received for it within a certain time threshold,
+ the default was decided as 5 seconds.
+ Beyond this the source should be considered, if at least temporarily, disconnec
+ted.
+\end_layout
+
+\begin_layout Standard
+This could be achieved using a separate thread that periodically iterates
+ through the last frame of each source and compares an associated timestamp
+ to the current time.
+\end_layout
+
+\begin_layout Standard
+While this thread could be included in many places throughout the server
+ application, it was considered important to facilitate applicability to
+ any cross-platform developments.
+\end_layout
+
+\begin_layout Standard
+As such the object-oriented programming concept of encapsulation was employed
+ to create a object responsible for containing live frames and checking
+ for 
+\emph on
+stale
+\emph default
+ sources.
+\end_layout
+
+\begin_layout Subsubsection
+
+\noun on
+SourceCollection
+\end_layout
+
+\begin_layout Standard
+The 
+\noun on
+SourceCollection
+\noun default
+ object wraps around the dictionary object used to store live frames indexed
+ by source ID.
+ The previously described thread is implemented along with integer attributes
+ defining the interval at which frames are checked and the threshold for
+ which sources are defined as 
+\emph on
+stale
+\emph default
+.
+ The UML diagram for this object can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:source-collection"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename /home/andy/uni/dissertation/media/SourceCollection.png
+	lyxscale 20
+	width 40col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+UML diagram for the 
+\noun on
+SourceCollection
+\noun default
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:source-collection"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In order to lend the design to a cross-platform server, events are used
+ to signal a source being connected or disconnected.
+ A connected source is identified when a frame is added for which there
+ is no key found in the sources dictionary.
+ The disconnected source event fires as during the RemoveSource() method
+ which is called manually or by the cleaner thread.
+\end_layout
+
+\begin_layout Standard
+An example of the use of these events is found in the 
+\noun on
+DisplayFrameTransfomer
+\noun default
+ where a check is made to ensure that a source's position override is cleared
+ if one exists when that source is disconnected.
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+is this a good idea?
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection
+Frame Rate Throttling
+\end_layout
+
+\begin_layout Subsection
+Cross Platform Extensions
+\end_layout
+
+\begin_layout Subsubsection
+Server
+\end_layout
+
+\begin_layout Subsubsection
 Mobile AR
 \end_layout
 
@@ -3417,14 +3739,60 @@ options "bibtotoc"
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Section
 \start_of_appendix
-\begin_inset Flex TODO Note (inline)
+Server UI Additions
+\end_layout
+
+\begin_layout Standard
+During the development of the network behaviour of the suite, various UI
+ elements were added to the server application in order to aid in debugging.
+ The final UI can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LiveScan-server-UI"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-I reckon this is all unnecessary, if any code goes in, it's not struct definitio
-ns
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/ServerWindow.png
+	lyxscale 30
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+LiveScan server window following the addition of UI elements for viewing
+ buffer capacity, network bandwidth and operating frequencies
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:LiveScan-server-UI"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3432,11 +3800,60 @@ ns
 
 \end_layout
 
+\end_inset
+
+
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+add before picture
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Receiving and transmitting network bandwidth 
+\end_layout
+
+\begin_layout Itemize
+Buffer usage
+\end_layout
+
+\begin_layout Itemize
+Operating frequencies
+\end_layout
+
+\begin_layout Itemize
+Connected sources
+\end_layout
+
+\begin_layout Itemize
+Connected user experiences
+\end_layout
+
 \begin_layout Section
 Existing Data Structures
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Existing-Data-Structures"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+I reckon this is all unnecessary, if any code goes in, it's not struct definitio
+ns
+\end_layout
 
 \end_inset
 
