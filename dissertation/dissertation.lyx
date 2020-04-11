@@ -267,7 +267,16 @@ Acknowledgements
 \begin_layout Standard
 \noindent
 \align center
-acknowledgements
+I'd like to extend my thanks to Professor Ning Wang for both the opportunities
+ provided by this project and his continued support.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+I would also like to thank Ioannis Selinis and Sweta Anmulwar for their
+ shared patience and help throughout this year.
 \end_layout
 
 \begin_layout Standard
@@ -290,11 +299,29 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
+The immersive technology spaces of virtual and augmented reality promise
+ to change the way we experience many different forms of media.
+ Spurred in recent years by the release of consumer VR headsets and the
+ push for handheld AR by phone manufacturers, no longer do these experiences
+ present merely proofs of concept but complete commercial products.
+ 
+\end_layout
+
+\begin_layout Standard
+While some present natural extensions to existing technology as seen in
+ VR gaming, others are more tied to the new domain.
+ The power of modern smartphones has allowed augmented reality to be integrated
+ into applications both as the primary function and in more secondary features
+ such as visualising products in shopping apps like 
+\noun on
+IKEA Place
+\noun default
+.
+\begin_inset Flex TODO Note (Margin)
 status open
 
 \begin_layout Plain Layout
-add proper intro about XR and new media
+reference?
 \end_layout
 
 \end_inset
@@ -303,12 +330,29 @@ add proper intro about XR and new media
 \end_layout
 
 \begin_layout Standard
-The aim of this project is to develop a piece of software capable of supporting
- multi-source holoportation (hologram teleportation) using the 
-\emph on
+No matter the application, common to all is the importance of the presented
+ media.
+ Typically this is in the form of pre-recorded meshes of 3D objects, captured
+ and stored within the application.
+ This is typically the case for both of the previously mentioned examples
+ in VR gaming and AR object reconstruction.
+ Less seen in commercial products is the live-streaming of 3D renders.
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+why?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One such technology for the capture and transmission of 3D video is 
 \noun on
 LiveScan3D
-\emph default
 \noun default
 
 \begin_inset CommandInset citation
@@ -318,18 +362,37 @@ literal "false"
 
 \end_inset
 
- suite of software as a base.
+, a client-server suite of applications utilising the 
+\noun on
+Microsoft Kinect
+\noun default
+ camera to capture a scene in real-time and deliver to a server for reconstructi
+on and presentation.
+ Renders or 
+\emph on
+holograms
+\emph default
+ can then be delivered to a 
+\emph on
+user experience
+\emph default
+ such as an AR or VR client.
+\end_layout
+
+\begin_layout Standard
+This project aims to extend this suite to support multi-source 
+\emph on
+holoportation
+\emph default
+ (hologram teleportation), receiving multiple scenes concurrently analogous
+ to move from traditional phone calls to group conference calls.
 \end_layout
 
 \begin_layout Standard
 As the spaces of augmented and virtual reality become more commonplace and
- mature, the ability to capture and stream 3D renders of objects and people
- over the internet using consumer-grade hardware has many possible applications.
-\end_layout
-
-\begin_layout Standard
-This represents one of the most direct evolutions of traditional video streaming
- when applied to this new technological space.
+ mature, the ability to capture and stream 3D renders over the internet
+ using consumer-grade hardware has many possible applications and presents
+ one of the most direct evolutions of traditional video streaming.
 \end_layout
 
 \begin_layout Standard
@@ -346,7 +409,7 @@ noprefix "false"
 .
  Both single and multi-view configurations of cameras are shown, the latter
  allowing more complete renders of the subject to be acquired.
- Both shapes are presented through the 
+ Both shapes are presented at the 
 \emph on
 user experience
 \emph default
@@ -402,51 +465,43 @@ name "fig:premise"
 
 \end_layout
 
-\begin_layout Standard
-
-\noun on
-LiveScan3D
-\noun default
- is a suite of 3D video software capable of recording and transmitting video
- from client to server for rendering.
- The suite is fast and uses consumer grade hardware for capture in the form
- of 
-\noun on
-Xbox Kinect
-\noun default
- cameras, it is used in various projects at the 
-\noun on
-University of Surrey
-\noun default
- and has multiple setups in dedicated lab space.
+\begin_layout Subsection
+Objectives
 \end_layout
 
 \begin_layout Standard
-
-\noun on
-LiveScan3D's
-\noun default
- use
-\noun on
- 
-\noun default
-of 
-\noun on
-Xbox Kinect
-\noun default
- cameras allows the capture and stream of 3D renders in single or multi-view
- configurations using calibrated cameras however the server is only able
- to process and reconstruct one environment at a time.
+In order to achieve the goal of multi-source holoportation the following
+ key objectives must be achieved,
 \end_layout
 
-\begin_layout Standard
-The capability to concurrently receive and reconstruct streams of different
- objects further broadens the landscape of possible applications, analogous
- to the movement from traditional phone calls to conference calling.
+\begin_layout Enumerate
+Extend the native viewfinder of the server in order to separately render
+ each connected source
+\end_layout
+
+\begin_layout Enumerate
+Redefine the network communications in order to identify each frame of footage
+ as a particular source
+\end_layout
+
+\begin_layout Enumerate
+Update the Android AR application to present each source of footage and
+ facilitate individual control
 \end_layout
 
 \begin_layout Subsection
 COVID-19
+\end_layout
+
+\begin_layout Standard
+Conducted throughout the 2019/20 academic year the project was inevitably
+ affected by the global COVID-19 pandemic.
+ From March onwards, there was only access to a single 
+\noun on
+Kinect
+\noun default
+ sensor, significantly hindering the ability to quantitatively evaluate
+ the implemented multi-source capabilities.
 \end_layout
 
 \begin_layout Section
@@ -462,7 +517,7 @@ LiveScan3D
 \noun on
 Microsoft Kinect
 \noun default
- sensor in order to capture RGB video with depth information.
+ sensor to capture RGB video with depth information.
  While Kinect sensors have proved extremely popular in the computer vision
  sector, it does not represent the only method for such 3D reconstruction,
  traditional visual hull reconstruction is investigated before identifying
@@ -632,7 +687,7 @@ Here 3D conference calling of the type described in the introduction without
  space on a screen with all participants rendered within.
  Work was undertaken to achieve mutual gaze between participants, a marked
  advantage over traditional conference calls where the lack of such aspects
- of group interaction make the experience more impersonal.
+ of group interaction makes the experience more impersonal.
  Methods of achieving more natural virtual interactions or 
 \emph on
 telepresence
@@ -656,7 +711,7 @@ A second version of the camera, v2, was released alongside the
 Xbox One
 \noun default
  in 2013 and presented many improvements over the original.
- A higher quality RGB camera captures 1080p video at up to 30 frames per
+ A higher-quality RGB camera captures 1080p video at up to 30 frames per
  second with a wider field of view than the original
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -854,9 +909,9 @@ literal "false"
 \end_layout
 
 \begin_layout Description
-Mixed A combination of virtual elements with the real world in order to
- facilitate interaction with an augmented reality.
- A somewhat broad term owing to it's description of a point between augmented
+Mixed A combination of virtual elements with the real world to facilitate
+ interaction with an augmented reality.
+ A somewhat broad term owing to its description of a point between augmented
  and virtual reality.
  An emphasis is typically placed on virtual elements existing coherently
  within the real world and interacting in real-time.
@@ -947,7 +1002,7 @@ Human interaction with a machine in which the machine retains and manipulates
 
 \begin_layout Standard
 Identifying the common dimensions across XR has led to the proposal of various
- taxonomies providing insights in to how each implementation relate to others
+ taxonomies providing insights into how each implementation relate to others
 \begin_inset CommandInset citation
 LatexCommand cite
 key "reality-virtuality-continuum,mr-taxonomy,all-reality"
@@ -1007,9 +1062,9 @@ RoomAlive
 procams
 \emph default
 ) to construct experiences in any room.
- This is presented through games and visual alterations to the users surrounding
-s.
- A strength of the system is it's self contained nature, able to automatically
+ This is presented through games and visual alterations to the user's surroundin
+gs.
+ A strength of the system is it's self-contained nature, able to automatically
  calibrate the camera arrangements using correspondences found between each
  view.
  Experience level heuristics are also discussed regarding capturing and
@@ -1124,7 +1179,7 @@ Augmented Reality
 The advancement of mobile AR aided by it's accessibility without expensive
  ancillary hardware has led this to be a rapidly growing and popular form
  of XR.
- The introduction of OS level SDK's in Google's ARCore
+ The introduction of OS-level SDK's in Google's ARCore
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ARCore"
@@ -2055,8 +2110,8 @@ extrinsics
 \end_layout
 
 \begin_layout Standard
-In order to make a composite frame a calibration process is completed client
- side following instruction by the server.
+In order to make a composite frame a calibration process is completed client-sid
+e following instruction by the server.
 \end_layout
 
 \begin_layout Standard
@@ -2125,7 +2180,7 @@ name "fig:calibration-marker"
 
 \begin_layout Standard
 This information can be used to transform points from the cameras coordinate
- system to the markers frame of reference.
+ system to the marker's frame of reference.
  As the relative locations of different markers are defined at the server,
  a world coordinate system can be defined as the centre of these markers.
  Typically 4 different markers are placed on the faces around the vertical
@@ -2142,13 +2197,13 @@ Kinect
  camera now orbits.
  As part of this calibration process the server distributes transformations
  to each client defining where they sit within this world coordinate space.
- Client's can now transform acquired renders from their own frame of reference
+ Client's can now transform acquired renders from their frame of reference
  to the world coordinate system at the point of capture and each point cloud
  can be merged coherently.
 \end_layout
 
 \begin_layout Standard
-The refinement process is completed server side by requesting a single frame
+The refinement process is completed server-side by requesting a single frame
  from each connected client and using Iterative Closest Points
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -2171,6 +2226,13 @@ OpenGL
 
 \begin_layout Subsection
 Buffers and a non-blocking Network
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Buffers"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -2181,12 +2243,129 @@ LiveScan
  Hololens
 \end_layout
 
+\begin_layout Standard
+Developed at the start of 2017, the 
+\noun on
+LiveScan Hololens
+\noun default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "livescan3d-hololens"
+literal "false"
+
+\end_inset
+
+ project provides an example of XR applications for the 
+\noun on
+LiveScan
+\noun default
+ suite.
+ 
+\end_layout
+
+\begin_layout Standard
+Using the 
+\noun on
+Unity
+\noun default
+ game engine, the application allows the reception and reconstruction of
+ 
+\noun on
+LiveScan 
+\noun default
+point clouds in a head-mounted AR context.
+\end_layout
+
 \begin_layout Subsection
 
 \noun on
 LiveScan
 \noun default
  Android
+\end_layout
+
+\begin_layout Standard
+Utilising a key strength of 
+\noun on
+Unity
+\noun default
+'s native cross-platform capabilities 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "livescan3d-android"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "livescan3d-android"
+literal "false"
+
+\end_inset
+
+ extended the 
+\noun on
+Hololens
+\noun default
+ application to build a handheld AR experience targeted at the Android mobile
+ operating system.
+\end_layout
+
+\begin_layout Standard
+This was achieved through the static linking of 
+\noun on
+Google
+\noun default
+'s 
+\noun on
+ARCore
+\noun default
+ library
+\begin_inset CommandInset citation
+LatexCommand cite
+key "arcore-unity"
+literal "false"
+
+\end_inset
+
+ for 
+\noun on
+Unity
+\noun default
+ and included buffers inline with the developments discussed in section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Buffers"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The 
+\noun on
+LeanTouch
+\noun default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "lean-touch"
+literal "false"
+
+\end_inset
+
+ 
+\noun on
+Unity
+\noun default
+ package was used to allow the live manipulation of displayed holograms,
+ abstracting away much of the otherwise required boilerplate touch management
+ code.
 \end_layout
 
 \begin_layout Subsection
@@ -2199,7 +2378,7 @@ Here an evaluation of the
 LiveScan
 \noun default
  suite is presented.
- It's strengths within the space of 3D capture and transmission are identified
+ Its strengths within the space of 3D capture and transmission are identified
  while it's limitations are also highlighted.
 \end_layout
 
@@ -2208,8 +2387,8 @@ The main strength of the
 \noun on
 LiveScan
 \noun default
- suite lies in it's display agnostic architecture.
- While some of the methods previously reviewed present domain specific implement
+ suite lies in its display agnostic architecture.
+ While some of the methods previously reviewed present domain-specific implement
 ations of holoportation, such as 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -2252,7 +2431,7 @@ reference?
 \end_layout
 
 \begin_layout Standard
-A limitation of the suite could be identified in it's network protocol use,
+A limitation of the suite could be identified in its network protocol use,
  TCP connections are used throughout the communication pipeline from 
 \noun on
 Kinect
@@ -2263,7 +2442,7 @@ Kinect
  which limits the speed of transmission.
  For these reasons UDP is typically better suited for media streaming, especiall
 y when in real-time.
- Investigations could be made into the suitability for it's use in the 
+ Investigations could be made into the suitability for its use in the 
 \noun on
 LiveScan3D
 \noun default
@@ -2325,8 +2504,8 @@ Developments
 \end_layout
 
 \begin_layout Standard
-The developments made throughout this project in order to facilitate multi-sourc
-e experiences were focused on four aspects of the suite,
+The developments made throughout this project to facilitate multi-source
+ experiences were focused on four aspects of the suite,
 \end_layout
 
 \begin_layout Itemize
@@ -2368,7 +2547,7 @@ Additional features facilitating the paradigm shift away from a single stream
 
 \begin_deeper
 \begin_layout Itemize
-This is done through identifying and removing 
+This is done by identifying and removing 
 \emph on
 stale sources
 \emph default
@@ -2722,12 +2901,12 @@ LiveScan3D
 
 \begin_layout Standard
 To accomplish this a dictionary was used as the shared variable with each
- client's frame referenced by it's source ID.
+ client's frame referenced by its source ID.
  In doing so only one frame per client is kept and each new frame overrides
  the last.
  During rendering the dictionary is iterated through and each point cloud
  combined.
- During combination a client specific transformation is retrieved from an
+ During combination a client-specific transformation is retrieved from an
  instance of the 
 \noun on
 DisplayFrameTransformer
@@ -2861,12 +3040,11 @@ LiveScan
 \end_layout
 
 \begin_layout Standard
-Additionally there are utility functions to bidirectionally cast between
- 
+Additionally, utility functions to bidirectionally cast between 
 \noun on
 Point3f
 \noun default
- data structures and the lists of received vertices.
+ data structures and the lists of received vertices were written.
 \end_layout
 
 \begin_layout Standard
@@ -2975,7 +3153,7 @@ Transformer
 \begin_inset Formula $y$
 \end_inset
 
- axis for each source, 
+-axis for each source, 
 \begin_inset Formula $n$
 \end_inset
 
@@ -3618,7 +3796,7 @@ Frame Rate Throttling
 \end_layout
 
 \begin_layout Subsection
-Cross Platform Extensions
+Cross-Platform Extensions
 \end_layout
 
 \begin_layout Subsubsection
