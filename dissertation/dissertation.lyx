@@ -333,10 +333,11 @@ reference?
 No matter the application, common to all is the importance of the presented
  media.
  Typically this is in the form of pre-recorded meshes of 3D objects, captured
- and stored within the application.
- This is typically the case for both of the previously mentioned examples
- in VR gaming and AR object reconstruction.
- Less seen in commercial products is the live-streaming of 3D renders.
+ and stored within the application for both the previously mentioned AR
+ and VR examples.
+ Less seen in commercial products is the live-streaming of 3D renders due
+ in part to both the required network bandwidth and the hardware required
+ to capture such media.
 \begin_inset Flex TODO Note (Margin)
 status open
 
@@ -366,8 +367,8 @@ literal "false"
 \noun on
 Microsoft Kinect
 \noun default
- camera to capture a scene in real-time and deliver to a server for reconstructi
-on and presentation.
+ camera to capture a scene in real-time and deliver the result to a server
+ for reconstruction and presentation.
  Renders or 
 \emph on
 holograms
@@ -376,16 +377,19 @@ holograms
 \emph on
 user experience
 \emph default
- such as an AR or VR client.
-\end_layout
-
-\begin_layout Standard
-This project aims to extend this suite to support multi-source 
+ such as an AR or VR client, overall a process referred to as 
 \emph on
 holoportation
 \emph default
- (hologram teleportation), receiving multiple scenes concurrently analogous
- to move from traditional phone calls to group conference calls.
+ or hologram teleportation.
+\end_layout
+
+\begin_layout Standard
+This project aims to extend this suite to support multi-source holoportation,
+ receiving multiple scenes concurrently analogous to the move from traditional
+ phone calls to group conference calls.
+ In doing so the implementation of holoportation could be seen to be generalised
+, extending the possible applications of the suite.
 \end_layout
 
 \begin_layout Standard
@@ -396,7 +400,8 @@ As the spaces of augmented and virtual reality become more commonplace and
 \end_layout
 
 \begin_layout Standard
-A view of what multi-source achieves can be seen in figure 
+A conceptual view of a multi-source configuration can be seen in figure
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:premise"
@@ -407,8 +412,8 @@ noprefix "false"
 \end_inset
 
 .
- Both single and multi-view configurations of cameras are shown, the latter
- allowing more complete renders of the subject to be acquired.
+ Both single and multi-view sources are shown, the latter allowing more
+ complete renders of the subject to be acquired.
  Both shapes are presented at the 
 \emph on
 user experience
@@ -485,8 +490,8 @@ Redefine the network communications in order to identify each frame of footage
 \end_layout
 
 \begin_layout Enumerate
-Update the Android AR application to present each source of footage and
- facilitate individual control
+Update the Android AR application to separately present each source of footage
+ and facilitate individual control
 \end_layout
 
 \begin_layout Subsection
@@ -494,14 +499,17 @@ COVID-19
 \end_layout
 
 \begin_layout Standard
-Conducted throughout the 2019/20 academic year the project was inevitably
+Conducted throughout the 2019/20 academic year, the project was inevitably
  affected by the global COVID-19 pandemic.
- From March onwards, there was only access to a single 
+ With a lack of access to the on-campus lab environment, from March onwards
+ there was access to only a single 
 \noun on
 Kinect
 \noun default
- sensor, significantly hindering the ability to quantitatively evaluate
- the implemented multi-source capabilities.
+ sensor.
+ This significantly hindered the ability to evaluate the implemented multi-sourc
+e capabilities and alternative objectives were identified in order to maintain
+ productivity.
 \end_layout
 
 \begin_layout Section
@@ -554,6 +562,8 @@ LiveScan
  client for 
 \noun on
 Microsoft Hololens
+\noun default
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "livescan3d-hololens"
@@ -561,8 +571,6 @@ literal "false"
 
 \end_inset
 
-
-\noun default
  and 
 \begin_inset CommandInset citation
 LatexCommand citeauthor
@@ -1177,9 +1185,17 @@ Augmented Reality
 
 \begin_layout Standard
 The advancement of mobile AR aided by it's accessibility without expensive
- ancillary hardware has led this to be a rapidly growing and popular form
+ ancillary hardware has led it to be a rapidly growing and popular form
  of XR.
- The introduction of OS-level SDK's in Google's ARCore
+ The introduction of OS-level SDK's in 
+\noun on
+Google
+\noun default
+'s 
+\noun on
+ARCore
+\noun default
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ARCore"
@@ -1187,7 +1203,15 @@ literal "false"
 
 \end_inset
 
- and Apple's ARKit
+ and 
+\noun on
+Apple
+\noun default
+'s 
+\noun on
+ARKit
+\noun default
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "arkit"
@@ -1195,7 +1219,8 @@ literal "false"
 
 \end_inset
 
- make it easier to create AR experiences.
+ make it easier to create AR experiences without the need to re-implement
+ the required boilerplate computer vision concepts.
 \end_layout
 
 \begin_layout Standard
@@ -2235,12 +2260,87 @@ name "subsec:Buffers"
 
 \end_layout
 
+\begin_layout Standard
+One of the weaknesses of the native codebase laid in it's network behaviour.
+ Requests for live frames made by the server to each connected client were
+ done in a synchronous fashion, pausing the operation of the thread responsible
+ for passing these frames to the OpenGL display and UEs in order to wait
+ for delivery from all clients.
+\end_layout
+
+\begin_layout Standard
+While this would not be expected to present impaired performance in a controlled
+ lab environment, it could prove detrimental when connected over the public
+ internet where adverse network conditions and bandwidth bottlenecks are
+ more likely.
+\end_layout
+
+\begin_layout Standard
+In practice this means that the user experience both at the server and any
+ connected UEs were determined by the instantaneous network conditions.
+\end_layout
+
+\begin_layout Standard
+With these public internet applications and the expected network conditions
+ in mind, 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "livescan3d-buffers"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "livescan3d-buffers"
+literal "false"
+
+\end_inset
+
+ provided improvements on this behaviour by including a system of buffers
+ throughout the transmission pipeline in order to unblock the network operations.
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+diagram?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Each client queues frames ready for transmission in a buffer while the server
+ maintains a buffer at each socket for reception.
+ The 
+\noun on
+KinectServer
+\noun default
+ collates frames from each socket's Rx buffer and moves them into a live
+ buffer for display and moving into a Tx buffer ready for transmission onto
+ any connected user experiences.
+\end_layout
+
+\begin_layout Standard
+This system decouples the network behaviour smoothing the effect of temporary
+ network conditions.
+\end_layout
+
+\begin_layout Standard
+Additionally, Selinis' work included the extension of connections between
+ both client-server and server-UE to allow the use of multiple concurrent
+ TCP connections, effectively increasing the available bandwidth.
+\end_layout
+
 \begin_layout Subsection
 
 \noun on
 LiveScan
 \noun default
- Hololens
+ XR Applications
 \end_layout
 
 \begin_layout Standard
@@ -2275,14 +2375,6 @@ Unity
 LiveScan 
 \noun default
 point clouds in a head-mounted AR context.
-\end_layout
-
-\begin_layout Subsection
-
-\noun on
-LiveScan
-\noun default
- Android
 \end_layout
 
 \begin_layout Standard
@@ -2364,12 +2456,19 @@ literal "false"
 Unity
 \noun default
  package was used to allow the live manipulation of displayed holograms,
- abstracting away much of the otherwise required boilerplate touch management
- code.
+ abstracting away much of the otherwise required boilerplate input processing
+ and management.
 \end_layout
 
 \begin_layout Subsection
 Evaluation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Evaluation"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2463,35 +2562,35 @@ Explain UDP/TCP? covered in high bandwidth media streaming?
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Comment
+The addition of buffers allows the presentation layer to request frames
+ from a buffer at a constant rate, decoupled from a level of volatility
+ in the network layer.
+ In doing so, however, the total perceived delay between capture and display
+ can be increased as the frames spend time in each of the consecutive buffers.
+ In an effort to identify methods for controlling this, investigations are
+ made into the effect of intentionally reducing the transmitted frame rate
+ in order to reduce this overall delay.
+\begin_inset Flex TODO Note (Margin)
 status open
 
 \begin_layout Plain Layout
-The original applications were best suited to a local environment as a result
- of many of the network functions being blocking.
- Should any delays or interruptions have occurred during a network operation,
- then the application would need to stop and wait for remediation before
- continuing.
- Interruptions of this type are more common when moving from a LAN environment
- to communicating over the open internet.
+reword?
 \end_layout
 
-\begin_layout Plain Layout
-From a network perspective the need to make these actions non-blocking would
- present benefits for both multi-source and multi-view configurations.
+\end_inset
+
+
 \end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status open
 
 \begin_layout Plain Layout
 Additionally, the network polling rates are higher than the frame rate of
  the produced video, when the server requests a frame before a new one has
  been captured by the client, the same previous frame is resent.
  This presents unnecessary bandwidth usage.
-\end_layout
-
-\begin_layout Plain Layout
-Moving to a multi-source context implies transmitting over the internet
- as opposed to local operation, this will make blocking actions and bloated
- bandwidth more dangerous to user experience.
 \end_layout
 
 \end_inset
@@ -2868,9 +2967,8 @@ MainWindow
 OpenGL
 \noun default
  were changed.
- A Frame structure was defined to wrap an individual point cloud with a
- source ID to allow differentiation, the definition can be seen in appendix
- 
+ A Frame object was defined to wrap an individual point cloud with a source
+ ID to allow differentiation, the definition can be seen in appendix 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Frame"
@@ -2881,7 +2979,7 @@ noprefix "false"
 \end_inset
 
 .
- The structure holds fields for each of the lists previously shared between
+ The object holds fields for each of the lists previously shared between
  the two objects including a list of vertices (co-ordinates) and the RGB
  values for each as well as the camera poses and bodies.
 \end_layout
@@ -2944,19 +3042,7 @@ Point3f
 \noun on
 Kinect
 \noun default
- camera.
- There is also a class defining an affine transformation, the definitions
- for all three can be seen in appendix 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Existing-Data-Structures"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
+ camera, there is also a class defining an affine transformation.
 \end_layout
 
 \begin_layout Standard
@@ -3474,7 +3560,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Existing packet header structure for all 
+Native packet header structure for all 
 \noun on
 LiveScan
 \noun default
@@ -3795,6 +3881,104 @@ is this a good idea?
 Frame Rate Throttling
 \end_layout
 
+\begin_layout Standard
+As discussed in the evaluations for the 
+\noun on
+LiveScan
+\noun default
+ suite (section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Evaluation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), the inclusion of buffers can add to the perceived delay of holograms
+ from capture to presentation as frames propagate through each.
+\end_layout
+
+\begin_layout Standard
+A proposed hypothesis for reducing this delay was to control the transmitted
+ frame rate.
+ It follow that this would reduce the population of each buffer and reduce
+ the time that each frame spent within each.
+\end_layout
+
+\begin_layout Standard
+This was implemented based on further work by Selinis introducing the concept
+ of a dynamic step calculated from a provided FPS and delay requirement
+ which would represent the percentage of frames dropped by the client.
+ This step is transmitted in the header of each frame request of a client
+ theoretically allowing the system to dynamically respond to changes in
+ network conditions.
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+needs some clarification, ie that ioannis wrote the calculatespecs
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Design Considerations
+\end_layout
+
+\begin_layout Standard
+When considering the final applications of these concepts in the context
+ of a multi-source project, the ability to have a step per source was included
+ in order to take into account the different network conditions between
+ the server and each source's client(s).
+ A single set of FPS and delay requirements would still be provided and
+ a step for each source would be calculated and distributed using the calculated
+ conditions of each.
+\end_layout
+
+\begin_layout Standard
+In order to complete the implementations of these concepts and evaluate
+ the hypothesis the following was required,
+\end_layout
+
+\begin_layout Itemize
+Extend the provided stats calculation function to do so for each source
+ as opposed to globally.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+This allows source-specific dynamic steps to be used.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Implement a moving average scheme to be applied to successive subsets of
+ frame delays from client to server.
+\end_layout
+
+\begin_layout Itemize
+Allow either an FPS or delay requirement to be made as well as a combination
+ of the two in order to the prioritisation of either.
+\end_layout
+
+\begin_layout Subsubsection
+Multi-Source Stats
+\end_layout
+
+\begin_layout Standard
+The base calculations of live statistics provided the FPS and used network
+ bandwidth of the 
+\noun on
+KinectServer
+\noun default
+.
+\end_layout
+
 \begin_layout Subsection
 Cross-Platform Extensions
 \end_layout
@@ -3824,7 +4008,7 @@ Within this piece the process of extending the
 \noun on
 LiveScan3D
 \noun default
- software to include multi-source holoportation has been introduced.
+ software to include multi-source holoportation has been presented.
  The use of such a system has many applications from those inherited from
  traditional 2D video such as conference calls to new utilisations that
  are wholly unique to the environment.
@@ -3835,15 +4019,24 @@ The literature review contextualises the
 \noun on
 LiveScan
 \noun default
- suite and the wider spaces of AR, VR, 3D video and multi-source holoportation
+ suite and the wider spaces of XR, 3D video and multi-source holoportation
  itself.
  Previous examples of holoportation are described and their aims of achieving
  telepresence are discussed.
 \end_layout
 
 \begin_layout Standard
-The current state of the project is laid out showing good progress through
- the required areas of development.
+The results of the project are 
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+laid out showing good progress through the required areas of development
+\end_layout
+
+\end_inset
+
+.
  Of these areas of concern, the display element has been extended in order
  to allow the rendering of multiple environments simultaneously with a dynamic
  sub-system of geometric transformations.
@@ -4011,64 +4204,6 @@ Connected sources
 
 \begin_layout Itemize
 Connected user experiences
-\end_layout
-
-\begin_layout Section
-Existing Data Structures
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:Existing-Data-Structures"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-I reckon this is all unnecessary, if any code goes in, it's not struct definitio
-ns
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand lstinputlisting
-filename "../snippets/point2f.cs"
-lstparams "language={[Sharp]C},caption={Cartesian coordinate in 2 dimensions}"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand lstinputlisting
-filename "../snippets/point3f.cs"
-lstparams "language={[Sharp]C},caption={Cartesian coordinate in 3 dimensions}"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand lstinputlisting
-filename "../snippets/affinetransform.cs"
-lstparams "language={[Sharp]C},caption={Affine transformation matrix with translation}"
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
