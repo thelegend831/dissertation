@@ -165,7 +165,7 @@ begin{changemargin}{3cm}{3cm}
 
 \size large
 A dissertation submitted to the Department of Electronic Engineering in
- partial fulfilment of the Degree of Bachelor of Engineering in Electronic
+ partial fulfilment of the Degree of Masters of Engineering in Electronic
  Engineering
 \end_layout
 
@@ -2345,6 +2345,13 @@ Additionally, Selinis' work included the extension of connections between
 LiveScan
 \noun default
  XR Applications
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:LiveScan-XR-Applications"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2481,7 +2488,7 @@ PointCloudElem
 \end_layout
 
 \begin_layout Standard
-The scripts most relevant scripts for the developments are as follows,
+The most relevant scripts for the developments are as follows,
 \end_layout
 
 \begin_layout Description
@@ -3662,13 +3669,59 @@ name "fig:Existing-packet-header"
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The message type field indicates what action is being conducted with examples
+ including a request for a frame from the server to the client or the delivery
+ of settings.
+ The message types can be seen in appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Network-Message-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ While there are many forms of message sent between client and server including
+ settings delivery and calibration requests, messages from server to UE
+ currently only correspond to frame delivery.
+\end_layout
+
+\begin_layout Subsubsection
+Implementation
+\end_layout
+
+\begin_layout Standard
+An integer source ID was created to be included in communications throughout
+ the suite.
+ For conciseness this was represented by a single byte during transmission
+ resulting in a range of possible source IDs between 0 and 127.
+ Considering the use case of a source representing a scene and the bandwidth
+ required for each, 128 possible concurrent sources was deemed sufficient.
+\end_layout
+
+\begin_layout Standard
+When and where the source ID was included within each packet was decided
+ by the semantics behind the different kinds of message.
+ For server to UE transmissions the source ID was included within the header
+ of the packet as can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:new-ue-packet"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -3683,7 +3736,7 @@ status open
 \begin_inset Graphics
 	filename ../media/HeaderUE.png
 	lyxscale 50
-	width 70col%
+	width 80col%
 
 \end_inset
 
@@ -3694,10 +3747,11 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Extended packet header structure for server to UE communications
+Updated packet structure for server to UE communications, blue highlight
+ indicates new field
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:new-packet-header"
+name "fig:new-ue-packet"
 
 \end_inset
 
@@ -3707,23 +3761,6 @@ name "fig:new-packet-header"
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Socket Handshake
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Doubt necessary
 \end_layout
 
 \end_inset
@@ -3732,38 +3769,62 @@ Doubt necessary
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Comment
-status open
+With regards to client to server communications it was noted that not all
+ message types have a natural association with the source itself.
+ For example when the server requests a client to begin calibration there
+ is no requirement for the source ID to be present.
+ As such the source ID is instead included only during frame delivery from
+ client to server at the start of the payload.
+ This layout can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:new-client-server-packet"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_layout Plain Layout
-The aim is to implement a method by which clients are grouped into sources
- that also allows them to identify themselves consistently when communicating
- over multiple sockets.
- Multiple sockets can be used by clients in order to make simultaneous connectio
-ns to the server and increase bandwidth.
- However when doing so it is important to be able to identify which sockets
- represent which client when some may be at the IP address.
-\end_layout
+\end_inset
 
-\begin_layout Plain Layout
-A method for doing so would involve a handshake process when new clients
- connect to the 
-\noun on
-KinectServer
-\noun default
 .
- The proposed handshake would be initiated by the client when connecting
- to the server, at this point they include which source they should be grouped
- with using an integer ID.
- The server groups the socket as such and, if one has not been received,
- responds with a random identifier string that should be used across all
- sockets to identify the client.
- Should the newly connected socket be for a client that is already connected
- then the client will respond with it's existing identifier to inform the
- server that this ID has been ignored.
- In doing so the client now has a method of identifying itself agnostic
- of socket, and the server has a way of identifying the source which each
- socket is representing.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/HeaderClientServer.png
+	lyxscale 50
+	width 90col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Updated packet structure for client to server frame delivery, blue highlight
+ indicates new field
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:new-client-server-packet"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3773,6 +3834,224 @@ KinectServer
 
 \begin_layout Subsection
 Mobile AR
+\end_layout
+
+\begin_layout Standard
+The architecture of the mobile AR application can be divided into two areas
+ of concern.
+ The first is related to establishing the AR environment within the 
+\noun on
+Unity
+\noun default
+ scene including plane discovery, motion tracking and presenting the camera
+ feed as the background.
+ This is provided by the 
+\noun on
+Google ARCore
+\noun default
+ library and requires only configuring provided objects, no additional code
+ is required.
+ The other aspect is the 
+\noun on
+LiveScan
+\noun default
+ specific objects responsible for receiving and constructing holograms within
+ the AR scene.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/UnityScriptsBefore.png
+	lyxscale 30
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Existing architecture of mobile AR components
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Existing-scripts"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This 
+\noun on
+LiveScan
+\noun default
+ specific code can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Existing-scripts"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ As discussed in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:LiveScan-XR-Applications"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ the 
+\noun on
+PointCloudReceiver
+\noun default
+ acts as the network layer passing frames from the receiving buffer to the
+ 
+\noun on
+PointCloudRenderer
+\noun default
+ for reconstruction in the form of a collection of 
+\noun on
+PointCloudElems
+\noun default
+.
+ This collection of 
+\noun on
+PointCloudElem
+\noun default
+s is scaled in population to match the size of the hologram and then each
+ is re-coloured and positioned on each frame update.
+\end_layout
+
+\begin_layout Subsubsection
+Design Considerations
+\end_layout
+
+\begin_layout Standard
+The nature of developing in 
+\noun on
+Unity
+\noun default
+ allowed the restructuring of this architecture into one capable of supporting
+ multi-source experiences with minimal code additions.
+ A source prefab
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+does prefab need defining?
+\end_layout
+
+\end_inset
+
+ was created with the intention of encapsulating the necessary components
+ required to represent a whole source including it's presentation touch
+ input management.
+ The 
+\noun on
+PointCloudRenderer
+\noun default
+ was redefined as this presentation manager for a single source allowing
+ it to own the 
+\noun on
+PointCloudElem
+\noun default
+s making up a hologram.
+\end_layout
+
+\begin_layout Standard
+On each frame update the 
+\noun on
+PointCloudReceiver
+\noun default
+ retrieves the required source from a dictionary indexed by source ID or
+ instantiates one if it is not available
+\noun on
+.
+
+\noun default
+ The render function of the source's contained renderer can then be called.
+ This updated architecture can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Scripts-after"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/UnityScriptsAfter.png
+	lyxscale 30
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Restructured architecture of mobile AR components
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Scripts-after"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -3786,9 +4065,9 @@ LiveScan
 \noun default
  suite to a multi-source architecture implies a significant difference in
  certain behaviours of the server.
- For example, when encountering adverse network conditions in a single source
- scenario, the desired action could be to wait until transmissions from
- the client(s) can resume.
+ When encountering adverse network conditions in a single source scenario,
+ the desired action could be to wait until transmissions from the client(s)
+ can resume.
  With only a single stream, the alternative would be to quit the experience.
 \end_layout
 
@@ -3867,7 +4146,7 @@ SourceCollection
  by source ID.
  The previously described thread is implemented along with integer attributes
  defining the interval at which frames are checked and the threshold for
- which sources are defined as 
+ which sources are designated 
 \emph on
 stale
 \emph default
@@ -3895,7 +4174,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/andy/uni/dissertation/media/SourceCollection.png
+	filename ../media/SourceCollection.png
 	lyxscale 20
 	width 60col%
 
@@ -3969,11 +4248,11 @@ The
 \noun on
 KinectSettings
 \noun default
- class is responsible for maintaining configuration parameters for aspects
- of the experience including calibration for multi-view scenarios and flags
- for whether bodies should be isolated from the scene and whether skeletons
- should be shown in the server display.
- Some of these including the positions of calibration markers must be known
+ class is responsible for maintaining configuration parameters of the experience
+ including calibration for multi-view scenarios and flags for whether bodies
+ should be isolated from the scene and whether skeletons should be shown
+ in the server display.
+ Some of these, including the positions of calibration markers must be known
  by clients and as such the 
 \noun on
 KinectServer
@@ -4000,7 +4279,10 @@ When considering the transition from a single stream scenario to the multi-sourc
 e product, it can be seen that the settings should no longer be global.
  Taking the calibration settings as an example, the positions and ID's of
  each marker refer to those visible within a scene.
- These will have no meaning if made central parameters, 
+ These will have no meaning if made central parameters, they are closely
+ tied to the scene and therefore the source.
+ Each source should have it's own independent set of settings and the server
+ should be able to deliver the settings to the corresponding clients.
 \end_layout
 
 \begin_layout Subsubsection
@@ -4024,7 +4306,7 @@ stale source
 \end_layout
 
 \begin_layout Standard
-The global settings object was not removed but instead had it's significance
+The global settings object was not removed but instead had it's function
  changed.
  The object was altered to define the default settings on which each newly
  connected source's are based on.
@@ -4054,7 +4336,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-A proposed hypothesis for reducing this delay was to control the transmitted
+A proposed hypothesis for reducing this delay was to limit the transmitted
  frame rate.
  It follow that this would reduce the population of each buffer and reduce
  the time that each frame spent within each.
@@ -4088,14 +4370,13 @@ When considering the final applications of these concepts in the context
  of a multi-source project, the ability to have a step per source was included
  in order to take into account the different network conditions between
  the server and each source's client(s).
- A single set of FPS and delay requirements would still be provided and
- a step for each source would be calculated and distributed using the calculated
- conditions of each.
+ A single set of global FPS and delay requirements would still be provided
+ and a step for each source would be calculated and distributed.
 \end_layout
 
 \begin_layout Standard
-In order to complete the implementations of these concepts and evaluate
- the hypothesis the following was required,
+In order to implement these concepts and evaluate the posed hypothesis the
+ following was required,
 \end_layout
 
 \begin_layout Itemize
@@ -4110,12 +4391,12 @@ This allows source-specific dynamic steps to be used.
 
 \end_deeper
 \begin_layout Itemize
-Implement a moving average scheme to be applied to successive subsets of
- frame delays from client to server.
+Implement a moving average scheme on successive subsets of latencies from
+ client to server.
 \end_layout
 
 \begin_layout Itemize
-Allow either an FPS or delay requirement to be made as well as a combination
+Allow either an FPS or delay requirement to be provided as well as a combination
  of the two in order to the prioritisation of either.
 \end_layout
 
@@ -4124,12 +4405,40 @@ Multi-Source Stats
 \end_layout
 
 \begin_layout Standard
-The base calculations of live statistics provided the FPS and used network
- bandwidth of the 
+The existing calculations of live statistics provided the global FPS and
+ network bandwidth of the 
 \noun on
 KinectServer
 \noun default
 .
+ In order to collect these values on a source-by-source basis a dictionary
+ of 
+\noun on
+SourceStat
+\noun default
+ objects were used.
+ This object collects the FPS, bandwidth and average latencies for each
+ allowing simple retrieval and update when iterating through each socket.
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+does this read right?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In implementing the latency calculations both a simple moving average and
+ exponential moving average were taken in order to investigate the efficacy
+ of both.
+ The values were found by collecting the latency of each frame currently
+ within the receiving buffers.
+ Theoretically this allows the moving nature of the calculated average to
+ be controlled by the speed with which frames are moved through the buffer.
 \end_layout
 
 \begin_layout Subsection
@@ -4357,6 +4666,65 @@ Connected sources
 
 \begin_layout Itemize
 Connected user experiences
+\end_layout
+
+\begin_layout Section
+Network Message Types
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Network-Message-Types"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+MSG_CAPTURE_FRAME
+\end_layout
+
+\begin_layout Itemize
+MSG_CALIBRATE
+\end_layout
+
+\begin_layout Itemize
+MSG_RECEIVE_SETTINGS
+\end_layout
+
+\begin_layout Itemize
+MSG_REQUEST_STORED_FRAME
+\end_layout
+
+\begin_layout Itemize
+MSG_REQUEST_LAST_FRAME
+\end_layout
+
+\begin_layout Itemize
+MSG_RECEIVE_CALIBRATION
+\end_layout
+
+\begin_layout Itemize
+MSG_CLEAR_STORED_FRAMES
+\end_layout
+
+\begin_layout Itemize
+MSG_CONFIRM_CAPTURED
+\end_layout
+
+\begin_layout Itemize
+MSG_CONFIRM_CALIBRATED
+\end_layout
+
+\begin_layout Itemize
+MSG_SEND_STORED_FRAME
+\end_layout
+
+\begin_layout Itemize
+MSG_SEND_LAST_FRAME
+\end_layout
+
+\begin_layout Itemize
+MSG_NO_FRAME 
 \end_layout
 
 \begin_layout Section
