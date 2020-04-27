@@ -1,0 +1,5 @@
+DelayToEnqueue	DeltaEnqueue	QueueDelay	DeltaDequeue	FrameSize	Buffer	RemotePort	LocalPort
+1713	0	3	0	1348058	0	53218	48000
+1721	20	4	21	338348	0	53218	48000
+1735	43	4	43	338861	0	53218	48000
+

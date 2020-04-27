@@ -1,0 +1,2 @@
+Source	FPS	Mbps	Latency EMA	Latency SMA	Alpha	Step	UTC
+ 
