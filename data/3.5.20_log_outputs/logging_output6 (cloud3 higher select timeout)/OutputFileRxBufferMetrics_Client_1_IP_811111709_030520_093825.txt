@@ -1,0 +1,6 @@
+DelayToEnqueue	DeltaEnqueue	QueueDelay	DeltaDequeue	FrameSize	Buffer	RemotePort	LocalPort
+172	0	15	0	94538	0	50581	48000
+226	62	16	63	95069	0	50581	48000
+605	407	15	406	94988	0	50581	48000
+586	15	16	16	95132	0	50581	48000
+

@@ -1,0 +1,7 @@
+DelayToEnqueue	DeltaEnqueue	QueueDelay	DeltaDequeue	FrameSize	Buffer
+187	0	79	0	94530	1
+242	63	47	31	95061	0
+
+620	406	16	375	94980	0
+602	16	31	31	95124	0
+
