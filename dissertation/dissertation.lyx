@@ -110,7 +110,11 @@ todonotes
 \begin_layout Title
 
 \size giant
-Multi-Source Holoportation
+Multi-Source Holoportation 
+\begin_inset Newline newline
+\end_inset
+
+with LiveScan3D
 \end_layout
 
 \begin_layout Author
@@ -128,8 +132,8 @@ Andy Pack
 \align center
 \begin_inset Graphics
 	filename ../surreylogo.png
-	lyxscale 30
-	width 60col%
+	lyxscale 15
+	width 20col%
 
 \end_inset
 
@@ -165,7 +169,7 @@ begin{changemargin}{3cm}{3cm}
 
 \size large
 A dissertation submitted to the Department of Electronic Engineering in
- partial fulfilment of the Degree of Masters of Engineering in Electronic
+ partial fulfillment of the Degree of Masters of Engineering in Electronic
  Engineering
 \end_layout
 
@@ -180,6 +184,13 @@ status open
 end{changemargin}
 \end_layout
 
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
 \end_inset
 
 
@@ -190,6 +201,12 @@ end{changemargin}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+Supervised by Professor Ning Wang
 \end_layout
 
 \begin_layout Standard
@@ -302,8 +319,8 @@ Introduction
 The immersive technology spaces of virtual and augmented reality promise
  to change the way we experience many different forms of media.
  Spurred in recent years by the release of consumer VR headsets and the
- push for handheld AR by phone manufacturers, no longer do these experiences
- present merely proofs of concept but complete commercial products.
+ push for handheld AR by mobile phone manufacturers, no longer do these
+ experiences present merely proofs of concept but complete commercial products.
  
 \end_layout
 
@@ -331,7 +348,7 @@ reference?
 
 \begin_layout Standard
 No matter the application, common to all is the importance of the presented
- media.
+ media itself.
  Typically this is in the form of pre-recorded meshes of 3D objects, captured
  and stored within the application for both the previously mentioned AR
  and VR examples.
@@ -377,11 +394,11 @@ holograms
 \emph on
 user experience
 \emph default
- such as an AR or VR client, overall a process referred to as 
+ such as an AR or VR client, together a process referred to as 
 \emph on
 holoportation
 \emph default
- or hologram teleportation.
+ (hologram teleportation).
 \end_layout
 
 \begin_layout Standard
@@ -390,6 +407,16 @@ This project aims to extend this suite to support multi-source holoportation,
  phone calls to group conference calls.
  In doing so the implementation of holoportation could be seen to be generalised
 , extending the possible applications of the suite.
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+examples?
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -413,13 +440,69 @@ noprefix "false"
 
 .
  Both single and multi-view sources are shown, the latter allowing more
- complete renders of the subject to be acquired.
+ complete renders of the subject to be acquired from different angles.
  Both shapes are presented at the 
 \emph on
 user experience
 \emph default
-, control schemes and visual language can vary between implementations across
- AR/VR and traditional 2D displays.
+, typically envisaged as an AR or VR client.
+\end_layout
+
+\begin_layout Standard
+The code for this project resides in two 
+\noun on
+Github
+\noun default
+ repositories the URLs for which can be seen below, the reports and associated
+ materials including gathered data is also under source control.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+
+\noun on
+LiveScan
+\noun default
+ Suite: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+github.com/Sarsoo/LiveScan3D
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Mobile AR Application: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+github.com/Sarsoo/LiveScan3D-Unity
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Report Materials: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+github.com/Sarsoo/dissertation
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -480,22 +563,99 @@ In order to achieve the goal of multi-source holoportation the following
 \end_layout
 
 \begin_layout Enumerate
-Extend the native viewfinder of the server in order to separately render
- each connected source
-\end_layout
-
-\begin_layout Enumerate
 Redefine the network communications in order to identify each frame of footage
  as a particular source
 \end_layout
 
 \begin_layout Enumerate
-Update the Android AR application to separately present each source of footage
- and facilitate individual control
+Migrate the server from a single-source streaming node to a manager of multiple
+ scenes
+\end_layout
+
+\begin_layout Enumerate
+Extend the native viewfinder of the server in order to separately render
+ each connected source
+\end_layout
+
+\begin_layout Enumerate
+Update the 
+\noun on
+Android
+\noun default
+ AR application to separately present each source of footage and facilitate
+ individual control
+\end_layout
+
+\begin_layout Standard
+These can be seen contextually highlighted in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:High-level-objectives"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/ObjectivesSummary.png
+	lyxscale 30
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+High level diagram of the suite with key objectives highlighted
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:High-level-objectives"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
 COVID-19
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:COVID-19"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -513,7 +673,30 @@ Android
  phone with AR support.
  This significantly hindered the ability to evaluate the implemented multi-sourc
 e capabilities and some elements of the mobile AR display, as a result alternati
-ve objectives were identified in order to maintain productivity.
+ve objectives were identified to allow quantitative analysis.
+\end_layout
+
+\begin_layout Standard
+In order to continue debugging the mobile AR user experience the structure
+ of the 
+\noun on
+Unity
+\noun default
+ application was changed significantly in order to allow deployment on either
+ an Android or iOS device.
+ This allowed the network behaviour to continue being evaluated.
+\end_layout
+
+\begin_layout Standard
+In support of the lab's ongoing research into the 
+\noun on
+LiveScan
+\noun default
+ suite and the area of theory in which it resides, investigations were made
+ into the effect of deliberately limiting the delivered frames per second
+ on effective display latency.
+ Preliminary data for one method of doing so was gathered and is presented
+ here in place of proper evaluation of the completed multi-source capabilities.
 \end_layout
 
 \begin_layout Section
@@ -1929,7 +2112,7 @@ Kinect
 \noun on
 Kinect
 \noun default
- v2 SDK and transmitting frames to the 
+ v2 SDK and transmitting hologram frames to the 
 \noun on
 LiveScan
 \noun default
@@ -2098,23 +2281,8 @@ Calibration & Multi-View Configurations
 
 \begin_layout Standard
 Single view configurations provide one viewing angle of a captured scene,
- this results in 
-\emph on
-shadows
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-
-\emph off
-Reword? include example?
-\end_layout
-
-\end_inset
-
-
-\emph default
- being visible in the hologram.
+ this results in areas of un-captured space causing visible shadows in the
+ hologram.
  Capturing multiple angles of the same scene allows a more complete composite
  hologram to be constructed and presented.
 \end_layout
@@ -2596,7 +2764,11 @@ In concept, this design pattern makes it a good candidate for use in a hologram
 \noun on
 Twitch
 \noun default
-.
+ or 
+\noun on
+Instagram
+\noun default
+'s live functionality.
 \begin_inset Flex TODO Note (Margin)
 status open
 
@@ -2629,19 +2801,6 @@ LiveScan3D
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-Explain UDP/TCP? covered in high bandwidth media streaming?
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 The addition of buffers allows the presentation layer to request frames
  from a buffer at a constant rate, decoupled from a level of volatility
  in the network layer.
@@ -2650,27 +2809,14 @@ The addition of buffers allows the presentation layer to request frames
  In an effort to identify methods for controlling this, investigations are
  made into the effect of intentionally reducing the transmitted frame rate
  in order to reduce this overall delay.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Flex TODO Note (Margin)
 status open
 
 \begin_layout Plain Layout
-reword?
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Comment
-status open
-
-\begin_layout Plain Layout
-Additionally, the network polling rates are higher than the frame rate of
- the produced video, when the server requests a frame before a new one has
- been captured by the client, the same previous frame is resent.
- This presents unnecessary bandwidth usage.
+comparison between multi-view and multi-source
 \end_layout
 
 \end_inset
@@ -2745,7 +2891,18 @@ s object describing parameters including the positions of calibration markers
 
 \end_deeper
 \begin_layout Standard
-Additionally, three other developments were made to the application suite,
+Additionally, two other developments were made to the application suite
+ (section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:COVID-19"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, COVID-19),
 \end_layout
 
 \begin_layout Itemize
@@ -2755,30 +2912,13 @@ A dynamic system of frame rate throttling was implemented.
 \begin_deeper
 \begin_layout Itemize
 This was in order to facilitate investigations into the effect on user experienc
-e of balancing FPS and delay.
+e of balancing FPS and display latency.
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-The server was refactored in order to facilitate cross-platform applications.
-\end_layout
-
-\begin_layout Itemize
 The mobile UE application was refactored in order to allow cross-platform
  deployment.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Extend, include section references?
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -2828,19 +2968,6 @@ In order to maintain a strength of the suite in it's agnostic behaviour
  In maintaining this separation of network and presentation layer each display
  can operate independently and no assumptions are made as to how a display
  method should handle each hologram.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-This also helps when no opengl, containers?
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsubsection
@@ -3363,16 +3490,6 @@ OpenGL
 \noun default
  window, source transformations are stored within a dictionary indexed by
  source ID.
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Not necessary
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -4227,16 +4344,6 @@ DisplayFrameTransfomer
 \noun default
  where a check is made to ensure that a source's position override is cleared
  if one exists when that source is disconnected.
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-is this a good idea?
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -4314,6 +4421,13 @@ The global settings object was not removed but instead had it's function
 
 \begin_layout Subsection
 Frame Rate Throttling
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Frame-Rate-Throttling"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4331,8 +4445,10 @@ noprefix "false"
 
 \end_inset
 
-), the inclusion of buffers can add to the perceived delay of holograms
- from capture to presentation as frames propagate through each.
+), the inclusion of buffers can add to the total effective delay of frames
+ from capture to presentation as they propagate through each.
+ This effect is exacerbated when operating across long distances such as
+ between cloud locations.
 \end_layout
 
 \begin_layout Standard
@@ -4344,21 +4460,16 @@ A proposed hypothesis for reducing this delay was to limit the transmitted
 
 \begin_layout Standard
 This was implemented based on further work by Selinis introducing the concept
- of a dynamic step calculated from a provided FPS and delay requirement
- which would represent the percentage of frames dropped by the client.
+ of a dynamic step calculated from a provided FPS and latency requirement
+ representing the percentage of frames dropped by the client.
  This step is transmitted in the header of each frame request of a client
  theoretically allowing the system to dynamically respond to changes in
  network conditions.
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-needs some clarification, ie that ioannis wrote the calculatespecs
-\end_layout
-
-\end_inset
-
- 
+ This step relied on global statistics calculated about the 
+\noun on
+KinectServer
+\noun default
+ including FPS and network bandwidth.
 \end_layout
 
 \begin_layout Subsubsection
@@ -4418,12 +4529,119 @@ SourceStat
 \noun default
  objects were used.
  This object collects the FPS, bandwidth and average latencies for each
- allowing simple retrieval and update when iterating through each socket.
-\begin_inset Flex TODO Note (Margin)
+ source allowing simple retrieval and update when iterating through each
+ socket.
+\end_layout
+
+\begin_layout Standard
+In implementing the latency calculations both a simple moving average or
+ traditional mean and exponential moving average were taken in order to
+ investigate the efficacy of both.
+ The equation for exponential moving average can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Exponential-moving-average"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, this iterative version was well suited to processing each element of latency.
+ Initially the values were found by collecting the latency of each frame
+ currently within the receiving buffers.
+ Theoretically this would have allowed the calculated average to be controlled
+ by the speed with which frames are moved through the buffer.
+ However this was found to be ineffective as the buffers typically stay
+ empty.
+ Instead queue of fixed size was defined in order to retain the most recent
+ values of latency as frames were received by the server.
+ This queue included the calculation for both exponential and simple moving
+ averages of the contents.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-does this read right?
+\noindent
+\align center
+\begin_inset Formula 
+\[
+S_{t}\begin{cases}
+Y_{1}, & t=1\\
+\alpha\cdot Y_{t}+\left(1-\alpha\right)\cdot S_{t-1} & t>1
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Formula $\alpha$
+\end_inset
+
+ = Weighting factor
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Formula $Y_{t}$
+\end_inset
+
+= Value at time 
+\begin_inset Formula $t$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Formula $S_{t}$
+\end_inset
+
+= EMA Value at time 
+\begin_inset Formula $t$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Exponential moving average calculation
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ema"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Exponential-moving-average"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4432,33 +4650,756 @@ does this read right?
 \end_layout
 
 \begin_layout Standard
-In implementing the latency calculations both a simple moving average and
- exponential moving average were taken in order to investigate the efficacy
- of both.
- The values were found by collecting the latency of each frame currently
- within the receiving buffers.
- Theoretically this allows the moving nature of the calculated average to
- be controlled by the speed with which frames are moved through the buffer.
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+step calculation information
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
-Cross-Platform Extensions
-\end_layout
-
-\begin_layout Subsubsection
-Server
-\end_layout
-
-\begin_layout Subsubsection
-Mobile AR
+Cross-Platform Mobile AR
 \end_layout
 
 \begin_layout Section
 Testing Methodology
 \end_layout
 
+\begin_layout Standard
+The following outlines the methods used to investigate the effect of limiting
+ client transmission frame rates in order to control the effective display
+ latency (section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Frame-Rate-Throttling"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsection
+Premise Validation
+\end_layout
+
+\begin_layout Standard
+Development was conducted with the client and server located on the same
+ machine reducing the latency to just that of processing the frames themselves.
+ In order to validate the initial premise of the hypothesis investigations
+ were made on two machines across a domestic local area network.
+\end_layout
+
+\begin_layout Standard
+When situated on the same machine the bandwidth used by the suite averages
+ around 275Mbps for a full scene.
+ When transmitting only bodies these numbers can be more dynamic based on
+ the number of and size of figures in the frame.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:body-bandwidth-variation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents the variation in network bandwidth for a single body moving closer
+ to and further away from the camera, it can be seen to vary between 5 and
+ 125 Mbps.
+ These be taken as the ideal or desired bandwidth requirements both both
+ configurations.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/graphs/BodyBandwidthVariation.png
+	lyxscale 40
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Variation in used bandwidth for a single body at different distances from
+ the 
+\noun on
+Kinect
+\noun default
+ sensor
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:body-bandwidth-variation"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The small scale of the controlled LAN environment does not inherently incur
+ long latencies between nodes and as such does not naturally present a valid
+ environment for these investigations.
+ To test such a scenario full-scene transmissions were used in order to
+ saturate the available bandwidth.
+ The connection between nodes included a WiFi connection which limited the
+ available bandwidth to around 100Mbps.
+ As the full-scene configuration requires around 275Mbps, artificial latency
+ was introduced as frames take longer to deliver.
+\end_layout
+
+\begin_layout Standard
+The step was specified and varied manually initially in order to visualise
+ the response in delay and FPS.
+ Following implementation of a dynamic step, the response was again visualised.
+\end_layout
+
+\begin_layout Subsection
+Natural Environment Evaluations
+\end_layout
+
+\begin_layout Standard
+In order to properly evaluate the hypothesis in a more natural environment
+ for the suite, the server was migrated to a virtual machine running in
+ 
+\noun on
+Microsoft
+\noun default
+'s 
+\noun on
+Azure
+\noun default
+ cloud computing environment.
+ A 
+\emph on
+Standard F2s V2
+\emph default
+ class virtual machine was used, the specifications for which can be seen
+ in appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Virtual-Machine-Specifications"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+When operating over the open internet the domestic internet connection became
+ relevant as a limiting factor, specifically the rated upload speed of 10Mbps.
+ With respect to the desired speeds mentioned above (5 - 275 Mbps), this
+ can be seen to be a significant bottleneck.
+ As such figure-only capture was used in order to limit the required bandwidth.
+\end_layout
+
 \begin_layout Section
 Results
+\end_layout
+
+\begin_layout Subsection
+LAN Premise Validation
+\end_layout
+
+\begin_layout Standard
+Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Latency-and-FPS1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Latency-and-FPS2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ present two test scenarios with a manually defined and varied client frame
+ drop rate.
+ Latency EMA refers to the moving exponential average of latency values
+ received from connected clients.
+ An alpha of 0.5 was used for both scenarios.
+ Both scenarios show an initial spike in latency despite figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Latency-and-FPS1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ having a 50% drop rate from 
+\begin_inset Formula $t=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/graphs/LatencyStep2.png
+	lyxscale 40
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/graphs/FPSStep2.png
+	lyxscale 40
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Latency and FPS response for a manually varied frame drop step (Full-scene
+ capture)
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Latency-and-FPS1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Generally the lowering of the drop rate induces the latency to begin increasing
+ at a fairly linear rate.
+ This can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Latency-and-FPS1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ at times 
+\begin_inset Formula $t=133$
+\end_inset
+
+ (Increasing at roughly 
+\begin_inset Formula $176\,\unitfrac{ms}{s}$
+\end_inset
+
+) and 
+\begin_inset Formula $t=250$
+\end_inset
+
+ (
+\begin_inset Formula $\approx151\,\unitfrac{ms}{s}$
+\end_inset
+
+) and in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Latency-and-FPS2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ at times 
+\begin_inset Formula $t=25$
+\end_inset
+
+ (
+\begin_inset Formula $\approx304\,\unitfrac{ms}{s}$
+\end_inset
+
+) and 
+\begin_inset Formula $t=270$
+\end_inset
+
+ (
+\begin_inset Formula $\approx315\,\unitfrac{ms}{s}$
+\end_inset
+
+).
+ Conversely increasing the step beyond a critical value causes a peak in
+ the latency before inducing the value to begin dropping.
+ There is a noticeable lag in response, changes in latency are offset in
+ time from the reception of a changed drop rate.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/graphs/LatencyStep1.png
+	lyxscale 40
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/graphs/FPSStep1.png
+	lyxscale 40
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Latency and FPS response for a manually varied frame drop step (Full-scene
+ capture)
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Latency-and-FPS2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Looking to the FPS data, in both test scenarios the frame rate drops in
+ response to an increase in frame drop rate and vice versa.
+ Similarly to latency a lag can be seen when changes in drop rate are received.
+\end_layout
+
+\begin_layout Subsection
+Cloud Environment
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:raw-cloud-latency"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents the average transmission latency with an uncontrolled frame drop
+ rate.
+ The used bandwidth is also visualised averaging around 10Mbps, the rated
+ upload speed for the domestic internet connection.
+ The latency can be seen to increase linearly and constantly with the exponentia
+l and simple moving averages increasing at 
+\begin_inset Formula $500\,\unitfrac{ms}{s}$
+\end_inset
+
+ and 
+\begin_inset Formula $460\,\unitfrac{ms}{s}$
+\end_inset
+
+ respectively.
+ The exponential moving average can be seen to move faster in response to
+ new values, a feature also seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:unstable-cloud-based-latency"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/graphs/RawLatencyWithoutStep.png
+	lyxscale 40
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Average transmission latency with no client frame drop (Figure-only capture)
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:raw-cloud-latency"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:unstable-cloud-based-latency"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ highlights the instability encountered in the cloud based environment.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/graphs/CloudInstabilityLatency.png
+	lyxscale 40
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/graphs/CloudInstabilityBandwidth.png
+	lyxscale 40
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Cloud based latency and bandwidth as a function of a manual frame drop step
+ (Figure-only capture)
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:unstable-cloud-based-latency"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Discussion
+\end_layout
+
+\begin_layout Subsection
+LAN Premise Validation
+\end_layout
+
+\begin_layout Standard
+The initial spike in latency could be a result of the delay in drop rate
+ delivery from server to client allowing the client's buffer to initially
+ fill at an uncontrolled rate.
+\end_layout
+
+\begin_layout Standard
+The response lag could be attributed to a couple of influencing factors.
+ The nature of a moving average partially representing previous values when
+ iterating adds a 
+\emph on
+friction
+\emph default
+ to each successive result and an inherent lag when the data swings.
+\end_layout
+
+\begin_layout Standard
+Additionally, the drop rate was employed at the client prior to queueing
+ frames in the transmission buffer.
+ Frames are then delivered to the server from this buffer decoupled from
+ this rate.
+ As a result when a new drop rate is received the buffer is filled at this
+ rate going forward however it was likely not empty and the server must
+ still receive the existing population queued at a different rate.
+\end_layout
+
+\begin_layout Subsection
+Cloud Environment
+\end_layout
+
+\begin_layout Section
+Evaluation
+\end_layout
+
+\begin_layout Section
+Future Work
+\end_layout
+
+\begin_layout Standard
+Below outlines possible future developments to the 
+\noun on
+LiveScan3D
+\noun default
+ suite with regards to both the work presented in this project and the suite
+ as a whole.
+\end_layout
+
+\begin_layout Standard
+The migration of the mobile application's AR environment in 
+\noun on
+Google
+\noun default
+'s 
+\noun on
+ARCore
+\noun default
+ to that of 
+\noun on
+Unity
+\noun default
+'s native 
+\noun on
+ARFoundation
+\noun default
+ framework allowed deploying to both iOS and Android phones.
+ However, the previously used 
+\noun on
+GSBillboard
+\noun default
+ shader is not compatible with the iOS 
+\noun on
+Metal
+\noun default
+ graphics library due to it being a geometry shader, limiting functionality
+ to just that of the network layer.
+ With a compatible shader the cross-platform migration would be feature-complete
+, extending the possible install base of the application while also providing
+ access to the currently wider feature set of iOS's 
+\noun on
+ARKit
+\noun default
+.
+\end_layout
+
+\begin_layout Standard
+With investigations being made into the speed and latency of network communicati
+ons, this is an area with much space for development.
+ The use of the TCP protocol for frame delivery includes overhead compared
+ to the more standard UDP for interactive media applications.
+ Migrating to UDP could present opportunities to increase the network speed.
+\end_layout
+
+\begin_layout Standard
+There are many ways in which the packet size could be reduced, one already
+ supported by the suite is the use of 
+\noun on
+ZStandard
+\noun default
+ compression, a lossless compression algorithm developed at 
+\noun on
+Facebook
+\noun default
+.
+ A similar method could be the use of hologram sub-sampling, particularly
+ between the server and user experience.
+ This would involve reducing the size of a transmitted holograms by sampling
+ only a percentage of the point cloud vertices and increasing the point
+ size at display to cover the space inbetween.
+ When presented at a small scale at the user experience this could present
+ a method to reduce transmission bandwidth while maintaining much of the
+ final experience.
+\end_layout
+
+\begin_layout Standard
+Another method for achieving this reduction in bandwidth could be inherited
+ from traditional video compression through the use of 
+\emph on
+frame types
+\emph default
+ including I-frames, P-frames and B-frames.
+ Essentially when capturing a whole scene, it is unlikely that all of it
+ will change significantly each frame and as such calculating and transmitting
+ only the changes since the last could significantly reduce the required
+ bandwidth.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+UDP network?
+\end_layout
+
+\begin_layout Plain Layout
+Fix iOS shaders
+\end_layout
+
+\begin_layout Plain Layout
+better step calculation
+\end_layout
+
+\begin_layout Plain Layout
+re-enabling compression
+\end_layout
+
+\begin_layout Plain Layout
+sampling holograms at client before transmission, increase point size?
+\end_layout
+
+\begin_layout Plain Layout
+Maybe at server for UE?
+\end_layout
+
+\begin_layout Plain Layout
+IBP frames
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -4472,8 +5413,8 @@ LiveScan3D
 \noun default
  software to include multi-source holoportation has been presented.
  The use of such a system has many applications from those inherited from
- traditional 2D video such as conference calls to new utilisations that
- are wholly unique to the environment.
+ traditional 2D video such as conference calls to wholly unique applications
+ within the new domain.
 \end_layout
 
 \begin_layout Standard
@@ -4481,9 +5422,9 @@ The literature review contextualises the
 \noun on
 LiveScan
 \noun default
- suite and the wider spaces of XR, 3D video and multi-source holoportation
+ suite within the wider spaces of XR, 3D video and multi-source holoportation
  itself.
- Previous examples of holoportation are described and their aims of achieving
+ Previous examples of holoportation are presented and their aims of achieving
  telepresence are discussed.
 \end_layout
 
@@ -4747,6 +5688,158 @@ name "subsec:Frame"
 LatexCommand lstinputlisting
 filename "../snippets/frame.cs"
 lstparams "language={[Sharp]C},caption={Point cloud with Client ID}"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Virtual Machine Specifications
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Virtual-Machine-Specifications"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Standard F2s v2
+\end_layout
+
+\begin_layout Standard
+Specifications found at 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+https://docs.microsoft.com/en-us/azure/virtual-machines/fsv2-series
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Based on the Intel Xeon Platinum 8168.
+ It features a sustained all core Turbo clock speed of 3.4 GHz and a maximum
+ single-core turbo frequency of 3.7 GHz.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+vCPUs
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Memory 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4 GiB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Temp Storage (SSD)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16 GiB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Max Data Disks
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Expected Network Bandwidth
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+875 Mbps
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
 
 \end_inset
 
