@@ -317,10 +317,10 @@ Introduction
 
 \begin_layout Standard
 The immersive technology spaces of virtual and augmented reality promise
- to change the way we experience many different forms of media.
+ to change the way we experience digital media.
  Spurred in recent years by the release of consumer VR headsets and the
- push for handheld AR by mobile phone manufacturers, no longer do these
- experiences present merely proofs of concept but complete commercial products.
+ push for handheld AR using smartphones, no longer do these experiences
+ present merely proofs of concept but complete commercial products.
  
 \end_layout
 
@@ -683,7 +683,11 @@ In order to continue debugging the mobile AR user experience the structure
 Unity
 \noun default
  application was changed significantly in order to allow deployment on either
- an Android or iOS device.
+ an 
+\noun on
+Android
+\noun default
+ or iOS device.
  This allowed the network behaviour to continue being evaluated.
 \end_layout
 
@@ -697,6 +701,13 @@ LiveScan
  on effective display latency.
  Preliminary data for one method of doing so was gathered and is presented
  here in place of proper evaluation of the completed multi-source capabilities.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -779,7 +790,7 @@ literal "false"
 \end_inset
 
 , the collection and transmission of 3D holograms have applicability to
- all forms of XR and as such the state of this space as a whole is investigated.
+ all forms of XR and as such the state of this space is investigated.
 \end_layout
 
 \begin_layout Standard
@@ -844,9 +855,9 @@ Kinect
 Microsoft
 \noun default
 .
- The device uses additional infrared lights and sensors alongside an RGB
- camera in a configuration referred to as a Time-of-Flight camera to generate
- 3D renders of a surroundings.
+ The device uses infrared lights and sensors alongside an RGB camera in
+ a configuration referred to as a Time-of-Flight camera to provide colour
+ and depth information about the surroundings.
  The device also includes motion tracking and skeleton isolation for figures
  in view.
 \end_layout
@@ -1011,7 +1022,7 @@ Extended Reality (XR)
 \begin_layout Standard
 Immersive media experiences enhanced through the use of technology are typically
  defined by the level to which they affect the perception of the user.
- This distinction typically organises technologies into one of three established
+ This distinction generally organises technologies into one of three established
  terms, 
 \emph on
 Virtual Reality
@@ -1154,8 +1165,8 @@ Cross reality? Reference?
 
 \begin_layout Standard
 While individual classes of XR provide ostensibly different experiences,
- it can be seen that there is overlap between them, notably that at a high
- level all aim to extend a user's experience of reality.
+ there is clearly overlap between them, notably at a high level all aim
+ to digitally extend a user's experience of reality.
 \begin_inset Flex TODO Note (inline)
 status open
 
@@ -1165,7 +1176,7 @@ Reword
 
 \end_inset
 
- All can be seen to employ 
+ All can also be seen to employ 
 \emph on
 Spatial Computing
 \emph default
@@ -1367,13 +1378,49 @@ Link with work
 \end_layout
 
 \begin_layout Subsubsection
-Augmented Reality
+Handheld Augmented Reality
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Handheld-Augmented-Reality"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The advancement of mobile AR aided by it's accessibility without expensive
- ancillary hardware has led it to be a rapidly growing and popular form
- of XR.
+This project deals primarily with augmented reality facilitated through
+ mobile phones, specifically from Selinis' work
+\begin_inset CommandInset citation
+LatexCommand cite
+key "livescan3d-android"
+literal "false"
+
+\end_inset
+
+ porting the existing 
+\noun on
+LiveScan3D Hololens
+\noun default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "livescan3d-hololens"
+literal "false"
+
+\end_inset
+
+ application to 
+\noun on
+Android
+\noun default
+.
+ As such, the state of handheld AR is briefly presented here.
+\end_layout
+
+\begin_layout Standard
+The advancement of mobile AR bolstered by the growing ubiquity of compatible
+ hardware has led it to becoming a rapidly growing and popular form of XR.
  The introduction of OS-level SDK's in 
 \noun on
 Google
@@ -1411,29 +1458,152 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Handheld and Hololens
-\end_layout
-
-\end_inset
-
-
+These frameworks provide native AR environment's in which important prerequisite
+s including rear-camera pass-through, device motion tracking and plane tracking
+ are implemented with the performance expected of an OS-level library.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Mobile AR SDKs and Unity ARFoundation
-\end_layout
+While each of these frameworks can be used directly within a traditional
+ app development environment, the 
+\noun on
+Unity
+\noun default
+ 3D game engine
+\begin_inset CommandInset citation
+LatexCommand cite
+key "unity"
+literal "false"
 
 \end_inset
 
+ provides many tools to make AR development easier.
+ 
+\noun on
+Microsoft
+\noun default
+ recommends 
+\noun on
+Unity
+\noun default
+ for use with the 
+\noun on
+Hololens
+\noun default
+ and this was the toolset used by 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "livescan3d-hololens"
+literal "false"
 
+\end_inset
+
+ in creating the LiveScan3D companion
+\begin_inset CommandInset citation
+LatexCommand cite
+key "livescan3d-hololens"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+One of 
+\noun on
+Unity
+\noun default
+'s greatest strengths lies in it's native cross-platform deployment allowing
+ building for the largest PC, mobile and games console platforms.
+ This in conjunction with 
+\noun on
+Google
+\noun default
+'s 
+\noun on
+ARCore
+\noun default
+ 
+\noun on
+Unity
+\noun default
+ package facilitated Selinis' migration of the 
+\noun on
+Hololens
+\noun default
+ application to a handheld 
+\noun on
+Android
+\noun default
+ target.
+\end_layout
+
+\begin_layout Standard
+While 
+\noun on
+Google
+\noun default
+'s 
+\noun on
+ARCore
+\noun default
+ 
+\noun on
+Unity
+\noun default
+ package provides functionality for both 
+\noun on
+Android
+\noun default
+ and iOS devices, 
+\noun on
+Unity
+\noun default
+ provides a native solution to AR development in its 
+\noun on
+ARFoundation
+\noun default
+ framework
+\begin_inset CommandInset citation
+LatexCommand cite
+key "arfoundation"
+literal "false"
+
+\end_inset
+
+.
+ 
+\noun on
+ARFoundation
+\noun default
+ abstracts away much of the common behaviour provided by each OS-specific
+ library and allows each to provide this functionality at runtime - 
+\noun on
+ARKit
+\noun default
+ for iOS, 
+\noun on
+ARCore
+\noun default
+ for 
+\noun on
+Android
+\noun default
+ etc.
+\end_layout
+
+\begin_layout Standard
+
+\noun on
+ARFoundation
+\noun default
+ was used in this project to broaden the compatible devices of the 
+\noun on
+Android
+\noun default
+ targeted application and allow deploying to iOS.
 \end_layout
 
 \begin_layout Subsection
@@ -1942,6 +2112,13 @@ Compression? ZSTD
 
 \begin_layout Subsection
 Summary
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -2824,8 +3001,15 @@ comparison between multi-view and multi-source
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
-Developments
+Multi-Source Developments
 \end_layout
 
 \begin_layout Standard
@@ -2890,37 +3074,6 @@ s object describing parameters including the positions of calibration markers
 \end_layout
 
 \end_deeper
-\begin_layout Standard
-Additionally, two other developments were made to the application suite
- (section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:COVID-19"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, COVID-19),
-\end_layout
-
-\begin_layout Itemize
-A dynamic system of frame rate throttling was implemented.
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-This was in order to facilitate investigations into the effect on user experienc
-e of balancing FPS and display latency.
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-The mobile UE application was refactored in order to allow cross-platform
- deployment.
-\end_layout
-
 \begin_layout Subsection
 Server Display
 \end_layout
@@ -3951,6 +4104,13 @@ name "fig:new-client-server-packet"
 
 \begin_layout Subsection
 Mobile AR
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Mobile-AR"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4420,7 +4580,502 @@ The global settings object was not removed but instead had it's function
 \end_layout
 
 \begin_layout Subsection
-Frame Rate Throttling
+Evaluation and Discussion
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Cross-Platform Mobile AR with 
+\noun on
+ARFoundation
+\end_layout
+
+\begin_layout Standard
+This section presents the refactoring of the mobile AR application conducted
+ in response to the lack of access to a compatible 
+\noun on
+Android
+\noun default
+ device, see section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:COVID-19"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, COVID-19.
+\end_layout
+
+\begin_layout Standard
+Although the majority of multi-source functionality had been developed prior
+ to the loss of access to the lab environment, the ability to individually
+ manipulate holograms through touch controls remained to be implemented.
+ The ability to deploy the application to an available iOS device would
+ allow this development to resume while also allowing continued debugging
+ of the network behaviour.
+\end_layout
+
+\begin_layout Standard
+Two methods were investigated, deploying as-is using 
+\noun on
+ARCore
+\noun default
+ for 
+\noun on
+Unity
+\noun default
+'s iOS support and migrating to 
+\noun on
+Unity
+\noun default
+'s 
+\noun on
+ARFoundation
+\noun default
+ framework.
+\end_layout
+
+\begin_layout Subsection
+
+\noun on
+ARCore
+\noun default
+ for iOS
+\end_layout
+
+\begin_layout Standard
+As described in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Handheld-Augmented-Reality"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the existing mobile application constructs an AR environment using 
+\noun on
+Google's
+\noun default
+ 
+\noun on
+ARCore
+\noun default
+ 
+\noun on
+Unity
+\noun default
+ package.
+ Consulting the documentation for this package, support is provided for
+ deploying to both 
+\noun on
+Android
+\noun default
+ and iOS and as such this avenue was investigated first.
+\end_layout
+
+\begin_layout Standard
+Following configuring the build settings as directed, the application failed
+ to operate correctly on deployment as permission for the camera was not
+ requested.
+ As a result the application could not present the 
+\emph on
+Window on the World
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "reality-virtuality-continuum"
+literal "false"
+
+\end_inset
+
+ effect of rear-camera pass-through natural to handheld AR experiences.
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+expand?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\noun on
+Unity ARFoundation
+\end_layout
+
+\begin_layout Standard
+Following these issues a different avenue was pursued in 
+\noun on
+Unity
+\noun default
+'s native 
+\noun on
+ARFoundation
+\noun default
+ framework.
+ While this would present a significant restructuring of the application
+ it would also theoretically expand the functionality allowing continued
+ deployment to 
+\noun on
+Android
+\noun default
+ while including iOS as an install target
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+With 
+\noun on
+Hololens
+\noun default
+ plane tracking pending support in 
+\noun on
+ARFoundation
+\noun default
+ at the time of writing, support could theoretically also be extended back
+ to 
+\noun on
+Hololens
+\noun default
+ in the future with minimal extra development.
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Migrating the 
+\noun on
+ARCore
+\noun default
+ components constituting the AR environment to 
+\noun on
+ARFoundation
+\noun default
+ did not involve an intense redesign as the libraries have similar design
+ principles and structure, many components were presented as a direct replacemen
+t.
+ The three main aspects of the AR environment include the concept of an
+ AR session, camera management and the detection of features within the
+ world.
+\end_layout
+
+\begin_layout Standard
+Both libraries use a session component to manage the life cycle of the AR
+ experience with a 
+\noun on
+Unity
+\noun default
+ camera acting as the virtual representation of the mobile's own rear-view
+ camera.
+ In both cases this virtual camera has a pose driver attached responsible
+ for tracing the movements of the physical device in the virtual space and
+ a component responsible for displaying the view of the rear-facing camera
+ as the background of the scene.
+ This presents the core of the environment, additionally both libraries
+ include separate components responsible for displaying discovered planes
+ within the space, optionally with UI directing the user to aid in this
+ discovery.
+ A difference in hierarchy was found in environmental light estimation allowing
+ holograms to sit more naturally within the rendered space, presented as
+ an option of the 
+\noun on
+CameraManager
+\noun default
+ component of 
+\noun on
+ARFoundation
+\noun default
+ and a separate prefab object in 
+\noun on
+ARCore
+\noun default
+.
+\end_layout
+
+\begin_layout Subsection
+Results and Discussion
+\end_layout
+
+\begin_layout Standard
+Following the migration to 
+\noun on
+ARFoundation
+\noun default
+ the application starts and constructs an AR environment as expected.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:app-ui-planes"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ demonstrates the UI of the application allowing a server IP to be entered,
+ highlighting the native keyboard and rear-camera pass-through.
+ Plane discovery can be seen in both images with the desk and floor correctly
+ identified.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/ios_app/IMG_2585.PNG
+	lyxscale 15
+	width 25col%
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename ../media/ios_app/IMG_2586.PNG
+	lyxscale 15
+	width 25col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The UI and discovered planes of the mobile AR application running on iOS
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:app-ui-planes"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Exercising another strength of the 
+\noun on
+Unity
+\noun default
+ environment, none of the written code scripts required editing with network
+ behaviour functioning, to qualitative tests, the same as seen on 
+\noun on
+Android
+\noun default
+.
+ As mentioned in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Mobile-AR"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the AR environment constructed either by 
+\noun on
+ARCore
+\noun default
+ or 
+\noun on
+ARFoundation
+\noun default
+ functions somewhat independently from the LiveScan specific components.
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ios-holograms"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, however, demonstrates the limitations of the application in this form.
+ As it stands the rendering of holograms is non-functional as a result of
+ an incompatible shader leaving the presented purple shapes.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/ios_app/IMG_2589.PNG
+	lyxscale 15
+	width 30col%
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename ../media/ios_app/IMG_2592.PNG
+	lyxscale 15
+	width 30col%
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename ../media/ios_app/IMG_2595.PNG
+	lyxscale 15
+	width 30col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Holograms rendered on iOS with the included incompatible shader
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ios-holograms"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\noun on
+GS Billboard
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+A billboard here refers to creating a 2D shape typically facing the camera
+ plane similar to a billboard sign, they are sometimes used to simplify
+ the rendering of complex objects.
+\end_layout
+
+\end_inset
+
+ 
+\noun default
+shader included with the application is a simple 
+\emph on
+geometry shader
+\emph default
+ used to render the 
+\noun on
+PointCloudElem
+\noun default
+s in a pixel-like fashion.
+ As described in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:LiveScan-XR-Applications"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ this mirrors the design philosophy of the server viewfinder.
+ While this suits the previous 
+\noun on
+Android
+\noun default
+ environment utilising the 
+\noun on
+OpenGL
+\noun default
+ ES3 graphics library, when compiling for iOS and hence 
+\noun on
+ARKit,
+\noun default
+ the native 
+\noun on
+Metal
+\noun default
+ graphics library is used which does not support geometry shaders.
+\end_layout
+
+\begin_layout Standard
+While there was an opportunity here to find an alternative shader in order
+ to complete the migration, with a lack of graphics programming experience
+ this proved to be beyond the scope of this project.
+\end_layout
+
+\begin_layout Standard
+The final product, however, did prove useful both in demonstrating the cross-pla
+tform capabilities of the application and in allowing continued network
+ debugging of the suite without access to an 
+\noun on
+Android
+\noun default
+ device.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Balancing Frame Rate and Transmission Latency
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Frame-Rate-Throttling"
@@ -4472,7 +5127,7 @@ KinectServer
  including FPS and network bandwidth.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Design Considerations
 \end_layout
 
@@ -4511,7 +5166,7 @@ Allow either an FPS or delay requirement to be provided as well as a combination
  of the two in order to the prioritisation of either.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Multi-Source Stats
 \end_layout
 
@@ -4649,24 +5304,34 @@ name "fig:Exponential-moving-average"
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-step calculation information
+\begin_layout Subsection
+Step Calculation
 \end_layout
+
+\begin_layout Standard
+In order to function as a proof-of-concept for future investigations a simple
+ method for calculating the frame drop rate was used.
+ The step began at 0 and was incremented or decremented linearly depending
+ on the source's latency or FPS with respect to the provided requirements,
+ an interval of 5% was used.
+ In practice this meant that for each second a source's latency was higher
+ than the requirement, for example, the source's frame drop rate would be
+ increased by 5%.
+ The implementation in code can be seen in appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Linear-Frame-Drop"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-
+.
+ 
 \end_layout
 
 \begin_layout Subsection
-Cross-Platform Mobile AR
-\end_layout
-
-\begin_layout Section
 Testing Methodology
 \end_layout
 
@@ -4686,7 +5351,7 @@ noprefix "false"
 ).
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Premise Validation
 \end_layout
 
@@ -4774,8 +5439,8 @@ The small scale of the controlled LAN environment does not inherently incur
  environment for these investigations.
  To test such a scenario full-scene transmissions were used in order to
  saturate the available bandwidth.
- The connection between nodes included a WiFi connection which limited the
- available bandwidth to around 100Mbps.
+ The connection between nodes also included a WiFi connection which limited
+ the available bandwidth to around 100Mbps.
  As the full-scene configuration requires around 275Mbps, artificial latency
  was introduced as frames take longer to deliver.
 \end_layout
@@ -4786,7 +5451,7 @@ The step was specified and varied manually initially in order to visualise
  Following implementation of a dynamic step, the response was again visualised.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Natural Environment Evaluations
 \end_layout
 
@@ -4828,11 +5493,18 @@ When operating over the open internet the domestic internet connection became
  As such figure-only capture was used in order to limit the required bandwidth.
 \end_layout
 
-\begin_layout Section
-Results
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
+Results
+\end_layout
+
+\begin_layout Subsubsection
 LAN Premise Validation
 \end_layout
 
@@ -4993,7 +5665,7 @@ noprefix "false"
 \end_inset
 
 ).
- Conversely increasing the step beyond a critical value causes a peak in
+ Conversely, increasing the step beyond a critical value causes a peak in
  the latency before inducing the value to begin dropping.
  There is a noticeable lag in response, changes in latency are offset in
  time from the reception of a changed drop rate.
@@ -5066,7 +5738,7 @@ Looking to the FPS data, in both test scenarios the frame rate drops in
  Similarly to latency a lag can be seen when changes in drop rate are received.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Cloud Environment
 \end_layout
 
@@ -5106,7 +5778,8 @@ noprefix "false"
 
 \end_inset
 
-.
+ as the early latency spike rises higher and drops off faster than the SMA
+ which has a smoother response.
 \end_layout
 
 \begin_layout Standard
@@ -5167,7 +5840,13 @@ noprefix "false"
 
 \end_inset
 
- highlights the instability encountered in the cloud based environment.
+ is presented to highlight the instability encountered in the cloud based
+ environment.
+ Similarly to the local environment an initial spike in latency is seen
+ before reducing to a consistent value.
+ When the frame drop rate is dropped from 0.8 to 0.6, however, the connection
+ becomes immediately unstable with bandwidth dropping as the connection
+ is lost.
 \end_layout
 
 \begin_layout Standard
@@ -5231,11 +5910,18 @@ name "fig:unstable-cloud-based-latency"
 
 \end_layout
 
-\begin_layout Section
-Discussion
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
+Discussion
+\end_layout
+
+\begin_layout Subsubsection
 LAN Premise Validation
 \end_layout
 
@@ -5258,19 +5944,41 @@ friction
 \begin_layout Standard
 Additionally, the drop rate was employed at the client prior to queueing
  frames in the transmission buffer.
- Frames are then delivered to the server from this buffer decoupled from
- this rate.
+ Frames are then delivered to the server decoupled from this rate.
  As a result when a new drop rate is received the buffer is filled at this
  rate going forward however it was likely not empty and the server must
  still receive the existing population queued at a different rate.
+ 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Cloud Environment
 \end_layout
 
-\begin_layout Section
-Evaluation
+\begin_layout Standard
+With the employed client frame drop rate method of controlling transmission
+ latency, representative data was not able to be gathered in the cloud environme
+nt due to connection instability.
+ While this was partly due to the suite's sensitivity to poor network conditions
+ as a result of its initial design favouring a LAN environment, the implemented
+ latency control method was likely also a factor.
+\end_layout
+
+\begin_layout Standard
+The need to deliver a step from the server to each client created an initial
+ spike in latency in both environments but one more pronounced in the cloud.
+ Additionally there were issues with the step not being delivered to the
+ client at all, as this is included in the header of each request it was
+ concluded that requests were either being lost or queued at the server
+ unable to be transmitted over the socket busy attempting to receive frames.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -5304,16 +6012,12 @@ Unity
 ARFoundation
 \noun default
  framework allowed deploying to both iOS and Android phones.
- However, the previously used 
-\noun on
-GSBillboard
-\noun default
- shader is not compatible with the iOS 
+ However, the previously used geometry shader is not compatible with the
+ iOS 
 \noun on
 Metal
 \noun default
- graphics library due to it being a geometry shader, limiting functionality
- to just that of the network layer.
+ graphics library, limiting functionality to just that of the network layer.
  With a compatible shader the cross-platform migration would be feature-complete
 , extending the possible install base of the application while also providing
  access to the currently wider feature set of iOS's 
@@ -5397,6 +6101,13 @@ Maybe at server for UE?
 IBP frames
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
 \end_inset
 
 
@@ -5669,11 +6380,7 @@ MSG_NO_FRAME
 \end_layout
 
 \begin_layout Section
-New Data Structures
-\end_layout
-
-\begin_layout Subsection
-Frame
+Frame Data Structure
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Frame"
@@ -5688,6 +6395,107 @@ name "subsec:Frame"
 LatexCommand lstinputlisting
 filename "../snippets/frame.cs"
 lstparams "language={[Sharp]C},caption={Point cloud with Client ID}"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Linear Frame Drop Rate Calculation
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Linear-Frame-Drop"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+if (fpsRequirement > 0) // fps constrained step
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	if (source.Value.FPS > fpsRequirement)
+\end_layout
+
+\begin_layout Plain Layout
+
+		source.Value.Step -= StepIncrement;
+\end_layout
+
+\begin_layout Plain Layout
+
+	else
+\end_layout
+
+\begin_layout Plain Layout
+
+		source.Value.Step += StepIncrement;
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+else if (latencyRequirement > 0) // latency constrained step
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	if (source.Value.LatencyEMA > latencyRequirement)
+\end_layout
+
+\begin_layout Plain Layout
+
+		source.Value.Step += StepIncrement;
+\end_layout
+
+\begin_layout Plain Layout
+
+	else
+\end_layout
+
+\begin_layout Plain Layout
+
+		source.Value.Step -= StepIncrement;
+\end_layout
+
+\begin_layout Plain Layout
+
+}                          
+\end_layout
+
+\begin_layout Plain Layout
+
+else                             
+\end_layout
+
+\begin_layout Plain Layout
+
+	source.Value.Step = 0;
+\end_layout
 
 \end_inset
 
