@@ -270,6 +270,10 @@ LatexCommand lstlistoflistings
 
 \end_layout
 
+\begin_layout List of TODOs
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset VSpace vfill
 \end_inset
@@ -327,9 +331,9 @@ The immersive technology spaces of virtual and augmented reality promise
 \begin_layout Standard
 While some present natural extensions to existing technology as seen in
  VR gaming, others are more tied to the new domain.
- The power of modern smartphones has allowed augmented reality to be integrated
- into applications both as the primary function and in more secondary features
- such as visualising products in shopping apps like 
+ The power of modern smartphones has allowed the integration of augmented
+ reality into applications both as the primary function and in more secondary
+ features such as visualising products in shopping apps like 
 \noun on
 IKEA Place
 \noun default
@@ -355,16 +359,6 @@ No matter the application, common to all is the importance of the presented
  Less seen in commercial products is the live-streaming of 3D renders due
  in part to both the required network bandwidth and the hardware required
  to capture such media.
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-why?
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -446,6 +440,34 @@ noprefix "false"
 user experience
 \emph default
 , typically envisaged as an AR or VR client.
+\end_layout
+
+\begin_layout Standard
+Introducing multiple sources to the experiences increases complexity in
+ many ways.
+ When assuming geographically distant sources it could also be assumed there
+ will be different network conditions between each and the server.
+ How the server handles and presents differences in connection quality will
+ be critical to the user experience when consumed in AR or VR where such
+ discrepancies would otherwise be clear and harmful.
+ While a low frame rate hologram may not look unacceptable on its own, when
+ presented with one of a higher frame rate this difference may become untenable.
+\end_layout
+
+\begin_layout Standard
+The bandwidth for multiple sources will scale mostly linearly in much the
+ same way as multi-view configurations.
+ For an already demanding service, this could require additional management.
+ 
+\end_layout
+
+\begin_layout Standard
+Additionally, synchronising sources could pose a challenge.
+ Although some applications could tolerate a time offset in display, this
+ could break the immersion for many others.
+ The previous conference call example would be one where this offset would
+ not be tolerable, the audio delay incurred during transatlantic phone calls
+ can make communication harder in the same way.
 \end_layout
 
 \begin_layout Standard
@@ -623,7 +645,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-High level diagram of the suite with key objectives highlighted
+High-level diagram of the suite with key objectives highlighted
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:High-level-objectives"
@@ -672,12 +694,13 @@ Android
 \noun default
  phone with AR support.
  This significantly hindered the ability to evaluate the implemented multi-sourc
-e capabilities and some elements of the mobile AR display, as a result alternati
-ve objectives were identified to allow quantitative analysis.
+e capabilities and some elements of the mobile AR display.
+ As a result, alternative objectives were identified to allow quantitative
+ analysis.
 \end_layout
 
 \begin_layout Standard
-In order to continue debugging the mobile AR user experience the structure
+In order to continue debugging the mobile AR user experience, the structure
  of the 
 \noun on
 Unity
@@ -724,10 +747,13 @@ LiveScan3D
 Microsoft Kinect
 \noun default
  sensor to capture RGB video with depth information.
- While Kinect sensors have proved extremely popular in the computer vision
- sector, it does not represent the only method for such 3D reconstruction,
- traditional visual hull reconstruction is investigated before identifying
- the 
+ While 
+\noun on
+Kinect
+\noun default
+ sensors have proved extremely popular in the computer vision sector, it
+ does not represent the only method for such 3D reconstruction, the state
+ of free-viewpoint video is investigated before identifying the 
 \noun on
 Kinect
 \noun default
@@ -794,6 +820,11 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
+Finally, existing examples of holoportation are presented including those
+ display multi-source capabilities.
+\end_layout
+
+\begin_layout Standard
 As the foundation of this project, the 
 \noun on
 LiveScan3D 
@@ -804,19 +835,184 @@ suite itself is presented in more depth following this review in order to
 \end_layout
 
 \begin_layout Subsection
-3D Capture & Reconstruction
-\end_layout
-
-\begin_layout Subsubsection
-Visual Hull Reconstruction
+Volumetric Video
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
+Within the space of real-time 3D video capture, the state of the art has
+ typically involved a purpose-built and static lab environment with an array
+ of digital cameras, possibly with additional depth sensors
+\begin_inset CommandInset citation
+LatexCommand cite
+key "microsoft-mixed-reality-studios,surrey-surface-capture"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+While this remains the case for the highest quality free-viewpoint video,
+ consumer-grade depth aware camera units have facilitated research and applicati
+ons outside of such environments.
+\end_layout
+
+\begin_layout Standard
+While capable of high-quality results, visual hull reconstruction requires
+ a tightly controlled environment and high-performance hardware.
+ As such, it is briefly presented here to contextualise the use of depth
+ aware cameras in the 
+\noun on
+LiveScan
+\noun default
+ suite.
+\end_layout
+
+\begin_layout Subsubsection
+Visual Hull Reconstruction in a Lab Environment
+\end_layout
+
+\begin_layout Standard
+A visual hull defines a 3D representation of an object constructed through
+ the volume intersection of multiple 2D silhouettes
+\begin_inset CommandInset citation
+LatexCommand cite
+key "visual-hull-laurentini"
+literal "false"
+
+\end_inset
+
+.
+ With knowledge of the relative positions of each view point, corresponding
+ silhouettes of an object can be triangulated to form a 3D object.
+ In doing so depth information lost in projection to a 2D image can be reconstru
+cted leading to the moniker 
+\emph on
+shape-from-silhouette
+\emph default
+.
+\begin_inset Flex TODO Note (Margin)
 status open
 
 \begin_layout Plain Layout
-CVSSP case study from CV?
+diagram?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With the increasing computational power of computers and GPUs, methods to
+ do so in real-time with high frame rates have been demonstrated
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cuda-visual-hull"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+While the visual hull alone can produce coherent 3D renders, further application
+s typically use it as one aspect of a multi-faceted capture pipeline in
+ order to create a spatially and temporally smooth surface
+\begin_inset CommandInset citation
+LatexCommand cite
+key "microsoft-mixed-reality-studios,surrey-surface-capture,hull-correspondences"
+literal "false"
+
+\end_inset
+
+.
+ Additional processing techniques such as feature correspondences
+\begin_inset CommandInset citation
+LatexCommand cite
+key "hull-correspondences,surrey-surface-capture"
+literal "false"
+
+\end_inset
+
+ have also proved effective.
+\end_layout
+
+\begin_layout Standard
+
+\noun on
+Microsoft's Mixed Reality Studios
+\begin_inset CommandInset citation
+LatexCommand cite
+key "microsoft-mixed-reality-studios"
+literal "false"
+
+\end_inset
+
+
+\noun default
+ employ a combination of all of these techniques with a surface constructed
+ from both infra-red depth information, 
+\emph on
+shape-from-silhouette
+\emph default
+ and RGB information.
+ 
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "microsoft-mixed-reality-studios"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "microsoft-mixed-reality-studios"
+literal "false"
+
+\end_inset
+
+ highlight the strength of this combination of information in identifying
+ different elements of a figure.
+\end_layout
+
+\begin_layout Standard
+The strength of these techniques draws from data gathered from tightly calibrate
+d camera viewpoints, however when considering consumer-grade applications
+ this is typically not available.
+ The use of infra-red structured light and 
+\emph on
+time-of-flight
+\emph default
+ sensors has facilitated self-contained depth aware camera units capable
+ of being used for these applications without such tightly controlled environmen
+ts.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+High quality meshes can be created by using tightly calibrated, high quality
+ cameras and complex refinement computations.
+ However this tight calibration also presents a limitation of the technique
+ in that the accuracy of these inter-camera relationships can limit the
+ quality of reconstructed objects.
+ This typically limits the wider application of the technique to purpose-built
+ lab environments
+\begin_inset CommandInset citation
+LatexCommand cite
+key "microsoft-mixed-reality-studios,surrey-surface-capture"
+literal "false"
+
+\end_inset
+
+ and is less mobile.
+ 
 \end_layout
 
 \end_inset
@@ -829,36 +1025,40 @@ RGB-D Cameras
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
+While many consumer depth-aware sensors exist including 
+\noun on
 
-\begin_layout Plain Layout
-Structure Sensor
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand citeauthor
+key "structure-sensor"
+literal "false"
 
 \end_inset
 
 
+\noun default
+'s 
+\noun on
+Structure Sensor
+\begin_inset CommandInset citation
+LatexCommand cite
+key "structure-sensor"
+literal "false"
+
+\end_inset
+
+,
+\noun default
+ and the rear-facing LIDAR of the 2020 iPad Pro, the most commonly used
+ camera in computer vision research is the 
+\noun on
+Microsoft Kinect.
 \end_layout
 
 \begin_layout Standard
-Initially designed as a motion control accessory for the 
-\noun on
-Xbox
-\noun default
-, the 
-\noun on
-Kinect
-\noun default
- is a series of depth aware cameras produced by 
-\noun on
-Microsoft
-\noun default
-.
- The device uses infrared lights and sensors alongside an RGB camera in
- a configuration referred to as a Time-of-Flight camera to provide colour
- and depth information about the surroundings.
- The device also includes motion tracking and skeleton isolation for figures
+The original used infrared structured light alongside an RGB camera to provide
+ colour and depth information about the surroundings.
+ The device also included motion tracking and skeleton isolation for figures
  in view.
 \end_layout
 
@@ -891,7 +1091,12 @@ literal "false"
 Here 3D conference calling of the type described in the introduction without
  AR or VR applications is presented, instead users watch a composite conference
  space on a screen with all participants rendered within.
- Work was undertaken to achieve mutual gaze between participants, a marked
+ 
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+Work was undertaken to achieve mutual gaze between participants, a marked
  advantage over traditional conference calls where the lack of such aspects
  of group interaction makes the experience more impersonal.
  Methods of achieving more natural virtual interactions or 
@@ -911,12 +1116,21 @@ noprefix "false"
 .
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 A second version of the camera, v2, was released alongside the 
 \noun on
 Xbox One
 \noun default
- in 2013 and presented many improvements over the original.
+ in 2013 and presented many improvements over the original utilising a 
+\emph on
+time-of-flight
+\emph default
+ sensor for depth information over the previous structured light.
  A higher-quality RGB camera captures 1080p video at up to 30 frames per
  second with a wider field of view than the original
 \begin_inset CommandInset citation
@@ -1002,7 +1216,7 @@ literal "false"
  a greenhouse.
  The depth information was used in conjunction with the RGB information
  to identify obstacles, while the paper lays out some limitations of the
- camera it was found to be effective in it's aim and was capable of running
+ camera it was found to be effective in its aim and was capable of running
  on a reasonable computer.
 \end_layout
 
@@ -1041,7 +1255,7 @@ Mixed Reality
 \begin_layout Description
 Virtual The replacement of a user's experience of unmediated reality, rendering
  a new computer-generated space that the user appears to immersively inhabit.
- Typically achieved through face mounted headsets (
+ Typically achieved through face-mounted headsets (
 \emph on
 Facebook Oculus, HTC Vive, Playstation VR, Valve Index
 \emph default
@@ -1151,31 +1365,12 @@ all
 
  realities.
  
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Cross reality? Reference?
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
-While individual classes of XR provide ostensibly different experiences,
- there is clearly overlap between them, notably at a high level all aim
- to digitally extend a user's experience of reality.
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Reword
-\end_layout
-
-\end_inset
-
+While individual classes of XR provide ostensibly different experiences
+ there is overlap between them, notably all aim to digitally extend a user's
+ experience of reality.
  All can also be seen to employ 
 \emph on
 Spatial Computing
@@ -1220,10 +1415,6 @@ literal "false"
 \end_layout
 
 \begin_layout Subsubsection
-The Reality Virtuality Continuum
-\end_layout
-
-\begin_layout Subsubsection
 XR Implementations
 \end_layout
 
@@ -1241,6 +1432,10 @@ Mobile AR examples
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
 Although VR and AR headsets have accelerated the development of XR technology,
  they are not the only way to construct XR experiences.
  
@@ -1289,7 +1484,7 @@ Link with work
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 A point is also made about how the nature of this room based experience
  breaks much of the typical game-user interaction established by virtual
  reality and video games.
@@ -1297,6 +1492,11 @@ A point is also made about how the nature of this room based experience
  game is ultimately in control of the user or user avatar, AR experiences
  of this type have no physical control over the user and extra considerations
  must be made when designing such systems.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1361,7 +1561,7 @@ Kinect
  Virtual manipulation of the space can then be achieved with visual, spatial
  and temporal changes supported.
  Objects can be scaled and sculpted in realtime while the environment can
- be paused and rewinded.
+ be paused and rewound.
  The strength of mixed reality comes with the immersion of being virtually
  placed in a version of the physical surroundings, tactile feedback from
  the environment compounds this.
@@ -1515,7 +1715,7 @@ One of
 \noun on
 Unity
 \noun default
-'s greatest strengths lies in it's native cross-platform deployment allowing
+'s greatest strengths lies in its native cross-platform deployment allowing
  building for the largest PC, mobile and games console platforms.
  This in conjunction with 
 \noun on
@@ -1693,18 +1893,11 @@ literal "false"
  to include the space of telecommunications to describe technology being
  used to make someone feel present in a different environment.
  
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Is telepresence relevant here? reverse telepresence for something else being
- telepresent in your space?
 \end_layout
 
-\end_inset
-
-In the context of holoportation this is through the use of 3D video reconstructi
-on.
+\begin_layout Standard
+In the context of holoportation, this is through the use of 3D video reconstruct
+ion.
  The aforementioned work by 
 \begin_inset CommandInset citation
 LatexCommand citeauthor
@@ -1818,7 +2011,7 @@ The
 Microsoft Research
 \noun default
  paper demonstrates a system using 8 cameras surrounding a space.
- Each camera captured both Near Infra-Red and colour images to construct
+ Each camera captured both near infra-red and colour images to construct
  a colour-depth video stream, a more complex camera configuration than in
  the others cited.
 \end_layout
@@ -1845,8 +2038,8 @@ LiveScan3D
 \noun default
  capable of supporting multi-view configurations, it also supports both
  point clouds and meshes.
- Calibrating multiple view points is completed using the extrinsics and
- intrinsics of the camera.
+ Calibrating multiple viewpoints is completed using the extrinsics and intrinsic
+s of the camera.
  The extrinsics are the relative positions of each 
 \noun on
 Kinect
@@ -1960,8 +2153,8 @@ literal "false"
  as a set of interfaces between the user and the virtual space they experience
  using tactile and visual tools.
  The interface involves providing the user with a miniature render of the
- world they are inhabiting that can interacted with in order to affect the
- full scale environment around them.
+ world they are inhabiting that can be interacted with in order to affect
+ the full-scale environment around them.
 \end_layout
 
 \begin_layout Standard
@@ -2055,63 +2248,20 @@ name "fig:World-in-Miniature-group-by-group"
 \end_layout
 
 \begin_layout Subsection
-High Bandwidth Media Streaming
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-RTP
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-UDP
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-4K media streaming?
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Compression? ZSTD
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
 Summary
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+PLACEHOLDER
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2181,10 +2331,10 @@ literal "false"
 
 \end_inset
 
- however for the purposes of an interactive or real-time application the
- plotting of each point of the cloud in a 3D space using a suitable point
- size can create a coloured mesh visually representing the captured object
- while keeping the processing pipeline streamlined.
+ however for an interactive or real-time application the plotting of each
+ point of the cloud in a 3D space using a suitable point size can create
+ a coloured mesh visually representing the captured object while keeping
+ the processing pipeline streamlined.
  This is the approach taken in 
 \noun on
 LiveScan
@@ -2294,7 +2444,7 @@ Kinect
 LiveScan
 \noun default
  Server.
- Body detection takes place client side, as does calibration when using
+ Body detection takes place client-side, as does calibration when using
  multiple sensors.
 \end_layout
 
@@ -2475,8 +2625,8 @@ Kinect
 
 \begin_layout Standard
 When using multiple sensors, the server would be unable to combine these
- unique Euclidean spaces without knowledge of the sensors positions relative
- to each other, the 
+ unique Euclidean spaces without knowledge of the positions of the sensors
+ relative to each other, the 
 \emph on
 extrinsics
 \emph default
@@ -2484,8 +2634,8 @@ extrinsics
 \end_layout
 
 \begin_layout Standard
-In order to make a composite frame a calibration process is completed client-sid
-e following instruction by the server.
+In order to make a composite frame, a calibration process is completed client-si
+de following instruction by the server.
 \end_layout
 
 \begin_layout Standard
@@ -2569,7 +2719,7 @@ Kinect
 \noun default
  sensor to being a point in the centre of the calibration markers that each
  camera now orbits.
- As part of this calibration process the server distributes transformations
+ As part of this calibration process, the server distributes transformations
  to each client defining where they sit within this world coordinate space.
  Client's can now transform acquired renders from their frame of reference
  to the world coordinate system at the point of capture and each point cloud
@@ -2610,11 +2760,11 @@ name "subsec:Buffers"
 \end_layout
 
 \begin_layout Standard
-One of the weaknesses of the native codebase laid in it's network behaviour.
+One of the weaknesses of the native codebase laid in its network behaviour.
  Requests for live frames made by the server to each connected client were
- done in a synchronous fashion, pausing the operation of the thread responsible
- for passing these frames to the OpenGL display and UEs in order to wait
- for delivery from all clients.
+ done synchronously, pausing the operation of the thread responsible for
+ passing these frames to the OpenGL display and UEs in order to wait for
+ delivery from all clients.
 \end_layout
 
 \begin_layout Standard
@@ -2625,8 +2775,8 @@ While this would not be expected to present impaired performance in a controlled
 \end_layout
 
 \begin_layout Standard
-In practice this means that the user experience both at the server and any
- connected UEs were determined by the instantaneous network conditions.
+In practice, this means that the user experience both at the server and
+ any connected UEs were determined by the instantaneous network conditions.
 \end_layout
 
 \begin_layout Standard
@@ -3293,11 +3443,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Composite testing frame following 180° rotation of recorded source in 
+Composite testing frame following 180° rotation of recorded source in the
+ 
 \begin_inset Formula $y$
 \end_inset
 
- axis
+-axis
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:180-degree-rotation"
@@ -3322,7 +3473,7 @@ name "fig:180-degree-rotation"
 \end_layout
 
 \begin_layout Standard
-In order to follow this design the transformations were moved to instead
+In order to follow this design, the transformations were moved to instead
  occur within the 
 \noun on
 OpenGL
@@ -3374,8 +3525,8 @@ To accomplish this a dictionary was used as the shared variable with each
  the last.
  During rendering the dictionary is iterated through and each point cloud
  combined.
- During combination a client-specific transformation is retrieved from an
- instance of the 
+ During combination, a client-specific transformation is retrieved from
+ an instance of the 
 \noun on
 DisplayFrameTransformer
 \noun default
@@ -3469,7 +3620,7 @@ Transformer
 OpenGL
 \noun default
  display to arrange separate point clouds.
- At a high level this is done by implementing matrix arithmetic functions
+ At a high level, this is done by implementing matrix arithmetic functions
  in the context of their use for applying linear transformations to Cartesian
  coordinates.
  
@@ -3504,7 +3655,7 @@ Point3f
 \end_layout
 
 \begin_layout Standard
-Finally static methods generate common rotation transformations about each
+Finally, static methods generate common rotation transformations about each
  axis given an arbitrary angle.
  This provided a foundation on which to define how the 
 \noun on
@@ -3820,7 +3971,7 @@ I
 \end_inset
 
 ) axis using the B and N keys.
- Finally the placement of an object can be reset to default using the R
+ Finally, the placement of an object can be reset to default using the R
  key, the addition of the shift modifier resets all clients.
 \end_layout
 
@@ -3831,24 +3982,6 @@ Worth noting is that this represents arbitrary placement of sources in only
  axes with which sources will need to be manipulated.
  The ability to allow movement in all axes would require only binding these
  actions to keys.
-\end_layout
-
-\begin_layout Standard
-There is room to improve these controls as the directions of movement are
- in relation to the fixed axes of the display space as opposed to the view
- of the viewpoint camera.
- In practice this means that when moving objects in the display space the
- orientation of the space must be considered in order to identify which
- direction the object should be moved.
- 
-\end_layout
-
-\begin_layout Standard
-This is less intuitive than could be expected in other areas where such
- a control scheme is used such as video games or modelling software.
- In such implementations when moving objects the directions are typically
- taken from the camera's frame of reference.
- The feasibility of employing a similar control philosophy should be considered.
 \end_layout
 
 \begin_layout Subsection
@@ -4249,8 +4382,8 @@ does prefab need defining?
 \end_inset
 
  was created with the intention of encapsulating the necessary components
- required to represent a whole source including it's presentation touch
- input management.
+ required to represent a whole source including its presentation touch input
+ management.
  The 
 \noun on
 PointCloudRenderer
@@ -4382,8 +4515,8 @@ stale
 \emph default
  when a frame has not been received for it within a certain time threshold,
  the default was decided as 5 seconds.
- Beyond this the source should be considered, if at least temporarily, disconnec
-ted.
+ Beyond this, the source should be considered, if at least temporarily,
+ disconnected.
 \end_layout
 
 \begin_layout Standard
@@ -4545,10 +4678,10 @@ Design Considerations
 When considering the transition from a single stream scenario to the multi-sourc
 e product, it can be seen that the settings should no longer be global.
  Taking the calibration settings as an example, the positions and ID's of
- each marker refer to those visible within a scene.
+ each marker refers to those visible within a scene.
  These will have no meaning if made central parameters, they are closely
  tied to the scene and therefore the source.
- Each source should have it's own independent set of settings and the server
+ Each source should have its own independent set of settings and the server
  should be able to deliver the settings to the corresponding clients.
 \end_layout
 
@@ -4562,8 +4695,8 @@ The
 SourceCollection
 \noun default
  presented a natural location to store each source's settings object alongside
- it's last frame, again aiming to employ the object-oriented ethos of encapsulat
-ion.
+ its last frame, again aiming to employ the object-oriented ethos of encapsulati
+on.
  This allowed the settings to be governed by the existing logic including
  
 \emph on
@@ -4581,6 +4714,34 @@ The global settings object was not removed but instead had it's function
 
 \begin_layout Subsection
 Evaluation and Discussion
+\end_layout
+
+\begin_layout Standard
+The server display's control scheme could be more intuitive as the directions
+ of movement are in relation to the fixed axes of the display space instead
+ of the view of the camera.
+ In practice this means that when translating objects the pose of the camera
+ with respect to the space must first be considered in order to identify
+ which direction the object will be moved.
+\end_layout
+
+\begin_layout Standard
+This is less intuitive than could be expected in other areas where such
+ control schemes are used such as video games or modelling software.
+ In such implementations when moving objects the directions are typically
+ taken from the camera's frame of reference.
+ 
+\end_layout
+
+\begin_layout Standard
+This could be implemented by updating the 
+\noun on
+Transformer
+\noun default
+ class to include a matrix inversion function.
+ Applying Euler angles through the already implemented rotation retrieval
+ functions, desired translations in the camera's frame of reference could
+ then be shifted back to that of the world's for application to a hologram.
 \end_layout
 
 \begin_layout Standard
@@ -4688,7 +4849,7 @@ Android
 Following configuring the build settings as directed, the application failed
  to operate correctly on deployment as permission for the camera was not
  requested.
- As a result the application could not present the 
+ As a result, the application could not present the 
 \emph on
 Window on the World
 \emph default
@@ -4785,8 +4946,7 @@ Both libraries use a session component to manage the life cycle of the AR
 \noun on
 Unity
 \noun default
- camera acting as the virtual representation of the mobile's own rear-view
- camera.
+ camera acting as the virtual representation of the mobile's rear-view camera.
  In both cases this virtual camera has a pose driver attached responsible
  for tracing the movements of the physical device in the virtual space and
  a component responsible for displaying the view of the rear-facing camera
@@ -5109,7 +5269,7 @@ noprefix "false"
 \begin_layout Standard
 A proposed hypothesis for reducing this delay was to limit the transmitted
  frame rate.
- It follow that this would reduce the population of each buffer and reduce
+ It follows that this would reduce the population of each buffer and reduce
  the time that each frame spent within each.
 \end_layout
 
@@ -5117,9 +5277,8 @@ A proposed hypothesis for reducing this delay was to limit the transmitted
 This was implemented based on further work by Selinis introducing the concept
  of a dynamic step calculated from a provided FPS and latency requirement
  representing the percentage of frames dropped by the client.
- This step is transmitted in the header of each frame request of a client
- theoretically allowing the system to dynamically respond to changes in
- network conditions.
+ This step is transmitted in the header of each frame request theoretically
+ allowing the system to dynamically respond to changes in network conditions.
  This step relied on global statistics calculated about the 
 \noun on
 KinectServer
@@ -5184,8 +5343,7 @@ SourceStat
 \noun default
  objects were used.
  This object collects the FPS, bandwidth and average latencies for each
- source allowing simple retrieval and update when iterating through each
- socket.
+ source allowing simple retrieval and update when iterating through sockets.
 \end_layout
 
 \begin_layout Standard
@@ -5202,16 +5360,17 @@ noprefix "false"
 
 \end_inset
 
-, this iterative version was well suited to processing each element of latency.
+, this iterative version was well suited to processing each collected latency
+ value.
  Initially the values were found by collecting the latency of each frame
- currently within the receiving buffers.
+ currently within the server's buffers.
  Theoretically this would have allowed the calculated average to be controlled
  by the speed with which frames are moved through the buffer.
  However this was found to be ineffective as the buffers typically stay
  empty.
- Instead queue of fixed size was defined in order to retain the most recent
- values of latency as frames were received by the server.
- This queue included the calculation for both exponential and simple moving
+ Instead a queue of fixed size was defined in order to retain the most recent
+ values of latency received at the server.
+ This queue included calculations for both exponential and simple moving
  averages of the contents.
 \end_layout
 
@@ -5265,7 +5424,7 @@ Y_{1}, & t=1\\
 \begin_inset Formula $S_{t}$
 \end_inset
 
-= EMA Value at time 
+= EMA value at time 
 \begin_inset Formula $t$
 \end_inset
 
@@ -5311,10 +5470,14 @@ Step Calculation
 \begin_layout Standard
 In order to function as a proof-of-concept for future investigations a simple
  method for calculating the frame drop rate was used.
- The step began at 0 and was incremented or decremented linearly depending
+ The step began at 0% and was incremented or decremented linearly depending
  on the source's latency or FPS with respect to the provided requirements,
  an interval of 5% was used.
- In practice this meant that for each second a source's latency was higher
+ 
+\end_layout
+
+\begin_layout Standard
+In practice this meant that for each second a source's latency was higher
  than the requirement, for example, the source's frame drop rate would be
  increased by 5%.
  The implementation in code can be seen in appendix 
@@ -5328,7 +5491,13 @@ noprefix "false"
 \end_inset
 
 .
- 
+\end_layout
+
+\begin_layout Standard
+Future investigations could use a non-linear calculation in order to reflect
+ the distance from which operating values are from the requirements.
+ Theoretically this would allow the step to move rapidly in order to quickly
+ approach the requirements before slowing and settling.
 \end_layout
 
 \begin_layout Subsection
@@ -5349,6 +5518,7 @@ noprefix "false"
 \end_inset
 
 ).
+ Both test environments are presented and the validity of each is discussed.
 \end_layout
 
 \begin_layout Subsubsection
@@ -5358,15 +5528,15 @@ Premise Validation
 \begin_layout Standard
 Development was conducted with the client and server located on the same
  machine reducing the latency to just that of processing the frames themselves.
- In order to validate the initial premise of the hypothesis investigations
- were made on two machines across a domestic local area network.
+ In order to validate the premise of the hypothesis, investigations were
+ made on two machines across a domestic local area network.
 \end_layout
 
 \begin_layout Standard
 When situated on the same machine the bandwidth used by the suite averages
  around 275Mbps for a full scene.
  When transmitting only bodies these numbers can be more dynamic based on
- the number of and size of figures in the frame.
+ the number and size of figures in the frame.
  Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -5380,7 +5550,7 @@ noprefix "false"
  presents the variation in network bandwidth for a single body moving closer
  to and further away from the camera, it can be seen to vary between 5 and
  125 Mbps.
- These be taken as the ideal or desired bandwidth requirements both both
+ These are taken as the ideal or desired bandwidth requirements for both
  configurations.
  
 \end_layout
@@ -5442,13 +5612,24 @@ The small scale of the controlled LAN environment does not inherently incur
  The connection between nodes also included a WiFi connection which limited
  the available bandwidth to around 100Mbps.
  As the full-scene configuration requires around 275Mbps, artificial latency
- was introduced as frames take longer to deliver.
+ was introduced as frames took longer to deliver and were produced faster
+ than they could be transmitted to the server.
 \end_layout
 
 \begin_layout Standard
 The step was specified and varied manually initially in order to visualise
  the response in delay and FPS.
  Following implementation of a dynamic step, the response was again visualised.
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+reassess
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -5840,13 +6021,13 @@ noprefix "false"
 
 \end_inset
 
- is presented to highlight the instability encountered in the cloud based
+ is presented to highlight the instability encountered in the cloud-based
  environment.
  Similarly to the local environment an initial spike in latency is seen
  before reducing to a consistent value.
  When the frame drop rate is dropped from 0.8 to 0.6, however, the connection
- becomes immediately unstable with bandwidth dropping as the connection
- is lost.
+ becomes immediately unstable with bandwidth dropping to 0 Mbps as the connectio
+n is lost.
 \end_layout
 
 \begin_layout Standard
@@ -5885,7 +6066,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Cloud based latency and bandwidth as a function of a manual frame drop step
+Cloud-based latency and bandwidth as a function of a manual frame drop step
  (Figure-only capture)
 \begin_inset CommandInset label
 LatexCommand label
@@ -5921,18 +6102,23 @@ name "fig:unstable-cloud-based-latency"
 Discussion
 \end_layout
 
+\begin_layout Standard
+Demonstrated in both the LAN and cloud environment, it can be seen that
+ a high enough frame drop rate keeps the latency constant while lowering
+ this beyond a critical value induces a constant linear increase.
+ This would suggest that below this critical value the server is not able
+ to receive frames at a rate higher than they are being produced at the
+ client allowing the latency to begin increasing as a backlog of frames
+ is produced.
+\end_layout
+
 \begin_layout Subsubsection
 LAN Premise Validation
 \end_layout
 
 \begin_layout Standard
-The initial spike in latency could be a result of the delay in drop rate
- delivery from server to client allowing the client's buffer to initially
- fill at an uncontrolled rate.
-\end_layout
-
-\begin_layout Standard
-The response lag could be attributed to a couple of influencing factors.
+The lag in latency response could be attributed to a couple of influencing
+ factors.
  The nature of a moving average partially representing previous values when
  iterating adds a 
 \emph on
@@ -5942,13 +6128,29 @@ friction
 \end_layout
 
 \begin_layout Standard
-Additionally, the drop rate was employed at the client prior to queueing
+The initial spike in latency could be a result of the delay in drop rate
+ delivery from server to client allowing the client's buffer to initially
+ fill at an uncontrolled rate.
+ Additionally, the drop rate was employed at the client prior to queueing
  frames in the transmission buffer.
  Frames are then delivered to the server decoupled from this rate.
  As a result when a new drop rate is received the buffer is filled at this
- rate going forward however it was likely not empty and the server must
- still receive the existing population queued at a different rate.
+ rate going forward however the existing population queued at a different
+ rate must still be transmitted.
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+fps discussion
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -5956,9 +6158,9 @@ Cloud Environment
 \end_layout
 
 \begin_layout Standard
-With the employed client frame drop rate method of controlling transmission
- latency, representative data was not able to be gathered in the cloud environme
-nt due to connection instability.
+With the employed method of controlling transmission latency, representative
+ data was not able to be gathered in the cloud environment due to connection
+ instability.
  While this was partly due to the suite's sensitivity to poor network conditions
  as a result of its initial design favouring a LAN environment, the implemented
  latency control method was likely also a factor.
@@ -5966,12 +6168,26 @@ nt due to connection instability.
 
 \begin_layout Standard
 The need to deliver a step from the server to each client created an initial
- spike in latency in both environments but one more pronounced in the cloud.
+ spike in latency in both environments but was more pronounced in the cloud.
  Additionally there were issues with the step not being delivered to the
  client at all, as this is included in the header of each request it was
  concluded that requests were either being lost or queued at the server
- unable to be transmitted over the socket busy attempting to receive frames.
- 
+ unable to be transmitted over the socket busy receiving frames.
+\end_layout
+
+\begin_layout Standard
+This highlights one of the downsides of the implemented control method.
+ Requiring a parameter to be delivered to the client for use requires reliable
+ delivery of this parameter.
+ This is not ideal when the parameter is used to mitigate adverse network
+ conditions but these may themselves cause transmission issues.
+\end_layout
+
+\begin_layout Standard
+An alternative would be to allow the server to independently implement this
+ frame rate control.
+ This could be done by dynamically controlling the rate of frame requests
+ made by the server as opposed to the rate of frames created at the client.
 \end_layout
 
 \begin_layout Standard
@@ -6523,7 +6739,7 @@ Specifications found at
 status open
 
 \begin_layout Plain Layout
-https://docs.microsoft.com/en-us/azure/virtual-machines/fsv2-series
+docs.microsoft.com/en-us/azure/virtual-machines/fsv2-series
 \end_layout
 
 \end_inset
