@@ -237,7 +237,16 @@ University of Surrey
 \end_layout
 
 \begin_layout Abstract
-abstract
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+PLACEHOLDER
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -267,10 +276,6 @@ LatexCommand lstlistoflistings
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout List of TODOs
 
 \end_layout
 
@@ -337,17 +342,15 @@ While some present natural extensions to existing technology as seen in
 \noun on
 IKEA Place
 \noun default
-.
-\begin_inset Flex TODO Note (Margin)
-status open
 
-\begin_layout Plain Layout
-reference?
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ikea-place"
+literal "false"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -397,20 +400,21 @@ holoportation
 
 \begin_layout Standard
 This project aims to extend this suite to support multi-source holoportation,
- receiving multiple scenes concurrently analogous to the move from traditional
- phone calls to group conference calls.
+ receiving multiple scenes concurrently in a many-to-one configuration ready
+ for composite presentation.
  In doing so the implementation of holoportation could be seen to be generalised
 , extending the possible applications of the suite.
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-examples?
+ 
 \end_layout
 
-\end_inset
-
-
+\begin_layout Standard
+One application would be support for experiences akin to conference-calls
+ with multiple actors capturing their own environments for composition at
+ the server.
+ This could be seen to be applicable both to productivity software similar
+ to existing conference-call software and to entertainment experiences with
+ multiple locations combined for consumption by the public.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -719,9 +723,9 @@ In support of the lab's ongoing research into the
 \noun on
 LiveScan
 \noun default
- suite and the area of theory in which it resides, investigations were made
- into the effect of deliberately limiting the delivered frames per second
- on effective display latency.
+ suite and it's network behaviour, investigations were made into the effect
+ of deliberately limiting the delivered frames per second on effective display
+ latency.
  Preliminary data for one method of doing so was gathered and is presented
  here in place of proper evaluation of the completed multi-source capabilities.
 \end_layout
@@ -761,11 +765,11 @@ Kinect
 \end_layout
 
 \begin_layout Standard
-The significance of 3D video like that captured and relayed using the 
+The significance of the renders captured and relayed by the 
 \noun on
 LiveScan
 \noun default
- suite is related to the development of new technologies able to immersively
+ suite is related to the development of technologies able to immersively
  display such video content.
  
 \end_layout
@@ -815,13 +819,14 @@ literal "false"
 
 \end_inset
 
-, the collection and transmission of 3D holograms have applicability to
- all forms of XR and as such the state of this space is investigated.
+, the generic collection and transmission of 3D holograms has applicability
+ to all forms of XR and as such the state of this space is investigated
+ with an emphasis on handheld AR.
 \end_layout
 
 \begin_layout Standard
 Finally, existing examples of holoportation are presented including those
- display multi-source capabilities.
+ displaying multi-source capabilities.
 \end_layout
 
 \begin_layout Standard
@@ -859,8 +864,8 @@ ons outside of such environments.
 \end_layout
 
 \begin_layout Standard
-While capable of high-quality results, visual hull reconstruction requires
- a tightly controlled environment and high-performance hardware.
+While capable of high-quality results, these implementations require a tightly
+ controlled environment and high-performance hardware.
  As such, it is briefly presented here to contextualise the use of depth
  aware cameras in the 
 \noun on
@@ -874,24 +879,38 @@ Visual Hull Reconstruction in a Lab Environment
 \end_layout
 
 \begin_layout Standard
-A visual hull defines a 3D representation of an object constructed through
- the volume intersection of multiple 2D silhouettes
+With a selection of 2D videos from multiple viewpoints, 
+\emph on
+shape-from-silhouette
+\emph default
+ describes a method to reconstruct depth information through the application
+ of Epipolar geometry
 \begin_inset CommandInset citation
 LatexCommand cite
-key "visual-hull-laurentini"
+key "sfs-over-time,sfs-video-cm"
 literal "false"
 
 \end_inset
 
 .
+ The result of this is referred to as a visual hull
+\begin_inset CommandInset citation
+LatexCommand cite
+key "visual-hull-laurentini,laurentini-solids-revolution"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A visual hull defines a 3D representation of an object constructed through
+ the volume intersection of multiple 2D silhouettes.
  With knowledge of the relative positions of each view point, corresponding
  silhouettes of an object can be triangulated to form a 3D object.
  In doing so depth information lost in projection to a 2D image can be reconstru
-cted leading to the moniker 
-\emph on
-shape-from-silhouette
-\emph default
-.
+cted.
 \begin_inset Flex TODO Note (Margin)
 status open
 
@@ -954,7 +973,7 @@ literal "false"
 
 \noun default
  employ a combination of all of these techniques with a surface constructed
- from both infra-red depth information, 
+ from infra-red, 
 \emph on
 shape-from-silhouette
 \emph default
@@ -1052,7 +1071,11 @@ literal "false"
  and the rear-facing LIDAR of the 2020 iPad Pro, the most commonly used
  camera in computer vision research is the 
 \noun on
-Microsoft Kinect.
+Microsoft Kinect
+\noun default
+ due its availability and price
+\noun on
+.
 \end_layout
 
 \begin_layout Standard
@@ -1419,34 +1442,7 @@ XR Implementations
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Mobile AR examples
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Comment
-status open
-
-\begin_layout Plain Layout
-Although VR and AR headsets have accelerated the development of XR technology,
- they are not the only way to construct XR experiences.
- 
-\begin_inset CommandInset citation
-LatexCommand citeauthor
-key "roomalive"
-literal "false"
-
-\end_inset
-
-
+While XR applications have been demonstrated without dedicated hardware
 \begin_inset CommandInset citation
 LatexCommand cite
 key "roomalive"
@@ -1454,55 +1450,56 @@ literal "false"
 
 \end_inset
 
- demonstrate 
-\emph on
-RoomAlive
-\emph default
-, an AR experience using depth cameras and projectors (referred to as 
-\emph on
-procams
-\emph default
-) to construct experiences in any room.
- This is presented through games and visual alterations to the user's surroundin
-gs.
- A strength of the system is it's self-contained nature, able to automatically
- calibrate the camera arrangements using correspondences found between each
- view.
- Experience level heuristics are also discussed regarding capturing and
- maintaining user attention in an environment where the experience can be
- occurring anywhere, including behind the user.
- 
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-Link with work
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-A point is also made about how the nature of this room based experience
- breaks much of the typical game-user interaction established by virtual
- reality and video games.
- In contrast to traditional and virtual reality game experiences where the
- game is ultimately in control of the user or user avatar, AR experiences
- of this type have no physical control over the user and extra considerations
- must be made when designing such systems.
-\end_layout
-
-\end_inset
-
-
+, the majority utilise dedicated headsets or handheld devices.
 \end_layout
 
 \begin_layout Standard
-Traditional media consumption is not the only area of interest for developing
- interactive experiences, an investigation into the value of AR and VR for
- improving construction safety is presented by 
+Consumer applications pioneer the spaces of video gaming
+\begin_inset CommandInset citation
+LatexCommand cite
+key "pokemonGO"
+literal "false"
+
+\end_inset
+
+, education
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ar-anatomy,ar-education"
+literal "false"
+
+\end_inset
+
+ and commerce
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ar-commerce,ikea-place"
+literal "false"
+
+\end_inset
+
+ but the use of XR in health-care
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ar-adrenalectomy"
+literal "false"
+
+\end_inset
+
+ and dangerous work environments
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ar/vr-construction"
+literal "false"
+
+\end_inset
+
+ presents the opportunities for life-saving results.
+\end_layout
+
+\begin_layout Standard
+An investigation into the value of AR and VR for improving construction
+ safety is presented by 
 \begin_inset CommandInset citation
 LatexCommand citeauthor
 key "ar/vr-construction"
@@ -1527,7 +1524,7 @@ g to reduce the effect of memory on safety.
 status open
 
 \begin_layout Plain Layout
-Link with work
+Link with work?
 \end_layout
 
 \end_inset
@@ -1558,23 +1555,47 @@ Kinect
  cameras and a virtual reality headset.
  Users are placed in a virtual space constructed from 3D renders of the
  physical environment around the user.
- Virtual manipulation of the space can then be achieved with visual, spatial
+ 
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+Virtual manipulation of the space can then be achieved with visual, spatial
  and temporal changes supported.
- Objects can be scaled and sculpted in realtime while the environment can
+ Objects can be scaled and sculpted in real-time while the environment can
  be paused and rewound.
  The strength of mixed reality comes with the immersion of being virtually
  placed in a version of the physical surroundings, tactile feedback from
  the environment compounds this.
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-Link with work
 \end_layout
 
 \end_inset
 
+Acquisition uses multiple 
+\noun on
+Kinect
+\noun default
+ v2 sensors with the 
+\noun on
+RoomAliveToolkit
+\noun default
 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "roomalive"
+literal "false"
+
+\end_inset
+
+ for calibration.
+ This calibration process utilises a projected series of Gray codes visible
+ by each sensor to localise each.
+ The 
+\noun on
+LiveScan
+\noun default
+ calibration process removes the need for additional projector hardware
+ by using a set of printed calibration markers to localise each sensor.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1590,7 +1611,7 @@ name "subsec:Handheld-Augmented-Reality"
 
 \begin_layout Standard
 This project deals primarily with augmented reality facilitated through
- mobile phones, specifically from Selinis' work
+ mobile phones, specifically based on Selinis' work
 \begin_inset CommandInset citation
 LatexCommand cite
 key "livescan3d-android"
@@ -1615,7 +1636,7 @@ literal "false"
 Android
 \noun default
 .
- As such, the state of handheld AR is briefly presented here.
+ As such, the state of handheld AR development is briefly presented here.
 \end_layout
 
 \begin_layout Standard
@@ -1658,8 +1679,8 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-These frameworks provide native AR environment's in which important prerequisite
-s including rear-camera pass-through, device motion tracking and plane tracking
+These frameworks provide native AR environments in which important prerequisites
+ including rear-camera pass-through, device motion tracking and plane tracking
  are implemented with the performance expected of an OS-level library.
 \end_layout
 
@@ -1733,11 +1754,11 @@ Unity
 \noun on
 Hololens
 \noun default
- application to a handheld 
+ application to 
 \noun on
 Android
 \noun default
- target.
+.
 \end_layout
 
 \begin_layout Standard
@@ -1953,7 +1974,7 @@ status open
 \begin_inset Graphics
 	filename ../media/telepresence-stereoscopic.png
 	lyxscale 30
-	width 40col%
+	width 30col%
 
 \end_inset
 
@@ -2011,9 +2032,10 @@ The
 Microsoft Research
 \noun default
  paper demonstrates a system using 8 cameras surrounding a space.
- Each camera captured both near infra-red and colour images to construct
- a colour-depth video stream, a more complex camera configuration than in
- the others cited.
+ Each camera captured both stereo near infra-red and monocular colour images
+ with additional structured light information to construct a colour-depth
+ video stream, a more complex camera configuration than many of the others
+ cited.
 \end_layout
 
 \begin_layout Standard
@@ -2247,6 +2269,16 @@ name "fig:World-in-Miniature-group-by-group"
 
 \end_layout
 
+\begin_layout Standard
+In comparison to 
+\noun on
+LiveScan
+\noun default
+ these provide domain-specific applications, the implementation developed
+ within this project aims to provide a general many-to-one application of
+ the concept to suit the existing philosophy of the suite.
+\end_layout
+
 \begin_layout Subsection
 Summary
 \end_layout
@@ -2304,8 +2336,7 @@ Xbox Kinect
  v2 camera to record and transmit 3D renders over an IP network.
  A server can manage multiple clients simultaneously in order to facilitate
  multi-view configurations, it is then responsible for displaying the renderings
- in real-time and/or transmitting composite renders to a user experience
- or UE.
+ in real-time and/or transmitting holograms to a user experience or UE.
  This architecture can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2463,7 +2494,7 @@ Kinect
 status open
 
 \begin_layout Plain Layout
-Extend
+Extend?
 \end_layout
 
 \end_inset
@@ -2543,7 +2574,7 @@ OpenGL
 \end_layout
 
 \begin_layout Standard
-This structure can be seen in figure 
+The structure up to reconstruction at the server can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:server-structure"
@@ -2553,7 +2584,7 @@ noprefix "false"
 
 \end_inset
 
-.
+, aspects related to the transmission to user experiences are omitted.
 \end_layout
 
 \begin_layout Standard
@@ -3095,17 +3126,29 @@ Twitch
 \noun on
 Instagram
 \noun default
-'s live functionality.
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-reference?
+'s live streaming functionality.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Standard
+Another advantage of the suite lies in the required computation power with
+ both client and server able to run on a single fairly powerful computer.
+ While systems such as 
+\noun on
+Microsoft's Mixed Media Studios
+\noun default
+ present excellent quality mesh-based renders with extensive post-processing,
+ there is no expectation of this system running locally on consumer-grade
+ hardware in real-time.
+ 
+\noun on
+LiveScan3D
+\noun default
+ extends access to such acquisition and reconstruction technology in much
+ the same way that the 
+\noun on
+Kinect
+\noun default
+ did.
 \end_layout
 
 \begin_layout Standard
@@ -3656,7 +3699,7 @@ Point3f
 
 \begin_layout Standard
 Finally, static methods generate common rotation transformations about each
- axis given an arbitrary angle.
+ axis given an arbitrary angle employing Euler angles.
  This provided a foundation on which to define how the 
 \noun on
 OpenGL
@@ -4247,6 +4290,21 @@ name "subsec:Mobile-AR"
 \end_layout
 
 \begin_layout Standard
+Here the multi-source updates made to the mobile AR application are presented.
+ In order to complete this update two objectives must be achieved,
+\end_layout
+
+\begin_layout Itemize
+The network and rendering behaviour must become source ID-aware, able to
+ differentiate and render separate scenes
+\end_layout
+
+\begin_layout Itemize
+The touch input management must be restructured to support the individual
+ manipulation of separate holograms
+\end_layout
+
+\begin_layout Standard
 The architecture of the mobile AR application can be divided into two areas
  of concern.
  The first is related to establishing the AR environment within the 
@@ -4361,7 +4419,7 @@ s is scaled in population to match the size of the hologram and then each
 \end_layout
 
 \begin_layout Subsubsection
-Design Considerations
+Implementation
 \end_layout
 
 \begin_layout Standard
@@ -4382,8 +4440,8 @@ does prefab need defining?
 \end_inset
 
  was created with the intention of encapsulating the necessary components
- required to represent a whole source including its presentation touch input
- management.
+ required to represent a whole source including its presentation and touch
+ input management.
  The 
 \noun on
 PointCloudRenderer
@@ -4478,7 +4536,7 @@ LiveScan
  When encountering adverse network conditions in a single source scenario,
  the desired action could be to wait until transmissions from the client(s)
  can resume.
- With only a single stream, the alternative would be to quit the experience.
+ With only a single stream, the alternative would be to halt the experience.
 \end_layout
 
 \begin_layout Standard
@@ -4498,7 +4556,7 @@ simulcast
 \noun on
 NFL's RedZone
 \noun default
- where multiple games can be watched simultaneously dividing the screen.
+ where multiple games can be watched simultaneously, dividing the screen.
  Were one of the games to experience transmission issues, it could be considered
  beneficial to the experience to remove the game from display and wait for
  the conditions to improve, especially in a commercial context.
@@ -4520,9 +4578,9 @@ stale
 \end_layout
 
 \begin_layout Standard
-This could be achieved using a separate thread that periodically iterates
- through the last frame of each source and compares an associated timestamp
- to the current time.
+This was achieved using a separate thread that periodically iterates through
+ the last frame of each source and compares an associated timestamp to the
+ current time.
 \end_layout
 
 \begin_layout Standard
@@ -4714,6 +4772,19 @@ The global settings object was not removed but instead had it's function
 
 \begin_layout Subsection
 Evaluation and Discussion
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+no individual manipulation of mobile holograms
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6349,25 +6420,30 @@ The literature review contextualises the
 \noun on
 LiveScan
 \noun default
- suite within the wider spaces of XR, 3D video and multi-source holoportation
- itself.
+ suite within the wider spaces of XR, volumetric video and multi-source
+ holoportation itself.
  Previous examples of holoportation are presented and their aims of achieving
  telepresence are discussed.
 \end_layout
 
 \begin_layout Standard
-The results of the project are 
-\begin_inset Note Comment
+The results of the project are presented with the limitations also discussed.
+ 
+\begin_inset Flex TODO Note (inline)
 status open
 
 \begin_layout Plain Layout
-laid out showing good progress through the required areas of development
+PLACEHOLDER
 \end_layout
 
 \end_inset
 
-.
- Of these areas of concern, the display element has been extended in order
+
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+Of these areas of concern, the display element has been extended in order
  to allow the rendering of multiple environments simultaneously with a dynamic
  sub-system of geometric transformations.
  The transformations are responsive to user input allowing arbitrary placement
@@ -6377,11 +6453,16 @@ laid out showing good progress through the required areas of development
  intuitive.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The next steps for the project leading up to its completion are presented,
  the initial and current plans for the remaining work is described and additiona
 l stretch goals are defined for any additional time.
  How the work will be presented in a final report is also described.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -6399,6 +6480,23 @@ Kinect
 \end_layout
 
 \begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+PLACEHOLDER
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
 At roughly halfway through the time allowed for this project the native
  display has successfully been extended to meet the deliverable specification.
  This has resulted in the 
@@ -6409,16 +6507,21 @@ OpenGL
  arbitrary placement and orientation within the display space.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 From this point the network layer of the suite will be developed to also
  match the specification, allowing connected clients to be grouped into
  sources for polling and processing.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Following the development of the two, testing methodologies will be defined
  and carried out to gather quantitative results for the final product.
  A final report on the results will be available in May 2020.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6499,16 +6602,6 @@ name "fig:LiveScan-server-UI"
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-add before picture
 \end_layout
 
 \end_inset
