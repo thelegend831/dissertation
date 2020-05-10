@@ -8,12 +8,14 @@
 \begin_preamble
 \def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
 \let\endchangemargin=\endlist 
+\pagenumbering{roman}
 \end_preamble
 \use_default_options true
 \begin_modules
 customHeadersFooters
 minimalistic
 todonotes
+figs-within-sections
 \end_modules
 \maintain_unincluded_children false
 \language english
@@ -133,7 +135,7 @@ Andy Pack
 \begin_inset Graphics
 	filename ../surreylogo.png
 	lyxscale 15
-	width 20col%
+	width 18col%
 
 \end_inset
 
@@ -250,36 +252,6 @@ PLACEHOLDER
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset toc
-LatexCommand tableofcontents
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace medskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset FloatList figure
-
-\end_inset
-
-
-\begin_inset CommandInset toc
-LatexCommand lstlistoflistings
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset VSpace vfill
 \end_inset
 
@@ -312,12 +284,72 @@ I would also like to thank Ioannis Selinis and Sweta Anmulwar for their
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList figure
+
+\end_inset
+
+
+\begin_inset CommandInset toc
+LatexCommand lstlistoflistings
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Right Footer
 Andy Pack / 6420013
 \end_layout
 
 \begin_layout Left Footer
 May 2020
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{arabic} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{page}{1}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -586,21 +618,32 @@ Objectives
 \begin_layout Standard
 In order to achieve the goal of multi-source holoportation the following
  key objectives must be achieved,
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+Need more explanation of the objectives below, in particular what is the
+ technical challenge
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
-Redefine the network communications in order to identify each frame of footage
- as a particular source
+Introduce a source ID in network communications to identify each frame of
+ a transmitted hologram.
 \end_layout
 
 \begin_layout Enumerate
 Migrate the server from a single-source streaming node to a manager of multiple
- scenes
+ scenes including a method to synchronise sources.
 \end_layout
 
 \begin_layout Enumerate
 Extend the native viewfinder of the server in order to separately render
- each connected source
+ each connected source.
 \end_layout
 
 \begin_layout Enumerate
@@ -608,8 +651,8 @@ Update the
 \noun on
 Android
 \noun default
- AR application to separately present each source of footage and facilitate
- individual control
+ AR application to separately present each source of footage and allow individua
+l control.
 \end_layout
 
 \begin_layout Standard
@@ -699,35 +742,269 @@ Android
  phone with AR support.
  This significantly hindered the ability to evaluate the implemented multi-sourc
 e capabilities and some elements of the mobile AR display.
- As a result, alternative objectives were identified to allow quantitative
+ As a result, two alternative objectives were identified to allow quantitative
  analysis.
 \end_layout
 
-\begin_layout Standard
-In order to continue debugging the mobile AR user experience, the structure
- of the 
-\noun on
-Unity
-\noun default
- application was changed significantly in order to allow deployment on either
- an 
+\begin_layout Enumerate
+Alter the AR environment of the mobile application in order to allow deployment
+ to both 
 \noun on
 Android
 \noun default
- or iOS device.
- This allowed the network behaviour to continue being evaluated.
+ and iOS devices.
+\end_layout
+
+\begin_layout Enumerate
+Implement a dynamic system of frame rate throttling to investigate the effect
+ on effective display latency.
+\end_layout
+
+\begin_layout Subsection
+Key Technical Achievements
 \end_layout
 
 \begin_layout Standard
-In support of the lab's ongoing research into the 
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+minimum two pages to highlight/summarize what you have done, including your
+ design, implementation, testing strategy and key observations.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Report Structure
+\end_layout
+
+\begin_layout Standard
+The remaining structure of this report is laid out as follows,
+\end_layout
+
+\begin_layout Standard
+Section 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Literature-Review"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents the states of the technology that 
+\noun on
+LiveScan3D
+\noun default
+ and this project relates to including volumetric video, VR/AR technology
+ and holoportation.
+\begin_inset Newline newline
+\end_inset
+
+The 
+\noun on
+LiveScan3D
+\noun default
+ suite is described and evaluated in section 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:LiveScan3D"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the original state is outlined and the impact of subsequent developments
+ are discussed.
+\begin_inset Newline newline
+\end_inset
+
+Section 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Multi-Source-Developments"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents the multi-source developments made to each aspect of the 
 \noun on
 LiveScan
 \noun default
- suite and it's network behaviour, investigations were made into the effect
- of deliberately limiting the delivered frames per second on effective display
- latency.
- Preliminary data for one method of doing so was gathered and is presented
- here in place of proper evaluation of the completed multi-source capabilities.
+ suite, qualitative evaluations are made as described in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:COVID-19"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, COVID-19.
+\begin_inset Newline newline
+\end_inset
+
+Section 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Cross-Platform-Mobile-AR"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ describes efforts made to extend the mobile AR application to include iOS
+ functionality, the limitations are presented with remaining required developmen
+ts outlined.
+\begin_inset Newline newline
+\end_inset
+
+In support of ongoing research into the 
+\noun on
+LiveScan
+\noun default
+ suite and it’s network behaviour, section 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Frame-Rate-Throttling"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents investigations made into the effect of throttling transmitted
+ frame rate on display latency in both a LAN and cloud environment.
+\begin_inset Newline newline
+\end_inset
+
+Section 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Future-Work"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ outlines additional areas of investigation and possible developments that
+ could be made into the 
+\noun on
+LiveScan
+\noun default
+ suite based both on the work of this project and the existing code.
+\begin_inset Newline newline
+\end_inset
+
+Finally, sections 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Summary"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Conclusions"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ summarise and provide conclusions for the project.
+\begin_inset Newline newline
+\end_inset
+
+Cited works are found in the references 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "sec:bibliography"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the appendices, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Server-UI-Additions"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ describes UI additions to the server application.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Network-Message-Types"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ provides a list of available message types used within the network communicatio
+ns.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Frame"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents the new 
+\noun on
+Frame
+\noun default
+ struct.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Linear-Frame-Drop"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ describes the frame drop rate calculation used in the frame rate/latency
+ investigations while 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Virtual-Machine-Specifications"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ documents the specifications of the virtual machine used.
 \end_layout
 
 \begin_layout Standard
@@ -739,6 +1016,13 @@ LiveScan
 
 \begin_layout Section
 Literature Review
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Literature-Review"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2284,11 +2568,50 @@ Summary
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
+Current methods to capture volumetric video in both the consumer and professiona
+l spaces have been presented.
+ The strengths of consumer-grade RGB-D cameras, specifically the 
+\noun on
+Microsoft Kinect
+\noun default
+ used by 
+\noun on
+LiveScan3D
+\noun default
+, were highlighted.
+\end_layout
+
+\begin_layout Standard
+The main forms of extended reality were described with the common factors
+ across all presented.
+ XR's applicability beyond standard media consumption was also briefly highlight
+ed.
+ 
+\noun on
+LiveScan3D
+\noun default
+ has two associated AR clients of which the most relevant to this project
+ is the mobile AR client, subsequently the current SDKs facilitating AR
+ development were presented and their relation to the 
+\noun on
+Unity
+\noun default
+ game engine were described.
+\end_layout
+
+\begin_layout Standard
+Finally previous implementations of holoportation were given while the concept
+ of 
+\emph on
+telepresence
+\emph default
+ was presented.
+ Domain-specific examples of multi-source holoportation were described.
+\begin_inset Flex TODO Note (Margin)
 status open
 
 \begin_layout Plain Layout
-PLACEHOLDER
+look at again
 \end_layout
 
 \end_inset
@@ -2598,7 +2921,7 @@ status open
 \begin_inset Graphics
 	filename ../media/initial-state.png
 	lyxscale 30
-	width 50col%
+	width 60col%
 
 \end_inset
 
@@ -2857,6 +3180,19 @@ KinectServer
 \begin_layout Standard
 This system decouples the network behaviour smoothing the effect of temporary
  network conditions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+NTP
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3203,6 +3539,13 @@ comparison between multi-view and multi-source
 
 \begin_layout Section
 Multi-Source Developments
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Multi-Source-Developments"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3237,6 +3580,10 @@ Using this ID, both the server and display elements are able to differentiate
 \end_layout
 
 \end_deeper
+\begin_layout Itemize
+Methods to temporally synchronise sources were investigated.
+\end_layout
+
 \begin_layout Itemize
 The mobile AR application was extended in order to display multiple holograms
  simultaneously.
@@ -3440,7 +3787,11 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Initial testing process transforming frames loaded from local storage
+Initial testing process transforming frames loaded from local storage, 
+\noun on
+KinectSocket
+\noun default
+ omitted for clarity
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Initial-testing-layout"
@@ -3535,7 +3886,7 @@ OpenGL
  ID to allow differentiation, the definition can be seen in appendix 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Frame"
+reference "sec:Frame"
 plural "false"
 caps "false"
 noprefix "false"
@@ -3878,7 +4229,7 @@ status open
 \begin_inset Graphics
 	filename ../media/december-state.png
 	lyxscale 30
-	width 60col%
+	width 65col%
 
 \end_inset
 
@@ -4279,6 +4630,199 @@ name "fig:new-client-server-packet"
 \end_layout
 
 \begin_layout Subsection
+Source Synchronisation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Source-Synchronisation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As a service intending to allow real-time streaming from multiple locations,
+ methods to synchronise streams during display constitute important aspects
+ of the experience.
+ With reference back to traditional conference-calling, voices being out
+ of sync poses a hurdle to seamless communication.
+ When considering these instead relating to holograms and the higher level
+ of intended immersion, this could hinder the resulting experience of telepresen
+ce.
+\end_layout
+
+\begin_layout Standard
+At a high level, sources can be considered synchronised if frames captured
+ at the same time are displayed concurrently whether from the perspective
+ of the server or a connected user experience.
+ There are three main challenges to achieving this aim.
+ The following assumes that timestamps captured at both the client and server
+ are synchronised using the included NTP functionality
+\begin_inset CommandInset citation
+LatexCommand cite
+key "livescan3d-buffers"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Although capturing frames at the same rate (30Hz), it is highly unlikely
+ that clients will capture frames at the same times.
+ A frequency of 30Hz corresponds to an interval of 33ms between frame captures
+ allowing a maximum offset of 17ms (
+\begin_inset Formula $\nicefrac{33}{2}$
+\end_inset
+
+) between clients.
+ While the latency incurred as a result may not be noticeable and will likely
+ not represent a large proportion of the overall latency, it does imply
+ that frames cannot be matched by checking timestamps for equality and instead
+ a latency interval must be used.
+\end_layout
+
+\begin_layout Standard
+Secondly, during transmission a variable amount of latency will be introduced
+ as a result of the network conditions and distance from client to server
+ and from server to UE.
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+remember third?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Methods to synchronise clients at the server could be classified as either
+ 
+\emph on
+active
+\emph default
+ or 
+\emph on
+passive
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Passive Synchronisation
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Passive
+\emph default
+ synchronisation describes methods aiming to indirectly reduce the difference
+ in latency as a result of controlling other service conditions.
+ Applying a latency requirement by controlling frame rate as investigated
+ in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Frame-Rate-Throttling"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is a method of passive synchronisation.
+ By prescribing a latency requirement to all sources, each would tend to
+ this value once received at the server.
+ 
+\end_layout
+
+\begin_layout Standard
+Passive methods would likely not be effective at tightly synchronising sources,
+ the FPS/latency balancing method described previously aims only to bring
+ the otherwise unbounded latency differences within a tolerable interval
+ and controls for a level of network volatility.
+\end_layout
+
+\begin_layout Subsubsection
+Active Synchronisation
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Active
+\emph default
+ synchronisation includes efforts to tightly match frames during processing
+ at the server in order to minimise the difference in latency since capture.
+ In practice this could be achieved at the point where frames are moved
+ from the various receiving buffers to the live buffer
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+implementation?
+\end_layout
+
+\end_inset
+
+.
+ Positioned within the critical processing pipeline, active methods have
+ access to only a tight interval of frames and must operate quickly making
+ them more sensitive to wide latency differences in sources.
+\end_layout
+
+\begin_layout Standard
+In practice, with 
+\emph on
+passive
+\emph default
+ sync functioning as coarse control and 
+\emph on
+active
+\emph default
+ sync acting as fine control, a combination of the two will likely provide
+ the best results.
+ As described, passive methods will be most effective at bringing the unbounded
+ latencies to within an interval of tolerance allowing active measures to
+ finish matching frames for a tighter synchronisation.
+\end_layout
+
+\begin_layout Subsubsection
+Implementation
+\end_layout
+
+\begin_layout Standard
+As a result of the lack of access to multiple 
+\noun on
+Kinect
+\noun default
+ sensors, the implemented multi-source capabilities were unable to be tested.
+ Without a live multi-source environment, active synchronisation methods
+ also remain presented here in theory.
+\end_layout
+
+\begin_layout Standard
+In order to present developments in source synchronisation, section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Frame-Rate-Throttling"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ functions as an investigation into the efficacy of one form of passive
+ synchronisation by implementing a latency requirement which each client
+ works to meet.
+\end_layout
+
+\begin_layout Subsection
 Mobile AR
 \begin_inset CommandInset label
 LatexCommand label
@@ -4420,6 +4964,13 @@ s is scaled in population to match the size of the hologram and then each
 
 \begin_layout Subsubsection
 Implementation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Mobile-AR-Multisource-Implementation"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4520,6 +5071,19 @@ name "fig:Scripts-after"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Before losing access to the lab environment the ability to individually
+ manipulate holograms was not implemented leaving this to be completed beyond
+ the end of the project.
+ Looking to the 
+\noun on
+LeanTouch
+\noun default
+ documentation, the required restructuring of components is specifically
+ outlined suggesting that with access to a compatible mobile device the
+ application could theoretically be completed without intense development.
 \end_layout
 
 \begin_layout Subsection
@@ -4775,16 +5339,20 @@ Evaluation and Discussion
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-no individual manipulation of mobile holograms
-\end_layout
+As described in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Mobile-AR-Multisource-Implementation"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-
+, holograms cannot currently be individually manipulated by the mobile AR
+ application.
+ Although theoretically a simple restructuring, as-is the application cannot
+ be considered a complete multi-source presentation layer.
 \end_layout
 
 \begin_layout Standard
@@ -4816,6 +5384,19 @@ Transformer
 \end_layout
 
 \begin_layout Standard
+\begin_inset Flex TODO Note (inline)
+status open
+
+\begin_layout Plain Layout
+more
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
 
@@ -4826,6 +5407,13 @@ Transformer
 Cross-Platform Mobile AR with 
 \noun on
 ARFoundation
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Cross-Platform-Mobile-AR"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5147,7 +5735,11 @@ ARCore
 \noun on
 ARFoundation
 \noun default
- functions somewhat independently from the LiveScan specific components.
+ functions somewhat independently from the 
+\noun on
+LiveScan
+\noun default
+ specific components.
 \end_layout
 
 \begin_layout Standard
@@ -5309,7 +5901,20 @@ Android
 Balancing Frame Rate and Transmission Latency
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:Frame-Rate-Throttling"
+name "sec:Frame-Rate-Throttling"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (Margin)
+status open
+
+\begin_layout Plain Layout
+diagrams
+\end_layout
 
 \end_inset
 
@@ -5581,14 +6186,16 @@ The following outlines the methods used to investigate the effect of limiting
  latency (section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Frame-Rate-Throttling"
+reference "sec:Frame-Rate-Throttling"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
-).
+) between a client and server.
+ Similar control methods could be implemented between server and user experience
+ device with similar expected results.
  Both test environments are presented and the validity of each is discussed.
 \end_layout
 
@@ -6270,6 +6877,13 @@ An alternative would be to allow the server to independently implement this
 
 \begin_layout Section
 Future Work
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Future-Work"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6279,6 +6893,42 @@ LiveScan3D
 \noun default
  suite with regards to both the work presented in this project and the suite
  as a whole.
+\end_layout
+
+\begin_layout Standard
+As presented in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Source-Synchronisation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, implementing forms of 
+\emph on
+active
+\emph default
+ synchronisation were hindered by the lack of access to a live multi-source
+ environment.
+ With access to multiple 
+\noun on
+Kinect
+\noun default
+ sensors a method to tightly match different source frames within the processing
+ pipeline based on timestamp could be implemented and tested.
+\end_layout
+
+\begin_layout Standard
+Following initial investigations into the effect of controlling frame rate
+ on effective latency, the implemented method of delivering a frame drop
+ rate was found to be susceptible to poor network conditions.
+ Future investigations could be made into alternative methods for achieving
+ this described balance, one method for doing so could be allowing the server
+ to dynamically manage its request rate of clients.
+ This would require allowing the client transmission buffer to have a rolling
+ behaviour where new frames result in a dropping of the oldest.
 \end_layout
 
 \begin_layout Standard
@@ -6327,6 +6977,14 @@ There are many ways in which the packet size could be reduced, one already
  supported by the suite is the use of 
 \noun on
 ZStandard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "zstd"
+literal "false"
+
+\end_inset
+
+
 \noun default
  compression, a lossless compression algorithm developed at 
 \noun on
@@ -6350,47 +7008,10 @@ Another method for achieving this reduction in bandwidth could be inherited
 frame types
 \emph default
  including I-frames, P-frames and B-frames.
- Essentially when capturing a whole scene, it is unlikely that all of it
+ Essentially, when capturing a whole scene it is unlikely that all of it
  will change significantly each frame and as such calculating and transmitting
  only the changes since the last could significantly reduce the required
  bandwidth.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Comment
-status open
-
-\begin_layout Plain Layout
-UDP network?
-\end_layout
-
-\begin_layout Plain Layout
-Fix iOS shaders
-\end_layout
-
-\begin_layout Plain Layout
-better step calculation
-\end_layout
-
-\begin_layout Plain Layout
-re-enabling compression
-\end_layout
-
-\begin_layout Plain Layout
-sampling holograms at client before transmission, increase point size?
-\end_layout
-
-\begin_layout Plain Layout
-Maybe at server for UE?
-\end_layout
-
-\begin_layout Plain Layout
-IBP frames
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -6402,6 +7023,13 @@ IBP frames
 
 \begin_layout Section
 Summary
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Summary"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6427,46 +7055,84 @@ LiveScan
 \end_layout
 
 \begin_layout Standard
-The results of the project are presented with the limitations also discussed.
- 
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-PLACEHOLDER
+The 
+\noun on
+LiveScan3D
+\noun default
+ suite is described, both in it's initial state and following developments
+ made to the network behaviour to include a sub-system of buffers.
+ Both accompanying AR applications for the suite are presented and finally
+ the suite as a whole is evaluated with it's strengths and limitations highlight
+ed.
 \end_layout
 
-\end_inset
-
-
-\begin_inset Note Comment
-status open
-
-\begin_layout Plain Layout
-Of these areas of concern, the display element has been extended in order
- to allow the rendering of multiple environments simultaneously with a dynamic
- sub-system of geometric transformations.
- The transformations are responsive to user input allowing arbitrary placement
- and orientation of individual sources within the display space.
- While this control interface allows free movement in the most naturally
- traversed axes it could use some additional tuning to make it feel more
- intuitive.
+\begin_layout Standard
+The multi-source developments made throughout the suite are presented, the
+ server's native 
+\noun on
+OpenGL
+\noun default
+ viewfinder was updated in order to allow the concurrent display of multiple
+ sources through a sub-system of dynamic geometric transformations.
 \end_layout
 
-\begin_layout Plain Layout
-The next steps for the project leading up to its completion are presented,
- the initial and current plans for the remaining work is described and additiona
-l stretch goals are defined for any additional time.
- How the work will be presented in a final report is also described.
+\begin_layout Standard
+A source ID was introduced in order to identify hologram frames during transmiss
+ion over the network.
+ The updated packet structure was presented with the location of the aforementio
+ned source ID highlighted.
 \end_layout
 
-\end_inset
+\begin_layout Standard
+Active and passive source synchronisation was introduced in an effort to
+ allow the coarse and fine temporal matching of different source's frames.
+\end_layout
 
+\begin_layout Standard
+The updated structure of the mobile AR application was described with the
+ ability to display multiple sources presented and the limitations highlighted.
+\end_layout
 
+\begin_layout Standard
+Additional behaviour designed to facilitate the server's position as a manager
+ of multiple source sessions was introduced including 
+\emph on
+stale sources
+\emph default
+ and the management of settings per-source.
+\end_layout
+
+\begin_layout Standard
+Efforts made to migrate the mobile application to a cross-platform AR environmen
+t were outlined.
+ The progress made and its implications on the remaining project were described
+ while the remaining graphics programming related objectives are presented.
+\end_layout
+
+\begin_layout Standard
+A system of frame rate throttling was implemented in order to investigate
+ the effects on effective display latency.
+ It's applicability to source synchronisation was discussed and preliminary
+ data from both a local and cloud-based environment was presented.
+ Possible drawbacks with the method were highlighted and alternative implementat
+ions were proposed.
+\end_layout
+
+\begin_layout Standard
+Possible future developments and investigations were outlined including
+ those working from the developments of this project and those inherent
+ to the suite itself.
 \end_layout
 
 \begin_layout Section
 Conclusions
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Conclusions"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6480,48 +7146,25 @@ Kinect
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
 
-\begin_layout Plain Layout
-PLACEHOLDER
-\end_layout
-
-\end_inset
-
-
+\noun on
+LiveScan3D
+\noun default
+ presents an open-source, domain-agnostic holoportation solution and a multi-sou
+rce version can be seen to further generalise the application suite.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Comment
-status open
-
-\begin_layout Plain Layout
-At roughly halfway through the time allowed for this project the native
- display has successfully been extended to meet the deliverable specification.
- This has resulted in the 
-\noun on
-OpenGL
-\noun default
- window being capable of simultaneously rendering multiple sources with
- arbitrary placement and orientation within the display space.
+Unfortunately, the impact of the COVID-19 pandemic severely impacted the
+ latter third of the project resulting in an inability to both quantitatively
+ evaluate the multi-source server and implement the mobile AR application
+ touch controls.
 \end_layout
 
-\begin_layout Plain Layout
-From this point the network layer of the suite will be developed to also
- match the specification, allowing connected clients to be grouped into
- sources for polling and processing.
-\end_layout
-
-\begin_layout Plain Layout
-Following the development of the two, testing methodologies will be defined
- and carried out to gather quantitative results for the final product.
- A final report on the results will be available in May 2020.
-\end_layout
-
-\end_inset
-
-
+\begin_layout Standard
+Despite the obstacles, additional objectives allowed extra investigations
+ to be made into the suite with significant progress made in making the
+ mobile application cross-platform and data gathered on the network behaviour.
 \end_layout
 
 \begin_layout Standard
@@ -6532,6 +7175,13 @@ Following the development of the two, testing methodologies will be defined
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:bibliography"
+
+\end_inset
+
+
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 btprint "btPrintCited"
@@ -6546,6 +7196,13 @@ options "bibtotoc"
 \begin_layout Section
 \start_of_appendix
 Server UI Additions
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Server-UI-Additions"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6609,12 +7266,16 @@ name "fig:LiveScan-server-UI"
 
 \end_layout
 
+\begin_layout Standard
+Working clockwise around the group boxes the new elements are as follows,
+\end_layout
+
 \begin_layout Itemize
 Receiving and transmitting network bandwidth 
 \end_layout
 
 \begin_layout Itemize
-Buffer usage
+Buffer population
 \end_layout
 
 \begin_layout Itemize
@@ -6622,11 +7283,16 @@ Operating frequencies
 \end_layout
 
 \begin_layout Itemize
-Connected sources
+Connected user experiences
 \end_layout
 
 \begin_layout Itemize
-Connected user experiences
+Connected sources with IDs
+\end_layout
+
+\begin_layout Itemize
+Dynamic step options including exponential moving average alpha and size
+ of latency queue
 \end_layout
 
 \begin_layout Section
@@ -6692,7 +7358,7 @@ MSG_NO_FRAME
 Frame Data Structure
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:Frame"
+name "sec:Frame"
 
 \end_inset
 
