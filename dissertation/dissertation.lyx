@@ -171,7 +171,7 @@ begin{changemargin}{3cm}{3cm}
 
 \size large
 A dissertation submitted to the Department of Electronic Engineering in
- partial fulfillment of the Degree of Masters of Engineering in Electronic
+ partial fulfilment of the Degree of Masters of Engineering in Electronic
  Engineering
 \end_layout
 
@@ -239,16 +239,35 @@ University of Surrey
 \end_layout
 
 \begin_layout Abstract
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-PLACEHOLDER
-\end_layout
-
-\end_inset
-
-
+An extension to the 
+\noun on
+LiveScan3D
+\noun default
+ suite is presented, facilitating the acquisition and presentation of multiple
+ scenes simultaneously.
+ In doing so the application suite already strengthened by it's domain-agnostic
+ nature can be seen to be further generalised allowing conference call-like
+ experiences.
+ Developments were made to the server display component allowing this concurrent
+ presentation and to the network layer of the suite in order to differentiate
+ sources.
+ Extensions to the 
+\noun on
+Android
+\noun default
+ AR application are presented, both in achieving the multi-source aim and
+ in facilitating deployment to iOS devices using Unity's 
+\noun on
+ARFoundation
+\noun default
+.
+ Efforts are made to define source synchronisation, coarse and fine sync
+ methods are described.
+ A method of coarse synchronisation is investigated by intentionally throttling
+ frame rate in an effort to meet a defined latency requirement.
+ This method was shown to successfully constrain the otherwise unbounded
+ latency in adverse network conditions, although the limitations of the
+ linear implementation is evaluated.
 \end_layout
 
 \begin_layout Standard
@@ -765,7 +784,12 @@ Key Technical Achievements
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
+This section summarises the design and implementation of the developments
+ made within this project.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex TODO Note (Margin)
 status open
 
 \begin_layout Plain Layout
@@ -776,6 +800,280 @@ minimum two pages to highlight/summarize what you have done, including your
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+Multi-source LiveScan
+\end_layout
+
+\begin_layout Standard
+Developing the server OpenGL display involved the creation of a subsystem
+ of dynamic geometric transformations in order to arrange holograms in the
+ 3D space.
+\end_layout
+
+\begin_layout Standard
+The 
+\noun on
+Transformer
+\noun default
+ class provides static methods to apply affine transformations to coordinates
+ using matrix arithmetic.
+ Transformations can also be compounded for efficient application to many
+ vertices.
+ Utility functions allow the retrieval of rotation matrices in all three
+ axes using Euler angles.
+\end_layout
+
+\begin_layout Standard
+This utility class is used extensively by the 
+\noun on
+DisplayFrameTransfomer
+\noun default
+, the object responsible for maintaining the spatial state of holograms
+ within the display space.
+ Each frame, the display retrieves the location of each source and applies
+ this transformation to holograms in their own coordinate space.
+ Keyboard controls trigger the selected hologram to move, these actions
+ are passed to the 
+\noun on
+DisplayFrameTransfomer
+\noun default
+ to update a source's location.
+\end_layout
+
+\begin_layout Standard
+An integer source ID identifies frames of a hologram when transmitted both
+ from client to server and server to user experience.
+ The source ID uses a single byte during transmission allowing a theoretical
+ 128 concurrent sources.
+ Communications between the server and a connected user experience only
+ pertain to frame transmission, as such the source ID is included in the
+ header of the packet.
+ A wider array of messages are sent between client and server including
+ calibration triggers and settings delivery.
+ As many of these have no semantic relation to the source itself, the source
+ ID instead prepends the payload when transmitting frames.
+ In both cases this allows the header structure to stay consistent.
+\end_layout
+
+\begin_layout Standard
+The concepts of 
+\emph on
+active
+\emph default
+ and 
+\emph on
+passive
+\emph default
+ source synchronisation are introduced.
+ Assuming synchronised timestamps across clients, server and user experiences
+ using the included NTP functionality, source synchronisation aims to match
+ frames captured at the same time during display.
+ Passive sync acts as a coarse match and aims to keep frames within a tolerable
+ latency interval by maintaining environment conditions.
+ Within this work, this is exemplified by throttling transmitted frame rate
+ to make all sources meet the same latency requirement.
+ Active sync acts as a fine control, tightly matching source frames of the
+ closest timestamp from within the processing pipeline of the server.
+ Active sync was unable to be implemented within this project due to the
+ lack of access to multiple 
+\noun on
+Kinect
+\noun default
+ sensors however it is theorised that a combination of the two methods will
+ provide the tightest synchronisation.
+\end_layout
+
+\begin_layout Standard
+The mobile AR application was updated in order to allow the simultaneous
+ display of multiple sources.
+ Utilising the strengths of 
+\noun on
+Unity
+\noun default
+ development, this did not require a significant redesign of the written
+ code, instead the hierarchy of game objects and components could be altered.
+ The 
+\noun on
+PointCloudRenderer
+\noun default
+ component responsible for rendering the hologram from pixel-like primitive
+ objects becomes responsible for managing a single source.
+ The 
+\noun on
+PointCloudReceiver
+\noun default
+ network layer now maintains a dictionary of these display managers indexed
+ by source ID.
+ The required alterations to the touch inputs were not able to be implemented
+ before losing access to the lab environment, this remained to be completed
+ at the end of the project.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Stale
+\emph default
+ source were defined as sources that have not delivered a frame to the server
+ within a given time interval.
+ This allows them to be removed from live display in order to maintain the
+ experience of other connected sources.
+ This was implemented through the 
+\noun on
+SourceCollection
+\noun default
+ object.
+ This object wraps around the dictionary used to store frames and includes
+ a thread responsible for checking the timestamp of the last received frame.
+\end_layout
+
+\begin_layout Standard
+The settings object previously maintained globally was redefined as being
+ a source level variable.
+ Containing calibration information, this was in order to allow sources
+ to be in multi-view configurations.
+ These settings objects were also stored within the 
+\noun on
+SourceCollection
+\noun default
+.
+\end_layout
+
+\begin_layout Subsubsection
+Cross-platform Mobile AR
+\end_layout
+
+\begin_layout Standard
+In an effort to continue using the mobile AR application without access
+ to an 
+\noun on
+Android
+\noun default
+ phone, efforts were made to allow deployment to iOS devices.
+ The existing application constructs an AR environment using 
+\noun on
+Google's
+\noun default
+ 
+\noun on
+ARCore
+\noun default
+ library which theoretically includes native support for deploying to iOS.
+ However, following issues when attempting to test this configuration, the
+ app was instead migrated to use 
+\noun on
+Unity
+\noun default
+'s native AR framework, 
+\noun on
+ARFoundation
+\noun default
+.
+\end_layout
+
+\begin_layout Standard
+
+\noun on
+ARFoundation
+\noun default
+ acts as an abstraction layer for 
+\noun on
+Android
+\noun default
+ and iOS's native AR libraries, 
+\noun on
+ARCore
+\noun default
+ and 
+\noun on
+ARKit
+\noun default
+ respectively.
+ In doing so, development can take place solely in 
+\noun on
+Unity
+\noun default
+ components which are replaced by the OS-specific implementation on deployment.
+\end_layout
+
+\begin_layout Standard
+On deployment, the app started as expected with native UI elements and visible
+ plane discovery.
+ Without the need to edit any of the 
+\noun on
+LiveScan
+\noun default
+ specific code, the network behaviour was also as expected and the client
+ connected to the server without issue.
+ At this point it was discovered that the included geometry shader used
+ by the 
+\noun on
+Android
+\noun default
+ implementation would not be compatible in this configuration.
+ Supported by 
+\noun on
+OpenGL ES 3
+\noun default
+ used by 
+\noun on
+Android
+\noun default
+, when deploying to iOS the native 
+\noun on
+Metal
+\noun default
+ graphics library is instead used which does not support geometry shaders.
+ Without the required experience to source or write a compatible shader,
+ this presents the current state of the application.
+ This proved useful in allowing continued network debugging of the server
+ however clearly doesn't constitute a complete migration without a functioning
+ presentation layer.
+\end_layout
+
+\begin_layout Subsubsection
+Frame rate throttling
+\end_layout
+
+\begin_layout Standard
+In support of further research done into the 
+\noun on
+LiveScan
+\noun default
+ network behaviour and to implement a form of passive source synchronisation,
+ investigations were made into the effect of limiting transmitted frame
+ rate on effective display latency.
+\end_layout
+
+\begin_layout Standard
+Based on a previous design by Selinis, a proportion of frames were dropped
+ at the client before queuing for transmission.
+ This rate was referred to as a dynamic step and was calculated by the server
+ based on current network conditions including latency and frames rate.
+ The step was attached to the header of each frame request allowing it to
+ move in response to changing conditions.
+\end_layout
+
+\begin_layout Standard
+This system was tested in both a local and cloud-based environment with
+ conditions applied in order to properly induce long latency.
+ Using full-scene capture in order to maximise the used bandwidth, the effect
+ of a manually varied step on both frame rate and latency was demonstrated
+ in a LAN environment.
+ Using figure-only capture, a dynamic step was shown to successfully control
+ the otherwise unbounded latency.
+ The limitations of this approach is discussed including the observed wide
+ oscillations around the requirement as a result of the linear step motion.
+\end_layout
+
+\begin_layout Standard
+Representative data was not able to be gathered in a cloud-based environment
+ as a result of the system's instability and domestic network upload speed.
+ Preliminary data in this environment is presented with discussions regarding
+ how to make the frame rate drop methods better suited to these adverse
+ conditions.
 \end_layout
 
 \begin_layout Subsection
@@ -995,6 +1293,17 @@ noprefix "false"
 
  describes the frame drop rate calculation used in the frame rate/latency
  investigations while 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Dynamic-Step-Test"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents the entire dataset from which results were presented.
+ Appendix 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Virtual-Machine-Specifications"
@@ -2600,8 +2909,8 @@ Unity
 \end_layout
 
 \begin_layout Standard
-Finally previous implementations of holoportation were given while the concept
- of 
+Finally, previous implementations of holoportation were given while the
+ concept of 
 \emph on
 telepresence
 \emph default
@@ -3153,16 +3462,6 @@ literal "false"
 
  provided improvements on this behaviour by including a system of buffers
  throughout the transmission pipeline in order to unblock the network operations.
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-diagram?
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -3183,22 +3482,23 @@ This system decouples the network behaviour smoothing the effect of temporary
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-NTP
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 Additionally, Selinis' work included the extension of connections between
  both client-server and server-UE to allow the use of multiple concurrent
  TCP connections, effectively increasing the available bandwidth.
+ NTP clients were also included at both the client and server allowing the
+ timestamps captured at each to be comparable.
+ This comparability is assumed when introducing source synchronisation in
+ section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Source-Synchronisation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -3345,8 +3645,11 @@ Hologram point clouds are rendered in a similar fashion to the server's
 \noun on
 PointCloudElem
 \noun default
- game object with a customisable colour acts as the primitive vertex of
- this cloud.
+ game object with a 
+\lang british
+customisable
+\lang english
+ colour acts as the primitive vertex of this cloud.
 \end_layout
 
 \begin_layout Standard
@@ -3372,7 +3675,7 @@ PointCloudRenderer Display manager responsible for managing the live
 \noun on
 PointCloudElem
 \noun default
-'s representing a hologram.
+s representing a hologram.
  Takes de-buffered frames from the 
 \noun on
 PointCloudReceiver
@@ -3381,7 +3684,7 @@ PointCloudReceiver
 \noun on
 PointCloudElem
 \noun default
-'s as required before using the contained 
+s as required before using the contained 
 \noun on
 ElemRenderer
 \noun default
@@ -4736,7 +5039,7 @@ noprefix "false"
 \end_inset
 
  is a method of passive synchronisation.
- By prescribing a latency requirement to all sources, each would tend to
+ By prescribing a latency requirement to all sources, each should tend to
  this value once received at the server.
  
 \end_layout
@@ -5356,6 +5659,43 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
+The use of a source ID transmitted alongside each frame provides flexibility
+ in that processing can be decoupled from the network infrastructure itself.
+ Theoretically it would also allow clients to function as multiple sources
+ simultaneously, allowing the attachment of different source IDs to different
+ frames
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+While no applications for such a configuration are posed here, this could
+ prove interesting with further investigation.
+\end_layout
+
+\end_inset
+
+.
+ However, the constant transmission of a source ID also extends the possibility
+ for error.
+ During debugging, what was assumed to be a malformed packet could cause
+ a frame to be entered for a different source as the source ID was corrupted.
+ While a single frame error doesn't necessarily constitute a catastrophic
+ error, it could prove detrimental to the experience.
+ 
+\end_layout
+
+\begin_layout Standard
+An alternative would be to associate a socket with a source ID, negotiated
+ during connection.
+ Frames received over this socket could then be tagged with this ID for
+ further propagation.
+ While this would not inherently fix the previously mentioned malformed
+ packet, it would constrain it to the source for which it was received as
+ opposed to allowing the source ID to also be subject to corruption, possible
+ affecting other sources.
+\end_layout
+
+\begin_layout Standard
 The server display's control scheme could be more intuitive as the directions
  of movement are in relation to the fixed axes of the display space instead
  of the view of the camera.
@@ -5381,19 +5721,6 @@ Transformer
  Applying Euler angles through the already implemented rotation retrieval
  functions, desired translations in the camera's frame of reference could
  then be shifted back to that of the world's for application to a hologram.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-more
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -5771,7 +6098,7 @@ status open
 \begin_inset Graphics
 	filename ../media/ios_app/IMG_2589.PNG
 	lyxscale 15
-	width 30col%
+	width 25col%
 
 \end_inset
 
@@ -5779,7 +6106,7 @@ status open
 \begin_inset Graphics
 	filename ../media/ios_app/IMG_2592.PNG
 	lyxscale 15
-	width 30col%
+	width 25col%
 
 \end_inset
 
@@ -5787,7 +6114,7 @@ status open
 \begin_inset Graphics
 	filename ../media/ios_app/IMG_2595.PNG
 	lyxscale 15
-	width 30col%
+	width 25col%
 
 \end_inset
 
@@ -6297,17 +6624,8 @@ The small scale of the controlled LAN environment does not inherently incur
 \begin_layout Standard
 The step was specified and varied manually initially in order to visualise
  the response in delay and FPS.
- Following implementation of a dynamic step, the response was again visualised.
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-reassess
-\end_layout
-
-\end_inset
-
-
+ Following implementation of a dynamic step, the response was again visualised
+ using figure-only capture for realistic latency values.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6368,7 +6686,7 @@ LAN Premise Validation
 \end_layout
 
 \begin_layout Standard
-Figures 
+Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Latency-and-FPS1"
@@ -6378,32 +6696,13 @@ noprefix "false"
 
 \end_inset
 
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Latency-and-FPS2"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- present two test scenarios with a manually defined and varied client frame
- drop rate.
+ presents a test scenario with a manually defined and varied frame drop
+ rate.
  Latency EMA refers to the moving exponential average of latency values
  received from connected clients.
- An alpha of 0.5 was used for both scenarios.
- Both scenarios show an initial spike in latency despite figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Latency-and-FPS1"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- having a 50% drop rate from 
+ An alpha of 0.5 was used.
+ An initial spike in latency can be seen despite having a 50% drop rate
+ from 
 \begin_inset Formula $t=0$
 \end_inset
 
@@ -6497,37 +6796,57 @@ noprefix "false"
 \begin_inset Formula $\approx151\,\unitfrac{ms}{s}$
 \end_inset
 
-) and in figure 
+).
+ Conversely, increasing the step beyond a critical value causes a peak in
+ the latency before inducing the value to begin dropping.
+ There is a noticeable lag in response, changes in latency are offset in
+ time from the reception of a changed drop rate.
+\end_layout
+
+\begin_layout Standard
+Looking to the FPS chart, the frame rate drops in response to an increase
+ in frame drop rate and vice versa.
+ Similarly to latency a lag can be seen when changes in drop rate are received.
+ Worth noticing is that as the step drops, the FPS increases before the
+ latency begins increasing (
+\begin_inset Formula $t=70$
+\end_inset
+
+ to 
+\begin_inset Formula $t=133$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Latency-and-FPS2"
+reference "fig:Local-Dynamic"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
- at times 
-\begin_inset Formula $t=25$
+ presents the variation in latency following the implementation of a dynamic
+ step, an exponential alpha of 0.7 was used.
+ Both charts show segments of a single test case, the entire dataset can
+ be seen visualised in appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Dynamic-Step-Test"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- (
-\begin_inset Formula $\approx304\,\unitfrac{ms}{s}$
-\end_inset
-
-) and 
-\begin_inset Formula $t=270$
-\end_inset
-
- (
-\begin_inset Formula $\approx315\,\unitfrac{ms}{s}$
-\end_inset
-
-).
- Conversely, increasing the step beyond a critical value causes a peak in
- the latency before inducing the value to begin dropping.
- There is a noticeable lag in response, changes in latency are offset in
- time from the reception of a changed drop rate.
+.
+ It can be seen that as the average latency increases above the prescribed
+ latency requirement an increase in dynamic step was induced.
+ As the latency fell past the requirement, the step also fell.
 \end_layout
 
 \begin_layout Standard
@@ -6539,21 +6858,16 @@ status open
 \begin_layout Plain Layout
 \noindent
 \align center
-\begin_inset Graphics
-	filename ../media/graphs/LatencyStep1.png
-	lyxscale 40
-	width 100col%
-
-\end_inset
-
-
-\end_layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
-	filename ../media/graphs/FPSStep1.png
+	filename ../media/graphs/LocalDynamic1000.png
 	lyxscale 40
 	width 100col%
 
@@ -6566,11 +6880,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Latency and FPS response for a manually varied frame drop step (Full-scene
- capture)
+1000ms latency requirement
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Latency-and-FPS2"
+name "fig:1000ms-latency-requirement"
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -6583,6 +6901,68 @@ name "fig:Latency-and-FPS2"
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/graphs/LocalDynamic2000.png
+	lyxscale 40
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+2000ms latency requirement
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:2000ms-latency-requirement"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Segments of data demonstrating dynamic step response to two different latency
+ requirements in a LAN environment, note the difference in latency scale
+ during comparison (Figure-only capture)
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Local-Dynamic"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
@@ -6592,9 +6972,34 @@ name "fig:Latency-and-FPS2"
 \end_layout
 
 \begin_layout Standard
-Looking to the FPS data, in both test scenarios the frame rate drops in
- response to an increase in frame drop rate and vice versa.
- Similarly to latency a lag can be seen when changes in drop rate are received.
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:2000ms-latency-requirement"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ shows higher latency peaks (
+\begin_inset Formula $\approx$
+\end_inset
+
+6000-10,000ms compared to 
+\begin_inset Formula $\approx$
+\end_inset
+
+1,500-2,500ms) for a higher requirement, the step can also be seen to rise
+ higher (
+\begin_inset Formula $\approx$
+\end_inset
+
+0.7-0.95 compared to 
+\begin_inset Formula $\approx$
+\end_inset
+
+0.4-0.7).
 \end_layout
 
 \begin_layout Subsubsection
@@ -6720,7 +7125,7 @@ status open
 \begin_inset Graphics
 	filename ../media/graphs/CloudInstabilityLatency.png
 	lyxscale 40
-	width 70col%
+	width 80col%
 
 \end_inset
 
@@ -6733,7 +7138,7 @@ status open
 \begin_inset Graphics
 	filename ../media/graphs/CloudInstabilityBandwidth.png
 	lyxscale 40
-	width 70col%
+	width 80col%
 
 \end_inset
 
@@ -6782,7 +7187,7 @@ Discussion
 
 \begin_layout Standard
 Demonstrated in both the LAN and cloud environment, it can be seen that
- a high enough frame drop rate keeps the latency constant while lowering
+ a high enough frame drop rate maintains a constant latency while lowering
  this beyond a critical value induces a constant linear increase.
  This would suggest that below this critical value the server is not able
  to receive frames at a rate higher than they are being produced at the
@@ -6815,20 +7220,36 @@ The initial spike in latency could be a result of the delay in drop rate
  As a result when a new drop rate is received the buffer is filled at this
  rate going forward however the existing population queued at a different
  rate must still be transmitted.
- 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-fps discussion
+Following the implementation of a dynamic step, the latency was no longer
+ unbounded and instead oscillated as the step increased and decreased.
+ As a result the system can be seen to dynamically drop frames in order
+ to maintain a constant latency in adverse network conditions.
+ This allows the system to keep up when when the amount of frames being
+ produced by the client is too high to be transmitted in the same period
+ of time.
 \end_layout
 
-\end_inset
+\begin_layout Standard
+The performance of this system, however, should be considered.
+ With a 1000ms requirement, the latency can be seen to rise to 2000ms and
+ as high as 3000ms before the step begins mitigating this rise.
+ This difference is worse for the 2000ms requirement with the latency reaching
+ as high as 10,000ms.
+ The level to which the latency swings above the requirement is significant
+ and is likely due to the linear rate with which the step increases and
+ decreases.
+\end_layout
 
-
+\begin_layout Standard
+One method to control this would be to have the step move in a non-linear
+ fashion, increasing at a higher rate the further away the live value is
+ from the requirement and dropping faster as it falls below the required
+ value.
+ This could allow the latency to oscillate closer to the requirement with
+ the goal being for it to settle at that value.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6995,7 +7416,7 @@ Facebook
  between the server and user experience.
  This would involve reducing the size of a transmitted holograms by sampling
  only a percentage of the point cloud vertices and increasing the point
- size at display to cover the space inbetween.
+ size at display to cover the space in-between.
  When presented at a small scale at the user experience this could present
  a method to reduce transmission bandwidth while maintaining much of the
  final experience.
@@ -7110,8 +7531,8 @@ t were outlined.
 \end_layout
 
 \begin_layout Standard
-A system of frame rate throttling was implemented in order to investigate
- the effects on effective display latency.
+A system of frame rate throttling was successfully implemented in order
+ to investigate the effects on effective display latency.
  It's applicability to source synchronisation was discussed and preliminary
  data from both a local and cloud-based environment was presented.
  Possible drawbacks with the method were highlighted and alternative implementat
@@ -7475,6 +7896,38 @@ else
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Dynamic Step Test Results
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Dynamic-Step-Test"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/graphs/LocalDynamicTotal.png
+	lyxscale 30
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note how without a latency requirement (
+\begin_inset Formula $t=290$
+\end_inset
+
+) the latency increases in an uncontrolled fashion.
 \end_layout
 
 \begin_layout Section
