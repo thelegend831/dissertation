@@ -245,10 +245,10 @@ LiveScan3D
 \noun default
  suite is presented, facilitating the acquisition and presentation of multiple
  scenes simultaneously.
- In doing so the application suite already strengthened by it's domain-agnostic
+ In doing so the application suite already strengthened by its domain-agnostic
  nature can be seen to be further generalised allowing conference call-like
  experiences.
- Developments were made to the server display component allowing this concurrent
+ Developments were made to the server display component to allow this concurrent
  presentation and to the network layer of the suite in order to differentiate
  sources.
  Extensions to the 
@@ -460,11 +460,11 @@ This project aims to extend this suite to support multi-source holoportation,
 
 \begin_layout Standard
 One application would be support for experiences akin to conference-calls
- with multiple actors capturing their own environments for composition at
- the server.
- This could be seen to be applicable both to productivity software similar
- to existing conference-call software and to entertainment experiences with
- multiple locations combined for consumption by the public.
+ with multiple actors capturing their separate environments for composition
+ at the server.
+ This could be seen to apply both to productivity software similar to existing
+ conference-call software and entertainment experiences with multiple locations
+ combined for consumption by the public.
  
 \end_layout
 
@@ -594,7 +594,7 @@ status open
 \begin_inset Graphics
 	filename ../media/premise.png
 	lyxscale 30
-	width 70col%
+	width 60col%
 
 \end_inset
 
@@ -637,17 +637,6 @@ Objectives
 \begin_layout Standard
 In order to achieve the goal of multi-source holoportation the following
  key objectives must be achieved,
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Need more explanation of the objectives below, in particular what is the
- technical challenge
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Enumerate
@@ -658,11 +647,15 @@ Introduce a source ID in network communications to identify each frame of
 \begin_layout Enumerate
 Migrate the server from a single-source streaming node to a manager of multiple
  scenes including a method to synchronise sources.
+ This includes defining methods of identifying sources that are no longer
+ actively transmitting frames to remove them from presentation.
 \end_layout
 
 \begin_layout Enumerate
-Extend the native viewfinder of the server in order to separately render
- each connected source.
+Extend the native display viewfinder of the server in order to separately
+ render each connected source.
+ Allow individual placement of holograms using keyboard controls.
+ Include automatically coherent placement of newly connected sources.
 \end_layout
 
 \begin_layout Enumerate
@@ -672,6 +665,7 @@ Android
 \noun default
  AR application to separately present each source of footage and allow individua
 l control.
+ This would represent multi-source developments to an AR presentation layer.
 \end_layout
 
 \begin_layout Standard
@@ -686,6 +680,13 @@ noprefix "false"
 \end_inset
 
 .
+ The greatest challenge to a seamless multi-source experience is that of
+ the previously mentioned synchronisation.
+ While methods to achieve temporally matched presentation are investigated,
+ these have the potential to significantly increase complexity in the processing
+ pipeline.
+ This makes the design of these systems critical in maintaining efficient
+ real-time processing.
 \end_layout
 
 \begin_layout Standard
@@ -766,8 +767,8 @@ e capabilities and some elements of the mobile AR display.
 \end_layout
 
 \begin_layout Enumerate
-Alter the AR environment of the mobile application in order to allow deployment
- to both 
+Migrate the AR environment of the mobile application in order to allow deploymen
+t to both 
 \noun on
 Android
 \noun default
@@ -779,6 +780,13 @@ Implement a dynamic system of frame rate throttling to investigate the effect
  on effective display latency.
 \end_layout
 
+\begin_layout Standard
+The biggest challenge to the mobile AR migration is the scope of changes
+ being made to the codebase, changing the library used to create the AR
+ environment.
+ This is a significant change and poses many opportunities to cause issues.
+\end_layout
+
 \begin_layout Subsection
 Key Technical Achievements
 \end_layout
@@ -786,20 +794,6 @@ Key Technical Achievements
 \begin_layout Standard
 This section summarises the design and implementation of the developments
  made within this project.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-minimum two pages to highlight/summarize what you have done, including your
- design, implementation, testing strategy and key observations.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsubsection
@@ -888,12 +882,12 @@ Kinect
 \begin_layout Standard
 The mobile AR application was updated in order to allow the simultaneous
  display of multiple sources.
- Utilising the strengths of 
+ Utilising strengths of 
 \noun on
 Unity
 \noun default
  development, this did not require a significant redesign of the written
- code, instead the hierarchy of game objects and components could be altered.
+ code, instead, the hierarchy of game objects and components could be altered.
  The 
 \noun on
 PointCloudRenderer
@@ -1167,11 +1161,7 @@ ts outlined.
 \begin_inset Newline newline
 \end_inset
 
-In support of ongoing research into the 
-\noun on
-LiveScan
-\noun default
- suite and it’s network behaviour, section 
+Section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sec:Frame-Rate-Throttling"
@@ -1244,6 +1234,16 @@ noprefix "false"
 
 \begin_layout Standard
 In the appendices, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Gantt-Chart"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents a Gantt chart for the project while 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Server-UI-Additions"
@@ -1500,20 +1500,10 @@ literal "false"
 \begin_layout Standard
 A visual hull defines a 3D representation of an object constructed through
  the volume intersection of multiple 2D silhouettes.
- With knowledge of the relative positions of each view point, corresponding
+ With knowledge of the relative positions of each viewpoint, corresponding
  silhouettes of an object can be triangulated to form a 3D object.
  In doing so depth information lost in projection to a 2D image can be reconstru
 cted.
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-diagram?
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -1593,7 +1583,7 @@ literal "false"
 
 \begin_layout Standard
 The strength of these techniques draws from data gathered from tightly calibrate
-d camera viewpoints, however when considering consumer-grade applications
+d camera viewpoints, however, when considering consumer-grade applications
  this is typically not available.
  The use of infra-red structured light and 
 \emph on
@@ -1705,7 +1695,7 @@ literal "false"
 
 \begin_layout Standard
 Here 3D conference calling of the type described in the introduction without
- AR or VR applications is presented, instead users watch a composite conference
+ AR or VR applications is presented, instead, users watch a composite conference
  space on a screen with all participants rendered within.
  
 \begin_inset Note Comment
@@ -2234,7 +2224,7 @@ Android
 
 \begin_layout Standard
 The advancement of mobile AR bolstered by the growing ubiquity of compatible
- hardware has led it to becoming a rapidly growing and popular form of XR.
+ hardware has led it to become a rapidly growing and popular form of XR.
  The introduction of OS-level SDK's in 
 \noun on
 Google
@@ -2900,7 +2890,7 @@ ed.
 LiveScan3D
 \noun default
  has two associated AR clients of which the most relevant to this project
- is the mobile AR client, subsequently the current SDKs facilitating AR
+ is the mobile AR client, subsequently, the current SDKs facilitating AR
  development were presented and their relation to the 
 \noun on
 Unity
@@ -3603,7 +3593,7 @@ literal "false"
 \noun on
 Unity
 \noun default
- and included buffers inline with the developments discussed in section
+ and included buffers in line with the developments discussed in section
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3959,8 +3949,8 @@ In order to maintain a strength of the suite in it's agnostic behaviour
  to different display methods, it was made critical to the design of the
  OpenGL extension that spatial processing would be specific to this display
  only.
- Mobile AR applications will arrange and interact with holograms in a different
- way, as will head-mounted AR or VR applications.
+ Mobile AR applications will arrange and interact with holograms differently,
+ as will head-mounted AR or VR applications.
  In maintaining this separation of network and presentation layer each display
  can operate independently and no assumptions are made as to how a display
  method should handle each hologram.
@@ -4447,7 +4437,7 @@ Each source is assigned a default transformation which can be overridden
 \end_layout
 
 \begin_layout Standard
-Sources are initially arranged in a circle around the origin in the center
+Sources are initially arranged in a circle around the origin in the centre
  of the space.
  This is done by retrieving a transformation from the 
 \noun on
@@ -4708,8 +4698,8 @@ Within the
 \noun on
 LiveScan
 \noun default
- suite two network communications required updating, those between the client
- and server and those between the server and user experiences.
+ suite, two network communications required updating, those between the
+ client and server and those between the server and user experiences.
 \end_layout
 
 \begin_layout Standard
@@ -4801,7 +4791,7 @@ Implementation
 \begin_layout Standard
 An integer source ID was created to be included in communications throughout
  the suite.
- For conciseness this was represented by a single byte during transmission
+ For conciseness, this was represented by a single byte during transmission
  resulting in a range of possible source IDs between 0 and 127.
  Considering the use case of a source representing a scene and the bandwidth
  required for each, 128 possible concurrent sources was deemed sufficient.
@@ -4958,9 +4948,9 @@ ce.
 At a high level, sources can be considered synchronised if frames captured
  at the same time are displayed concurrently whether from the perspective
  of the server or a connected user experience.
- There are three main challenges to achieving this aim.
+ There are two main challenges to achieving this aim.
  The following assumes that timestamps captured at both the client and server
- are synchronised using the included NTP functionality
+ are synchronised and therefore comparable using the included NTP functionality
 \begin_inset CommandInset citation
 LatexCommand cite
 key "livescan3d-buffers"
@@ -4990,16 +4980,6 @@ Although capturing frames at the same rate (30Hz), it is highly unlikely
 Secondly, during transmission a variable amount of latency will be introduced
  as a result of the network conditions and distance from client to server
  and from server to UE.
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-remember third?
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -5062,7 +5042,7 @@ Active
 \emph default
  synchronisation includes efforts to tightly match frames during processing
  at the server in order to minimise the difference in latency since capture.
- In practice this could be achieved at the point where frames are moved
+ In practice, this could be achieved at the point where frames are moved
  from the various receiving buffers to the live buffer
 \begin_inset Flex TODO Note (Margin)
 status open
@@ -5309,7 +5289,7 @@ s making up a hologram.
 \end_layout
 
 \begin_layout Standard
-On each frame update the 
+On each frame update, the 
 \noun on
 PointCloudReceiver
 \noun default
@@ -5458,7 +5438,7 @@ While this thread could be included in many places throughout the server
 
 \begin_layout Standard
 As such the object-oriented programming concept of encapsulation was employed
- to create a object responsible for containing live frames and checking
+ to create an object responsible for containing live frames and checking
  for 
 \emph on
 stale
@@ -5661,7 +5641,7 @@ noprefix "false"
 \begin_layout Standard
 The use of a source ID transmitted alongside each frame provides flexibility
  in that processing can be decoupled from the network infrastructure itself.
- Theoretically it would also allow clients to function as multiple sources
+ Theoretically, it would also allow clients to function as multiple sources
  simultaneously, allowing the attachment of different source IDs to different
  frames
 \begin_inset Foot
@@ -5699,7 +5679,7 @@ An alternative would be to associate a socket with a source ID, negotiated
 The server display's control scheme could be more intuitive as the directions
  of movement are in relation to the fixed axes of the display space instead
  of the view of the camera.
- In practice this means that when translating objects the pose of the camera
+ In practice, this means that when translating objects the pose of the camera
  with respect to the space must first be considered in order to identify
  which direction the object will be moved.
 \end_layout
@@ -5867,7 +5847,7 @@ Unity ARFoundation
 \end_layout
 
 \begin_layout Standard
-Following these issues a different avenue was pursued in 
+Following these issues, a different avenue was pursued in 
 \noun on
 Unity
 \noun default
@@ -5933,11 +5913,11 @@ Both libraries use a session component to manage the life cycle of the AR
 Unity
 \noun default
  camera acting as the virtual representation of the mobile's rear-view camera.
- In both cases this virtual camera has a pose driver attached responsible
+ In both cases, this virtual camera has a pose driver attached responsible
  for tracing the movements of the physical device in the virtual space and
  a component responsible for displaying the view of the rear-facing camera
  as the background of the scene.
- This presents the core of the environment, additionally both libraries
+ This presents the core of the environment, additionally, both libraries
  include separate components responsible for displaying discovered planes
  within the space, optionally with UI directing the user to aid in this
  discovery.
@@ -6236,19 +6216,6 @@ name "sec:Frame-Rate-Throttling"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-diagrams
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 As discussed in the evaluations for the 
 \noun on
 LiveScan
@@ -6295,7 +6262,7 @@ Design Considerations
 
 \begin_layout Standard
 When considering the final applications of these concepts in the context
- of a multi-source project, the ability to have a step per source was included
+ of a multi-source project, the ability to have a step per-source was included
  in order to take into account the different network conditions between
  the server and each source's client(s).
  A single set of global FPS and delay requirements would still be provided
@@ -6339,7 +6306,7 @@ The existing calculations of live statistics provided the global FPS and
 KinectServer
 \noun default
 .
- In order to collect these values on a source-by-source basis a dictionary
+ In order to collect these values on a source-by-source basis, a dictionary
  of 
 \noun on
 SourceStat
@@ -6365,14 +6332,14 @@ noprefix "false"
 
 , this iterative version was well suited to processing each collected latency
  value.
- Initially the values were found by collecting the latency of each frame
+ Initially, the values were found by collecting the latency of each frame
  currently within the server's buffers.
- Theoretically this would have allowed the calculated average to be controlled
+ Theoretically, this would have allowed the calculated average to be controlled
  by the speed with which frames are moved through the buffer.
- However this was found to be ineffective as the buffers typically stay
+ However, this was found to be ineffective as the buffers typically stay
  empty.
- Instead a queue of fixed size was defined in order to retain the most recent
- values of latency received at the server.
+ Instead, a queue of fixed size was defined in order to retain the most
+ recent values of latency received at the server.
  This queue included calculations for both exponential and simple moving
  averages of the contents.
 \end_layout
@@ -6480,7 +6447,7 @@ In order to function as a proof-of-concept for future investigations a simple
 \end_layout
 
 \begin_layout Standard
-In practice this meant that for each second a source's latency was higher
+In practice, this meant that for each second a source's latency was higher
  than the requirement, for example, the source's frame drop rate would be
  increased by 5%.
  The implementation in code can be seen in appendix 
@@ -6499,7 +6466,7 @@ noprefix "false"
 \begin_layout Standard
 Future investigations could use a non-linear calculation in order to reflect
  the distance from which operating values are from the requirements.
- Theoretically this would allow the step to move rapidly in order to quickly
+ Theoretically, this would allow the step to move rapidly in order to quickly
  approach the requirements before slowing and settling.
 \end_layout
 
@@ -6531,8 +6498,67 @@ Premise Validation
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/TestDev.png
+	lyxscale 30
+	width 45col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Client-server relationship in a development environment located on a single
+ machine
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:TestDev"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Development was conducted with the client and server located on the same
- machine reducing the latency to just that of processing the frames themselves.
+ machine reducing the latency to just that of processing the frames themselves,
+ see figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:TestDev"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
  In order to validate the premise of the hypothesis, investigations were
  made on two machines across a domestic local area network.
 \end_layout
@@ -6619,13 +6645,57 @@ The small scale of the controlled LAN environment does not inherently incur
  As the full-scene configuration requires around 275Mbps, artificial latency
  was introduced as frames took longer to deliver and were produced faster
  than they could be transmitted to the server.
+ A diagram of this testing layout can be seen in figure .
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/TestLAN.png
+	lyxscale 30
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Client-server relationship during initial testing in a LAN environment
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:TestLAN"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 The step was specified and varied manually initially in order to visualise
  the response in delay and FPS.
- Following implementation of a dynamic step, the response was again visualised
- using figure-only capture for realistic latency values.
+ Following the implementation of a dynamic step, the response was again
+ visualised using figure-only capture for realistic latency values.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6644,6 +6714,17 @@ Microsoft
 Azure
 \noun default
  cloud computing environment.
+ This final testing scenario can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:TestCloud"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
  A 
 \emph on
 Standard F2s V2
@@ -6668,6 +6749,49 @@ When operating over the open internet the domestic internet connection became
  With respect to the desired speeds mentioned above (5 - 275 Mbps), this
  can be seen to be a significant bottleneck.
  As such figure-only capture was used in order to limit the required bandwidth.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/TestCloud.png
+	lyxscale 30
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Client-server relationship during further testing in a cloud-based environment
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:TestCloud"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6768,7 +6892,7 @@ name "fig:Latency-and-FPS1"
 \end_layout
 
 \begin_layout Standard
-Generally the lowering of the drop rate induces the latency to begin increasing
+Generally, the lowering of the drop rate induces the latency to begin increasing
  at a fairly linear rate.
  This can be seen in figure 
 \begin_inset CommandInset ref
@@ -6806,7 +6930,7 @@ noprefix "false"
 \begin_layout Standard
 Looking to the FPS chart, the frame rate drops in response to an increase
  in frame drop rate and vice versa.
- Similarly to latency a lag can be seen when changes in drop rate are received.
+ Similarly to latency, a lag can be seen when changes in drop rate are received.
  Worth noticing is that as the step drops, the FPS increases before the
  latency begins increasing (
 \begin_inset Formula $t=70$
@@ -6844,8 +6968,8 @@ noprefix "false"
 \end_inset
 
 .
- It can be seen that as the average latency increases above the prescribed
- latency requirement an increase in dynamic step was induced.
+ It can be seen that as the average latency (blue) increased above the prescribe
+d latency requirement (green) an increase in dynamic step (red) was induced.
  As the latency fell past the requirement, the step also fell.
 \end_layout
 
@@ -7106,7 +7230,7 @@ noprefix "false"
 
  is presented to highlight the instability encountered in the cloud-based
  environment.
- Similarly to the local environment an initial spike in latency is seen
+ Similarly to the local environment, an initial spike in latency is seen
  before reducing to a consistent value.
  When the frame drop rate is dropped from 0.8 to 0.6, however, the connection
  becomes immediately unstable with bandwidth dropping to 0 Mbps as the connectio
@@ -7203,7 +7327,7 @@ LAN Premise Validation
 The lag in latency response could be attributed to a couple of influencing
  factors.
  The nature of a moving average partially representing previous values when
- iterating adds a 
+ iterating adds 
 \emph on
 friction
 \emph default
@@ -7217,7 +7341,7 @@ The initial spike in latency could be a result of the delay in drop rate
  Additionally, the drop rate was employed at the client prior to queueing
  frames in the transmission buffer.
  Frames are then delivered to the server decoupled from this rate.
- As a result when a new drop rate is received the buffer is filled at this
+ As a result, when a new drop rate is received the buffer is filled at this
  rate going forward however the existing population queued at a different
  rate must still be transmitted.
 \end_layout
@@ -7225,11 +7349,10 @@ The initial spike in latency could be a result of the delay in drop rate
 \begin_layout Standard
 Following the implementation of a dynamic step, the latency was no longer
  unbounded and instead oscillated as the step increased and decreased.
- As a result the system can be seen to dynamically drop frames in order
+ As a result, the system can be seen to dynamically drop frames in order
  to maintain a constant latency in adverse network conditions.
- This allows the system to keep up when when the amount of frames being
- produced by the client is too high to be transmitted in the same period
- of time.
+ This allows the system to keep up when the amount of frames being produced
+ by the client is too high to be transmitted in the same period of time.
 \end_layout
 
 \begin_layout Standard
@@ -7245,11 +7368,10 @@ The performance of this system, however, should be considered.
 
 \begin_layout Standard
 One method to control this would be to have the step move in a non-linear
- fashion, increasing at a higher rate the further away the live value is
- from the requirement and dropping faster as it falls below the required
- value.
+ fashion, changing at a rate proportional to the difference between the
+ live value and the requirement.
  This could allow the latency to oscillate closer to the requirement with
- the goal being for it to settle at that value.
+ the goal being for it to settle at this value.
 \end_layout
 
 \begin_layout Subsubsection
@@ -7268,7 +7390,7 @@ With the employed method of controlling transmission latency, representative
 \begin_layout Standard
 The need to deliver a step from the server to each client created an initial
  spike in latency in both environments but was more pronounced in the cloud.
- Additionally there were issues with the step not being delivered to the
+ Additionally, there were issues with the step not being delivered to the
  client at all, as this is included in the header of each request it was
  concluded that requests were either being lost or queued at the server
  unable to be transmitted over the socket busy receiving frames.
@@ -7337,8 +7459,8 @@ active
 \noun on
 Kinect
 \noun default
- sensors a method to tightly match different source frames within the processing
- pipeline based on timestamp could be implemented and tested.
+ sensors, a method to tightly match different source frames within the processin
+g pipeline based on timestamp could be implemented and tested.
 \end_layout
 
 \begin_layout Standard
@@ -7376,8 +7498,8 @@ ARFoundation
 Metal
 \noun default
  graphics library, limiting functionality to just that of the network layer.
- With a compatible shader the cross-platform migration would be feature-complete
-, extending the possible install base of the application while also providing
+ With a compatible shader, the cross-platform migration would be feature-complet
+e, extending the possible install base of the application while also providing
  access to the currently wider feature set of iOS's 
 \noun on
 ARKit
@@ -7433,6 +7555,8 @@ frame types
  will change significantly each frame and as such calculating and transmitting
  only the changes since the last could significantly reduce the required
  bandwidth.
+ The challenge here would be establishing temporal coherence between successive
+ frames to identify these differences, a harder task in 3D.
 \end_layout
 
 \begin_layout Standard
@@ -7454,7 +7578,7 @@ name "sec:Summary"
 \end_layout
 
 \begin_layout Standard
-Within this piece the process of extending the 
+Within this piece, the process of extending the 
 \noun on
 LiveScan3D
 \noun default
@@ -7480,11 +7604,11 @@ The
 \noun on
 LiveScan3D
 \noun default
- suite is described, both in it's initial state and following developments
+ suite is described, both in its initial state and following developments
  made to the network behaviour to include a sub-system of buffers.
  Both accompanying AR applications for the suite are presented and finally
- the suite as a whole is evaluated with it's strengths and limitations highlight
-ed.
+ the suite as a whole is evaluated with its strengths and limitations highlighte
+d.
 \end_layout
 
 \begin_layout Standard
@@ -7616,6 +7740,30 @@ options "bibtotoc"
 
 \begin_layout Section
 \start_of_appendix
+Project Gantt Chart
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Gantt-Chart"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/GanttChart.png
+	lyxscale 30
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Server UI Additions
 \begin_inset CommandInset label
 LatexCommand label
