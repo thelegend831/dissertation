@@ -3121,7 +3121,7 @@ status open
 \begin_inset Graphics
 	filename ../media/LiveScanArchitecture.png
 	lyxscale 50
-	width 70col%
+	width 65col%
 
 \end_inset
 
@@ -3396,7 +3396,7 @@ status open
 \begin_inset Graphics
 	filename /home/andy/uni/dissertation/media/calibration.png
 	lyxscale 30
-	width 20col%
+	width 15col%
 
 \end_inset
 
@@ -5006,6 +5006,13 @@ name "fig:new-client-server-packet"
 
 \end_layout
 
+\begin_layout Standard
+The client has had a text box added to the UI in order to allow an integer
+ source ID to be added.
+ This value is clamped between 0 and 127 to fit within the allowed range
+ and is then attached to each frame delivery as described above.
+\end_layout
+
 \begin_layout Subsection
 Source Synchronisation
 \begin_inset CommandInset label
@@ -5730,6 +5737,29 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
+Currently there is no way to negotiate source IDs with a newly connected
+ source.
+ It is the responsibility of each client of a source to select the same
+ ID.
+ It is also feasible for a new source to select an occupied ID without challenge
+ resulting in the server merging both sources together.
+ This would likely result in the two holograms flickering in the same space
+ and scatter calculated statistics.
+ Although attempts could be made to identify clients by IP address, this
+ would prove ineffective in many situations including IP addresses behind
+ carrier-grade NAT, those using IPv6 addressing or co-located sources.
+ Co-located sources could occur at a hypothetical studio utilising the 
+\noun on
+LiveScan3D
+\noun default
+ suite.
+ One alternative could be for the client to use an alphanumeric identifier
+ which would be mapped to the integer source ID during connection.
+ This handshake would then theoretically allow easier implementation of
+ further validation including authentication methods like passwords.
+\end_layout
+
+\begin_layout Standard
 The use of a source ID transmitted alongside each frame provides flexibility
  in that processing can be decoupled from the network infrastructure itself.
  Theoretically, it would also allow clients to function as multiple sources
@@ -5798,6 +5828,60 @@ Transformer
 As a whole, the design of the multi-source developments was intended to
  follow the philosophy of the existing suite without radically redesigning
  the application.
+\end_layout
+
+\begin_layout Subsection
+Summary
+\end_layout
+
+\begin_layout Standard
+Within this section the multi-source developments made throughout the 
+\noun on
+LiveScan
+\noun default
+ suite have been presented.
+ The suite is now capable of supporting multi-source experiences from client
+ to mobile AR application.
+ The viewfinder display at the server also provides an interactive space
+ to view all connected sources.
+ The limitations of the mobile AR application have been described, notably
+ the lack of individual touch interaction.
+ Two concepts of synchronisation have been introduced, 
+\emph on
+active
+\emph default
+ and 
+\emph on
+passive
+\emph default
+ sync.
+ A method of 
+\emph on
+passive
+\emph default
+ sync will be investigated in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Frame-Rate-Throttling"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ 
+\emph on
+Stale
+\emph default
+ sources were defined as sources that have not transmitted any frames within
+ a set time interval in order to remove them from display.
+ Finally, the global 
+\noun on
+KinectSettings
+\noun default
+ object was redefined as a per-source object, the main advantage of which
+ being to allow multi-view sources.
 \end_layout
 
 \begin_layout Standard
@@ -6294,6 +6378,31 @@ Android
  device.
 \end_layout
 
+\begin_layout Subsection
+Summary
+\end_layout
+
+\begin_layout Standard
+Within this section, efforts made to extend compatibility of the mobile
+ AR application to iOS devices have been presented.
+ The goal of migrating the AR SDK from 
+\noun on
+Google's ARCore
+\noun default
+ to 
+\noun on
+Unity's ARFoundation
+\noun default
+ was successful and the app would likely function correctly on 
+\noun on
+Android
+\noun default
+.
+ However, the app does not display holograms on iOS due to the included
+ shader being incompatible.
+ The app still functions as a useful network debugging tool.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
@@ -6313,7 +6422,9 @@ name "sec:Frame-Rate-Throttling"
 \end_layout
 
 \begin_layout Standard
-As discussed in the evaluations for the 
+Operating a server in the cloud could incur long latencies between client
+ frame capture and display whether at the server or user experience.
+ As discussed in the evaluations for the 
 \noun on
 LiveScan
 \noun default
@@ -6327,14 +6438,13 @@ noprefix "false"
 
 \end_inset
 
-), the inclusion of buffers can add to the total effective delay of frames
- from capture to presentation as they propagate through each.
- This effect is exacerbated when operating across long distances such as
- between cloud locations.
+), the inclusion of buffers can also add to the total effective delay of
+ frames from capture to presentation as they propagate through each, specificall
+y the transmission buffer of the client.
 \end_layout
 
 \begin_layout Standard
-A proposed hypothesis for reducing this delay was to limit the transmitted
+A proposed hypothesis for reducing this delay is to limit the transmitted
  frame rate.
  It follows that this would reduce the population of each buffer and reduce
  the time that each frame spent within each.
@@ -6342,8 +6452,13 @@ A proposed hypothesis for reducing this delay was to limit the transmitted
 
 \begin_layout Standard
 This was implemented based on further work by Selinis introducing the concept
- of a dynamic step calculated from a provided FPS and latency requirement
- representing the percentage of frames dropped by the client.
+ of a 
+\emph on
+dynamic step
+\emph default
+.
+ This step is calculated from an FPS and latency requirement and represents
+ the percentage of frames to be probabilistically dropped by the client.
  This step is transmitted in the header of each frame request theoretically
  allowing the system to dynamically respond to changes in network conditions.
  This step relied on global statistics calculated about the 
@@ -6388,8 +6503,8 @@ Implement a moving average scheme on successive subsets of latencies from
 \end_layout
 
 \begin_layout Itemize
-Allow either an FPS or delay requirement to be provided as well as a combination
- of the two in order to the prioritisation of either.
+Allow either an FPS or delay requirement to be provided as well as the existing
+ combination of the two in order to facilitate the prioritisation of either.
 \end_layout
 
 \begin_layout Subsection
@@ -6408,7 +6523,7 @@ KinectServer
 \noun on
 SourceStat
 \noun default
- objects were used.
+ objects was used.
  This object collects the FPS, bandwidth and average latencies for each
  source allowing simple retrieval and update when iterating through sockets.
 \end_layout
@@ -6535,8 +6650,8 @@ Step Calculation & Use
 \end_layout
 
 \begin_layout Standard
-In order to function as a proof-of-concept for future investigations a simple
- method for calculating the frame drop rate was used.
+In order to function as a proof-of-concept for future investigations, a
+ simple method for calculating the frame drop rate was used.
  The step began at 0% and was incremented or decremented linearly depending
  on the source's latency or FPS with respect to the provided requirements,
  an interval of 5% was used.
@@ -6561,7 +6676,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-Each frame the client generates a random number between 0 and 1 and compares
+Each frame, the client generates a random number between 0 and 1 and compares
  this to the step.
  If this random number is greater than the step then this frame is transmitted,
  otherwise it is dropped.
@@ -6583,8 +6698,7 @@ The following outlines the methods used to investigate the effect of limiting
  client transmission frame rates in order to control the effective display
  latency between a client and server.
  Similar control methods could be implemented between server and user experience
- device with similar expected results, however it should be noted that doing
- both could effectively square the proportion of frames dropped.
+ device with similar expected results.
  Both test environments are presented and the validity of each is discussed.
 \end_layout
 
@@ -6733,7 +6847,7 @@ name "fig:body-bandwidth-variation"
 The small scale of the controlled LAN environment does not inherently incur
  long latencies between nodes and as such does not naturally present a valid
  environment for these investigations.
- To test such a scenario full-scene transmissions were used in order to
+ To test such a scenario, full-scene transmissions were used in order to
  saturate the available bandwidth.
  The connection between nodes also included a WiFi connection which limited
  the available bandwidth to around 100Mbps.
@@ -6846,7 +6960,8 @@ The frame drop rate or step,
 \end_inset
 
 , is defined as the proportion of frames to probabilistically drop at the
- client, this was transformed into an expected frame rate (
+ client.
+ This was transformed into an expected frame rate (
 \begin_inset Formula $\upsilon_{E}$
 \end_inset
 
@@ -6866,8 +6981,8 @@ The frame drop rate or step,
 \end_layout
 
 \begin_layout Standard
-This allows comparison between the calculated live FPS and what the frame
- drop rate should ideally be inducing in this value.
+This allows comparison between the live FPS and what the frame drop rate
+ should ideally be inducing in this value.
  The 
 \noun on
 Kinect
@@ -7106,8 +7221,8 @@ name "fig:Latency-and-FPS1"
 \end_layout
 
 \begin_layout Standard
-Generally, the lowering of the frame drop proportion induces the latency
- to begin increasing at a fairly linear rate.
+Generally, the lowering of the frame drop proportion beyond a critical value
+ induces the latency to begin increasing at a fairly linear rate.
  This can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7135,8 +7250,8 @@ noprefix "false"
 \end_inset
 
 ).
- Conversely, increasing the step beyond a critical value causes a peak in
- the latency before inducing the value to begin dropping.
+ Conversely, increasing the step causes a peak in the latency before inducing
+ the value to begin dropping.
  There is a noticeable lag in response, changes in latency are offset in
  time from the reception of a changed drop rate.
  Additionally an initial spike in latency can be seen despite having a 50%
@@ -7162,6 +7277,8 @@ Looking to the FPS chart, the frame rate drops in response to an increase
 \end_inset
 
 ).
+ From here, the frame drop proportion or step is presented through the previousl
+y defined expected frame rate.
 \end_layout
 
 \begin_layout Standard
@@ -7232,7 +7349,7 @@ yellow
 green
 \color inherit
 ).
- As the latency fell past the requirement, the expected frame rate rose
+ As the latency falls past the requirement, the expected frame rate rises
  back to the maximum, each latency spike has an associated frame rate drop.
 \end_layout
 
@@ -7416,7 +7533,7 @@ noprefix "false"
 
 \begin_layout Standard
 Many of the induced frame rate drops display a lag in responding to a latency
- increase, three latency spikes can be seen presented individually in figure
+ increase, six latency spikes can be seen presented individually in figure
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7428,16 +7545,35 @@ noprefix "false"
 \end_inset
 
 .
- While the extent of the lag varies, in the first two of these details there
- can be seen to be roughly 10 seconds between the expected rate intersecting
- the actual FPS and the induced drop.
+ While the extent of the lag varies, in the figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:a-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:c-2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ there can be seen to be roughly 10 seconds between the expected rate intersecti
+ng the actual FPS and the induced drop.
  Additionally, in these cases the expected frame rate has already started
  increasing before the actual frame rate properly responds.
 \end_layout
 
 \begin_layout Standard
-Worth noting, however, is the difference in behaviour as the expected frame
- rate increases as opposed to when it is decreasing.
+Worth noting is the difference in lag when the expected frame rate increases
+ as opposed to when it is decreasing.
  Visible in much of figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7448,7 +7584,7 @@ noprefix "false"
 
 \end_inset
 
- and the first two charts of figure 
+ and figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:lag-spike-details"
@@ -7458,8 +7594,17 @@ noprefix "false"
 
 \end_inset
 
- is that the lag in frame rate decrease is not as visible when frame rates
- increase and the actual value more closely follows the expected value.
+ is that the lag in frame rate decrease is generally not visible when the
+ frame rate increases, the actual value more closely follows the expected
+ value.
+\end_layout
+
+\begin_layout Standard
+As a whole, in general the observed frame rate can be seen initially to
+ drop with the expected value before flattening and peaking at a similar
+ time to latency.
+ Latency and frame rate in many cases drop at similar times before the FPS
+ then rises in line with the expected value.
 \end_layout
 
 \begin_layout Standard
@@ -7471,10 +7616,18 @@ status open
 \begin_layout Plain Layout
 \noindent
 \align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
 \begin_inset Graphics
 	filename ../media/graphs/FPSLagSmall.png
 	lyxscale 30
-	width 55col%
+	width 50col%
 
 \end_inset
 
@@ -7482,17 +7635,30 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename ../media/graphs/FPSLagSmall2.png
-	lyxscale 30
-	width 55col%
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:a-1"
 
 \end_inset
 
 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -7500,7 +7666,196 @@ status open
 \begin_inset Graphics
 	filename ../media/graphs/FPSLagSmall3.png
 	lyxscale 30
-	width 55col%
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:b-3"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/graphs/FPSLagSmall2.png
+	lyxscale 30
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:c-2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/graphs/FPSLagSmall5.png
+	lyxscale 30
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:d-5"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/graphs/FPSLagSmall4.png
+	lyxscale 30
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:e-4"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../media/graphs/FPSLagSmall6.png
+	lyxscale 30
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:f-6"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -7737,22 +8092,45 @@ LAN Premise Validation
 \end_layout
 
 \begin_layout Standard
-The lag in latency response could be attributed to a couple of influencing
- factors.
- A small effect could be posed by the nature of a moving average partially
- representing previous values when iterating.
- This adds 
-\emph on
-friction
-\emph default
- to each successive result and an inherent lag when the data swings.
- Ultimately the latency in delay is closely related to the delay in FPS
- response, discussed in this section.
+Key in understanding figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Local-Dynamic"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:lag-spike-details"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is noting that the latency values measure the time between a frame being
+ queued at the client and it being received at the server.
+ An increase in latency suggests that frames are not able to be delivered
+ to the server at a rate higher than they are being produced and as such
+ the transmission buffer at the client is filling.
+ While it may at first appear odd that the observed frame rate peaks as
+ latency peaks, this can be explained by attributing this to the time where
+ the network conditions are alleviating and the transmission buffer is emptying.
+ Hence, the point at which the latency peaks is not the point at which the
+ network is being stressed most which would be just beforehand when the
+ latency is increasing.
+ With an empty buffer, the latency drops and the frame rate falls to the
+ expected value, more able to match it with the less contested network condition
+s.
 \end_layout
 
 \begin_layout Standard
-Following the implementation of a dynamic step, the latency was no longer
- unbounded and instead oscillated as the frame rate increased and decreased.
+Following the implementation of a dynamic step, the latency is no longer
+ unbounded and instead oscillates as the frame rate increases and decreases.
  As a result, the system can be seen to dynamically drop frames in order
  to maintain a constant latency in adverse network conditions.
  This allows the system to keep up when the amount of frames being produced
@@ -7795,7 +8173,19 @@ Another contributor to this spike could be a delay in delivering new drop
  Although the rate moved in real-time at the server, sometimes this did
  not appear to be the case at the client.
  As particular strain was put on the connection, specifically as the latency
- increased, the ability to deliver new drop rates appeared to be compromised.
+ increased, the ability to deliver new drop rates appeared to be compromised,
+ this would explain why the lag was seen more as the latency increased and
+ less so when the latency is low (figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:lag-spike-details"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
  As this is included in the header of each request it was concluded that
  requests were being queued at the server unable to be transmitted over
  the socket busy receiving frames.
@@ -7817,7 +8207,7 @@ With the employed method of controlling transmission latency, representative
 \begin_layout Standard
 The need to deliver a step from the server to each client created an initial
  spike in latency in both environments but was more pronounced in the cloud.
- The previously mentioned issues with rapidly delivering new frame drop
+ The previously mentioned issues with promptly delivering new frame drop
  rates was more pronounced in this scenario.
 \end_layout
 
