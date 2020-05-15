@@ -84,10 +84,10 @@ figs-within-sections
 \shortcut idx
 \color #008000
 \end_index
-\leftmargin 2cm
-\topmargin 2.2cm
-\rightmargin 2cm
-\bottommargin 2.2cm
+\leftmargin 1.8cm
+\topmargin 2cm
+\rightmargin 1.8cm
+\bottommargin 2cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation skip
@@ -7371,7 +7371,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename ../media/graphs/LocalDynamic1000FPSEMA0.7.png
+	filename ../media/graphs/LocalDynamic1000FPSEMA0.7Labelled.png
 	lyxscale 40
 	width 100col%
 
@@ -7424,7 +7424,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename ../media/graphs/LocalDynamic2000FPSEMA0.7.png
+	filename ../media/graphs/LocalDynamic2000FPSEMA0.7Labelled.png
 	lyxscale 40
 	width 100col%
 
@@ -7538,6 +7538,16 @@ Many of the induced frame rate drops display a lag in responding to a latency
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:lag-spike-details"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, letter identifiers relate to those seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Local-Dynamic"
 plural "false"
 caps "false"
 noprefix "false"
@@ -8114,18 +8124,19 @@ noprefix "false"
 
  is noting that the latency values measure the time between a frame being
  queued at the client and it being received at the server.
- An increase in latency suggests that frames are not able to be delivered
- to the server at a rate higher than they are being produced and as such
- the transmission buffer at the client is filling.
+ The previously mentioned inability to retrieve frames faster than they
+ are being produced allows the transmission buffer at the client to begin
+ filling.
  While it may at first appear odd that the observed frame rate peaks as
  latency peaks, this can be explained by attributing this to the time where
- the network conditions are alleviating and the transmission buffer is emptying.
+ the network conditions are alleviating and the transmission buffer is emptying
+ in a flushing motion.
  Hence, the point at which the latency peaks is not the point at which the
- network is being stressed most which would be just beforehand when the
+ network is being stressed most, this would be just beforehand when the
  latency is increasing.
  With an empty buffer, the latency drops and the frame rate falls to the
- expected value, more able to match it with the less contested network condition
-s.
+ expected value, more able to closely follow it with the less contested
+ network conditions.
 \end_layout
 
 \begin_layout Standard
@@ -8229,6 +8240,29 @@ An alternative would be to allow the server to independently implement this
  decides whether a frame should be delivered in response.
  With a higher step (and therefore lower expected frame rate) a higher proportio
 n of requests made by the server are unnecessary.
+\end_layout
+
+\begin_layout Subsection
+Summary
+\end_layout
+
+\begin_layout Standard
+In this section, investigations were made into controlling the otherwise
+ unbounded display latency in a LAN and cloud-based environment.
+ This was successfully demonstrated in the LAN environment and the performance
+ was discussed, the linear movement of the frame drop rate was shown to
+ induce a slow response that allow high peaks in latency.
+ 
+\end_layout
+
+\begin_layout Standard
+The cloud environment was shown to be highly unstable, such that representative
+ data was not able to be collected.
+ This was suggested to be partly due to the nature of the suite's behaviour
+ and partly due to unreliability in transmitting the frame drop rate.
+ Alternatives to the implemented client frame drop rate that could alleviate
+ this were presented, allowing the server to independently implement the
+ control method.
 \end_layout
 
 \begin_layout Standard
@@ -8479,6 +8513,8 @@ A system of frame rate throttling was successfully implemented in order
  to investigate the effects on effective display latency.
  It's applicability to source synchronisation was discussed and preliminary
  data from both a local and cloud-based environment was presented.
+ The implemented method was successfully shown to limit latency by controlling
+ transmitted frame rate.
  Possible drawbacks with the method were highlighted and alternative implementat
 ions were proposed.
 \end_layout
