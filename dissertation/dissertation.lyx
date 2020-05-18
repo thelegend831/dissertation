@@ -627,8 +627,8 @@ Migrate the server from a single-source streaming node to a manager of multiple
 \begin_layout Enumerate
 Extend the native display viewfinder of the server in order to separately
  render each connected source.
- Allow individual placement of holograms using keyboard controls.
- Include automatically coherent placement of newly connected sources.
+ Allow individual placement of holograms using keyboard controls and include
+ automatically coherent placement of newly connected sources.
 \end_layout
 
 \begin_layout Enumerate
@@ -855,16 +855,16 @@ Challenges
 The biggest challenge to the mobile AR migration is the scope of changes
  being made to the codebase, changing the base library used to create and
  manage the AR environment.
- This is a significant change and poses many opportunities to cause issues
- compounded by the goal of building for a different device than initially
- intended implying a different build toolset.
+ This is a significant change posing many opportunities to cause issues.
+ This is compounded by the goal of building for a different device than
+ initially intended implying a different build toolset.
 \end_layout
 
 \begin_layout Itemize
 The biggest challenge in implementing dynamic frame rate throttling is defining
- how this system reacts to changing network conditions, it is important
- to balance both frame rate and latency as detriment either too heavily
- can significantly detriment the final experience.
+ how this system reacts to changing network conditions.
+ It is important to balance both frame rate and latency as sacrificing either
+ too heavily can significantly detriment the final experience.
 \end_layout
 
 \begin_layout Subsection
@@ -952,8 +952,8 @@ passive
  to make all sources meet the same latency requirement.
  Active sync acts as a fine control, tightly matching source frames of the
  closest timestamp from within the processing pipeline of the server.
- Active sync was unable to be implemented within this project due to the
- lack of access to multiple 
+ Active sync was unable to be implemented within the allowed time-frame
+ due to the lack of access to multiple 
 \noun on
 Kinect
 \noun default
@@ -1124,7 +1124,7 @@ LiveScan
 \end_layout
 
 \begin_layout Standard
-Based on a previous design by Selinis, a proportion of frames were dropped
+Completing a previous design by Selinis, a proportion of frames were dropped
  at the client before queuing for transmission.
  This rate was referred to as a dynamic step and was calculated by the server
  based on current network conditions including latency and frame rate.
@@ -1149,7 +1149,7 @@ This system was tested in both a local and cloud-based environment with
 Representative data was not able to be gathered in a cloud-based environment
  as a result of the system's instability and domestic network upload speed.
  Preliminary data in this environment is presented with discussions regarding
- how to make the frame rate drop methods better suited to these adverse
+ how to make the frame drop rate methods better suited to these adverse
  conditions.
 \end_layout
 
@@ -3379,7 +3379,19 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Example marker used within the LiveScan3D calibration process
+Example marker used within the 
+\noun on
+LiveScan3D
+\begin_inset CommandInset citation
+LatexCommand cite
+key "livescan3d"
+literal "false"
+
+\end_inset
+
+
+\noun default
+ calibration process
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:calibration-marker"
