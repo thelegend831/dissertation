@@ -668,7 +668,7 @@ status open
 \begin_inset Graphics
 	filename ../media/ObjectivesSummary.png
 	lyxscale 30
-	width 50col%
+	width 45col%
 
 \end_inset
 
@@ -715,7 +715,7 @@ Connection Quality
 Introducing multiple sources to the experiences increases complexity in
  many ways.
  When assuming geographically distant sources it could also be assumed there
- will be different network conditions between each and the server.
+ will be different network conditions between each of these and the server.
  How the server handles and presents differences in connection quality will
  be critical to the user experience when consumed in AR or VR where such
  discrepancies would otherwise be clear and harmful.
@@ -744,7 +744,7 @@ The bandwidth for multiple sources can be expected to scale linearly in
  only.
  For an already demanding service, this could require additional management.
  An expected environment for the server would be a cloud-based environment
- where bandwidth can be expected to be high, investigations into it's behaviour
+ where bandwidth can be expected to be high, investigations into its behaviour
  in this scenario are presented in section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -770,9 +770,9 @@ Synchronising sources for display poses the largest challenge to a seamless
  The previous conference call example would be one where this offset would
  not be tolerable, the audio delay incurred during transatlantic phone calls
  can make communication harder in the same way.
- Additionally it is likely that such a system would need to be situated
- in the main processing flow of frames at the server, as such a high performance
- implementation must be found in order not to detriment the overall performance.
+ Additionally, such a system would likely need to be situated in the main
+ processing flow of frames at the server, as such a high-performance implementat
+ion must be found in order not to detriment the overall performance.
  Two theories of synchronisation are presented in section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -851,23 +851,20 @@ LiveScan
 Challenges
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 The biggest challenge to the mobile AR migration is the scope of changes
  being made to the codebase, changing the base library used to create and
  manage the AR environment.
  This is a significant change and poses many opportunities to cause issues
  compounded by the goal of building for a different device than initially
  intended implying a different build toolset.
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-frame rate challenge?
 \end_layout
 
-\end_inset
-
-
+\begin_layout Itemize
+The biggest challenge in implementing dynamic frame rate throttling is defining
+ how this system reacts to changing network conditions, it is important
+ to balance both frame rate and latency as detriment either too heavily
+ can significantly detriment the final experience.
 \end_layout
 
 \begin_layout Subsection
@@ -950,7 +947,7 @@ passive
  using the included NTP functionality, source synchronisation attempts to
  match frames captured at the same time during display.
  Passive sync acts as a coarse match and aims to keep frames within a tolerable
- latency interval by responding to current environment conditions.
+ latency interval by responding to current environmental conditions.
  Within this work, this is exemplified by throttling transmitted frame rate
  to make all sources meet the same latency requirement.
  Active sync acts as a fine control, tightly matching source frames of the
@@ -995,8 +992,8 @@ PointCloudReceiver
 \emph on
 Stale
 \emph default
- source were defined as sources that have not delivered a frame to the server
- within a given time interval.
+ sources were defined as sources that have not delivered a frame to the
+ server within a given time interval.
  This allows them to be removed from live display in order to maintain the
  experience of other connected sources.
  This was implemented through the 
@@ -1010,8 +1007,8 @@ SourceCollection
 
 \begin_layout Standard
 The settings object previously maintained globally was redefined as being
- a source level variable.
- Containing calibration information, this allowed sources to be setup in
+ a source-level variable.
+ Containing calibration information, this allowed sources to be set up in
  multi-view configurations.
  These settings objects were also stored within the 
 \noun on
@@ -1086,7 +1083,7 @@ LiveScan
 \noun default
  specific code, the network behaviour was also as expected and the client
  connected to the server without issue.
- At this point it was discovered that the included geometry shader used
+ At this point, it was discovered that the included geometry shader used
  by the 
 \noun on
 Android
@@ -1144,7 +1141,7 @@ This system was tested in both a local and cloud-based environment with
  these variables.
  Using figure-only capture, a dynamic step was shown to successfully control
  the otherwise unbounded latency.
- The limitations of this approach is discussed including the observed wide
+ The limitations of this approach are discussed including the observed wide
  oscillations around the requirement as a result of the linear step motion.
 \end_layout
 
@@ -1184,11 +1181,7 @@ LiveScan3D
 \begin_inset Newline newline
 \end_inset
 
-The 
-\noun on
-LiveScan3D
-\noun default
- suite is described and evaluated in section 
+Section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sec:LiveScan3D"
@@ -1198,7 +1191,11 @@ noprefix "false"
 
 \end_inset
 
-, the original state is outlined and the impact of subsequent developments
+ describes and evaluates the 
+\noun on
+LiveScan3D
+\noun default
+ suite; the original state is outlined and the impact of subsequent developments
  are discussed.
 \begin_inset Newline newline
 \end_inset
@@ -1393,7 +1390,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -1590,8 +1587,18 @@ cted.
 \end_layout
 
 \begin_layout Standard
-With the increasing computational power of computers and GPUs, methods to
- do so in real-time with high frame rates have been demonstrated
+With the increasing computational power of computers and GPUs
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Graphics Processing Unit, processors specialising in parallel computing
+ with applications in graphics rendering
+\end_layout
+
+\end_inset
+
+, methods to do so in real-time with high frame rates have been demonstrated
 \begin_inset CommandInset citation
 LatexCommand cite
 key "cuda-visual-hull"
@@ -1666,7 +1673,7 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-These techniques draw data from tightly calibrated camera viewpoints, however,
+These techniques draw data from tightly calibrated camera viewpoints, however
  when considering consumer-grade applications this is typically not available.
  The use of infra-red structured light and 
 \emph on
@@ -2186,16 +2193,6 @@ literal "false"
  experiences for developing worker balance to aid in working at elevation
  and AR experiences incorporated into the workplace for aiding in task sequencin
 g to reduce the effect of memory on safety.
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-Link with work?
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -2306,8 +2303,8 @@ Android
 \end_layout
 
 \begin_layout Standard
-The advancement of mobile AR bolstered by the growing ubiquity of compatible
- hardware has led it to become a rapidly growing and popular form of XR.
+The advancement of mobile AR, bolstered by the growing ubiquity of compatible
+ hardware, has led it to become a rapidly growing and popular form of XR.
  The introduction of OS-level SDK's in 
 \noun on
 Google
@@ -2347,7 +2344,8 @@ literal "false"
 \begin_layout Standard
 These frameworks provide native AR environments in which important prerequisites
  including rear-camera pass-through, device motion tracking and plane tracking
- are implemented with the performance expected of an OS-level library.
+ are implemented with the performance and development tools expected of
+ an OS-level library.
 \end_layout
 
 \begin_layout Standard
@@ -2404,7 +2402,7 @@ Unity
 \noun default
 's greatest strengths lies in its native cross-platform deployment allowing
  building for the largest PC, mobile and games console platforms.
- This in conjunction with 
+ This, in conjunction with 
 \noun on
 Google
 \noun default
@@ -2416,7 +2414,7 @@ ARCore
 \noun on
 Unity
 \noun default
- package facilitated Selinis' migration of the 
+ package, facilitated Selinis' migration of the 
 \noun on
 Hololens
 \noun default
@@ -2758,34 +2756,8 @@ OpenCV
  in calibration.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-Link to livescan?
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection
 Multi-Source Holoportation
-\end_layout
-
-\begin_layout Standard
-\begin_inset Flex TODO Note (inline)
-status open
-
-\begin_layout Plain Layout
-More?
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -2938,7 +2910,7 @@ name "fig:World-in-Miniature-group-by-group"
 \begin_layout Standard
 In comparison to 
 \noun on
-LiveScan
+LiveScan,
 \noun default
  these provide domain-specific applications, the implementation developed
  within this project aims to provide a general many-to-one application of
@@ -2999,11 +2971,11 @@ telepresence
 \emph default
  was presented.
  Domain-specific examples of multi-source holoportation were described to
- contextualise this projects aim to produce a general implementation.
+ contextualise this project's aim to produce a general implementation.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -3887,20 +3859,7 @@ The addition of buffers allows the presentation layer to request frames
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-comparison between multi-view and multi-source
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -4037,7 +3996,7 @@ Implementation
 \end_layout
 
 \begin_layout Standard
-During initial testing frames received from a live sensor were intercepted
+During initial testing, frames received from a live sensor were intercepted
  and serialized to XML in local storage.
  These frames were then loaded into memory as the server was started and
  merged with those received live before display.
@@ -4286,11 +4245,11 @@ LiveScan3D
 \end_layout
 
 \begin_layout Standard
-To accomplish this a dictionary was used as the shared variable with each
+To accomplish this, a dictionary was used as the shared variable with each
  client's frame referenced by its source ID.
  In doing so only one frame per client is kept and each new frame overrides
  the last.
- During rendering the dictionary is iterated through and each point cloud
+ During rendering, the dictionary is iterated through and each point cloud
  combined.
  During combination, a client-specific transformation is retrieved from
  an instance of the 
@@ -5069,8 +5028,10 @@ Although capturing frames at the same rate (30Hz), it is highly unlikely
 
 \begin_layout Standard
 Secondly, during transmission a variable amount of latency will be introduced
- as a result of the network conditions and distance from client to server
- and from server to UE.
+ as a result of the network conditions and distance between client, server
+ and UE.
+ This likely presents the majority of the whole value and as such is focused
+ on.
 \end_layout
 
 \begin_layout Standard
@@ -5134,20 +5095,13 @@ Active
  synchronisation includes efforts to tightly match frames during processing
  at the server in order to minimise the difference in latency since capture.
  In practice, this could be achieved at the point where frames are moved
- from the various receiving buffers to the live buffer
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-implementation?
-\end_layout
-
-\end_inset
-
-.
+ from the various receiving buffers to the live buffer.
  Positioned within the critical processing pipeline, active methods have
  access to only a tight interval of frames and must operate quickly making
  them more sensitive to wide latency differences in sources.
+ This sensitivity and tight interval of frames from which to pick matched
+ frames will likely also make active sync methods more fragile if latency
+ deltas are too wide.
 \end_layout
 
 \begin_layout Standard
@@ -5241,8 +5195,8 @@ Google ARCore
 \noun on
 LiveScan
 \noun default
- specific objects responsible for receiving and constructing holograms within
- the AR scene.
+ specific objects and C# scripts responsible for receiving and constructing
+ holograms within the AR scene.
 \end_layout
 
 \begin_layout Standard
@@ -5289,11 +5243,11 @@ name "fig:Existing-scripts"
 \end_layout
 
 \begin_layout Standard
-This 
+The layout of 
 \noun on
 LiveScan
 \noun default
- specific code can be seen in figure 
+ specific C# components can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Existing-scripts"
@@ -5354,12 +5308,25 @@ Unity
 \noun default
  allowed the restructuring of this architecture into one capable of supporting
  multi-source experiences with minimal code additions.
- A source prefab
-\begin_inset Flex TODO Note (Margin)
+ A source 
+\emph on
+prefab
+\emph default
+
+\begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-does prefab need defining?
+A 
+\emph on
+prefab
+\emph default
+ is a preconfigured 
+\noun on
+Unity
+\noun default
+ GameObject with defined parameters and attached C# scripts capable of easily
+ being instantiated in the scene
 \end_layout
 
 \end_inset
@@ -5517,7 +5484,7 @@ A source could be considered
 stale
 \emph default
  when a frame has not been received for it within a certain time threshold,
- the default was decided as 5 seconds.
+ the default was defined as 5 seconds.
  Beyond this, the source should be considered, if at least temporarily,
  disconnected.
 \end_layout
@@ -5661,16 +5628,6 @@ KinectSettings
 KinectServer
 \noun default
  is capable of delivering the current settings to each client.
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-settings window figure?
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsubsection
@@ -5778,8 +5735,9 @@ While no applications for such a configuration are posed here, this could
 .
  However, the constant transmission of a source ID also extends the possibility
  for error.
- During debugging, what was assumed to be a malformed packet could cause
- a frame to be entered for a different source as the source ID was corrupted.
+ Rarely, during debugging what was assumed to be a malformed packet could
+ cause a frame to be entered for a different source as the source ID was
+ corrupted.
  While a single frame error doesn't necessarily constitute a catastrophic
  error, it could prove detrimental to the experience.
  
@@ -5841,11 +5799,17 @@ LiveScan
 \noun default
  suite have been presented.
  The suite is now capable of supporting multi-source experiences from client
- to mobile AR application.
- The viewfinder display at the server also provides an interactive space
- to view all connected sources.
- The limitations of the mobile AR application have been described, notably
- the lack of individual touch interaction.
+ to mobile AR application although tests have not been conducted due to
+ a lack of access to multiple 
+\noun on
+Kinect
+\noun default
+ sensors.
+ The viewfinder display at the server provides an interactive space to view
+ all connected sources, each can be moved using keyboard controls.
+ Despite being able to view multiple sources concurrently, the limitations
+ of the mobile AR application have been described, notably the lack of individua
+l touch interaction.
  Two concepts of synchronisation have been introduced, 
 \emph on
 active
@@ -5885,7 +5849,7 @@ KinectSettings
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -6009,16 +5973,19 @@ literal "false"
 \end_inset
 
  effect of rear-camera pass-through natural to handheld AR experiences.
-\begin_inset Flex TODO Note (Margin)
-status open
-
-\begin_layout Plain Layout
-expand?
 \end_layout
 
-\end_inset
-
-
+\begin_layout Standard
+Methods to do acquire such permissions were not identified and in an effort
+ to properly generalise the application, 
+\noun on
+Unity's
+\noun default
+ 
+\noun on
+ARFoundation
+\noun default
+ was instead investigated.
 \end_layout
 
 \begin_layout Subsection
@@ -6404,7 +6371,7 @@ Android
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -6446,8 +6413,10 @@ y the transmission buffer of the client.
 \begin_layout Standard
 A proposed hypothesis for reducing this delay is to limit the transmitted
  frame rate.
- It follows that this would reduce the population of each buffer and reduce
- the time that each frame spent within each.
+ It follows that this would reduce the time required to deliver a unit time's
+ worth of footage.
+ Additionally this would theoretically reduce the population of each buffer
+ and reduce the time that each frame spent within each.
 \end_layout
 
 \begin_layout Standard
@@ -7105,7 +7074,7 @@ name "fig:TestCloud"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -7555,7 +7524,7 @@ noprefix "false"
 \end_inset
 
 .
- While the extent of the lag varies, in the figures 
+ While the extent of the lag varies, in figures 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:a-1"
@@ -7577,7 +7546,7 @@ noprefix "false"
 
  there can be seen to be roughly 10 seconds between the expected rate intersecti
 ng the actual FPS and the induced drop.
- Additionally, in these cases the expected frame rate has already started
+ Additionally, in these cases, the expected frame rate has already started
  increasing before the actual frame rate properly responds.
 \end_layout
 
@@ -7610,9 +7579,9 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-As a whole, in general the observed frame rate can be seen initially to
- drop with the expected value before flattening and peaking at a similar
- time to latency.
+When considering an individual latency spike, in general the observed frame
+ rate can be seen initially to drop with the expected value before flattening
+ and peaking at a similar time to latency.
  Latency and frame rate in many cases drop at similar times before the FPS
  then rises in line with the expected value.
 \end_layout
@@ -7920,7 +7889,7 @@ noprefix "false"
 \end_inset
 
  presents the average transmission latency with an uncontrolled frame drop
- rate.
+ rate in a cloud environment.
  The used bandwidth is also visualised averaging around 10Mbps, the rated
  upload speed for the domestic internet connection.
  The latency can be seen to increase linearly and constantly with the exponentia
@@ -8077,6 +8046,23 @@ name "fig:unstable-cloud-based-latency"
 \end_layout
 
 \begin_layout Standard
+This was the extent of data able to be gathered in the cloud environment,
+ the dynamic step proved ineffectual as the drop rate was not promptly transmitt
+ed to the connected client.
+ This resulted in an unbounded latency increase as seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:raw-cloud-latency"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
 
@@ -8089,9 +8075,9 @@ Discussion
 
 \begin_layout Standard
 Demonstrated in both the LAN and cloud environment, it can be seen that
- a high enough frame drop rate maintains a constant latency while lowering
+ a low enough expected frame rate maintains a constant latency while increasing
  this beyond a critical value induces a constant linear increase.
- This would suggest that below this critical value the server is not able
+ This would suggest that above this critical value the server is not able
  to receive frames at a rate higher than they are being produced at the
  client allowing the latency to begin increasing as a backlog of frames
  is produced.
@@ -8135,7 +8121,7 @@ noprefix "false"
  network is being stressed most, this would be just beforehand when the
  latency is increasing.
  With an empty buffer, the latency drops and the frame rate falls to the
- expected value, more able to closely follow it with the less contested
+ expected value, more able to closely follow it with the less congested
  network conditions.
 \end_layout
 
@@ -8198,8 +8184,9 @@ noprefix "false"
 
 ).
  As this is included in the header of each request it was concluded that
- requests were being queued at the server unable to be transmitted over
- the socket busy receiving frames.
+ these were either being queued at the server unable to be transmitted over
+ the socket busy receiving frames or queued at the client ready for processing
+ and responding to the request.
 \end_layout
 
 \begin_layout Subsubsection
@@ -8236,10 +8223,11 @@ An alternative would be to allow the server to independently implement this
  This could be done by dynamically controlling the rate of frame requests
  made by the server as opposed to the rate of frames created at the client.
  An advantage could be found in the increased efficiency.
- Currently the server requests frames at a constant rate and the client
+ Currently, the server requests frames at a constant rate and the client
  decides whether a frame should be delivered in response.
  With a higher step (and therefore lower expected frame rate) a higher proportio
-n of requests made by the server are unnecessary.
+n of requests made by the server are unnecessary, in a real-time application
+ this should be minimised.
 \end_layout
 
 \begin_layout Subsection
@@ -8266,7 +8254,7 @@ The cloud environment was shown to be highly unstable, such that representative
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -8514,7 +8502,8 @@ A system of frame rate throttling was successfully implemented in order
  It's applicability to source synchronisation was discussed and preliminary
  data from both a local and cloud-based environment was presented.
  The implemented method was successfully shown to limit latency by controlling
- transmitted frame rate.
+ transmitted frame rate in the LAN environment.
+ The limitations encountered in the cloud environment were also presented.
  Possible drawbacks with the method were highlighted and alternative implementat
 ions were proposed.
 \end_layout
@@ -8523,6 +8512,10 @@ ions were proposed.
 Possible future developments and investigations were outlined including
  those working from the developments of this project and those inherent
  to the suite itself.
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -8537,13 +8530,17 @@ name "sec:Conclusions"
 \end_layout
 
 \begin_layout Standard
-Holoportation and multi-source configurations thereof are important technologies
- for extended reality experiences with broad appeal to many applications.
+Holoportation and multi-source configurations thereof are important for
+ all forms of extended reality experiences.
  The use of consumer hardware, specifically the 
 \noun on
 Kinect
 \noun default
-, has accelerated the space.
+, has accelerated the space and allowed access to the technology without
+ a dedicated lab environment.
+ With broad appeal to many applications, the generic real-time collection
+ and transmission of 3D video will facilitate both existing XR experiences
+ and a future of those based on live broadcast.
 \end_layout
 
 \begin_layout Standard
@@ -8556,16 +8553,33 @@ rce version can be seen to further generalise the application suite.
 \end_layout
 
 \begin_layout Standard
-Unfortunately, the impact of the COVID-19 pandemic severely impacted the
- latter third of the project resulting in an inability to both quantitatively
- evaluate the multi-source server and implement the mobile AR application
- touch controls.
+This project presents such a development, allowing the capture of multiple
+ scenes simultaneously with presentation both at the server and in a mobile
+ AR context.
 \end_layout
 
 \begin_layout Standard
-Despite the obstacles, additional objectives allowed extra investigations
- to be made into the suite with significant progress made in making the
- mobile application cross-platform and data gathered on the network behaviour.
+Unfortunately, the impact of the COVID-19 pandemic severely impacted the
+ latter third of the project resulting in an inability to both quantitatively
+ evaluate the multi-source server and implement individual touch controls
+ for the mobile AR application.
+\end_layout
+
+\begin_layout Standard
+Despite this, additional objectives allowed extra investigations to be made
+ into the suite with significant progress made in making the mobile application
+ cross-platform.
+ Finally, data was gathered on a form of 
+\emph on
+passive
+\emph default
+ sync, the network behaviour of the suite was evaluated as transmitted frame
+ rate was limited in order to control transmission latency.
+\end_layout
+
+\begin_layout Standard
+Overall, although the majority of the objectives have been met, quantitative
+ evaluation remains to be completed.
 \end_layout
 
 \begin_layout Standard
